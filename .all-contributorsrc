@@ -8,13 +8,20 @@
   "commitConvention": "angular",
   "contributors": [
     {
+      "login": "zZHorizonZz",
+      "name": "Daniel Fiala",
+      "avatar_url": "https://avatars.githubusercontent.com/u/60035933?v=4",
+      "profile": "https://github.com/zZHorizonZz",
+      "contributions": [
+        "maintenance",
+        "code"
+      ],
       "login": "ZunwDev",
       "name": "Zunw",
       "avatar_url": "https://avatars.githubusercontent.com/u/43964753?v=4",
       "profile": "https://github.com/ZunwDev",
       "contributions": [
         "code",
-        "doc"
       ]
     }
   ],
