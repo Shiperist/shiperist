@@ -1,7 +1,7 @@
 import React from "react";
 import {getServerSession} from "next-auth";
 import {authOptions} from "@/lib/auth";
-import SignInComponent from "@/components/navbar/sign-in.component";
+import SignInComponent from "@/app/[lang]/components/navbar/sign-in.component";
 
 export default async function NavbarComponent() {
     const session = await getServerSession(authOptions);
