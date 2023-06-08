@@ -2,10 +2,10 @@ import React from 'react';
 
 export default async function projectList() {
   return (
-    <div className='midwrap max-w-full mx-auto w-[1200px] px-4'>
-      <div className='tbwrap my-8 bg-base-100'></div>
+    <div className='midwrap max-w-full max-h-full mx-auto w-[1200px] px-4'>
+      <div className='tbwrap my-8'></div>
       <div className='flex flex-col gap-6'>
-        <form>
+        <form className='search-bar'>
           <div className='relative'>
             <div className='absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none'>
               <svg
@@ -28,7 +28,7 @@ export default async function projectList() {
             />
           </div>
         </form>
-        <div className='flex flex-row'>
+        <div className='flex flex-wrap gap-4'>
           <div className='card card-compact w-64 bg-ghost border transition cursor-pointer hover:shadow-lg'>
             <div className='card-body'>
               <div className='flex flex-row gap-2'>
@@ -53,6 +53,9 @@ export default async function projectList() {
                 <p className='pt-4 text-neutral'>time ago</p>
               </div>
             </div>
+          </div>
+          <div className='card card-compact w-64 bg-ghost border transition cursor-pointer hover:shadow-lg'>
+            <h1 className='text-5xl text-secondary mx-auto my-auto'>+</h1>
           </div>
         </div>
       </div>
