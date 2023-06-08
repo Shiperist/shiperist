@@ -1,0 +1,88 @@
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: keycloak-secret
+type: Opaque
+data:
+  KEYCLOAK_USER: YWRtaW4=     # base64 encoded 'admin'
+  KEYCLOAK_PASSWORD: YWRtaW4= # base64 encoded 'admin'
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: keycloak
+spec:
+  selector:
+    matchLabels:
+      app: keycloak
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  minReadySeconds: 5
+  template:
+    metadata:
+      labels:
+        app: keycloak
+    spec:
+      containers:
+        - name: keycloak-development
+          image: quay.io/keycloak/keycloak:latest
+          imagePullPolicy: Always
+          env:
+            - name: KEYCLOAK_ADMIN
+              valueFrom:
+                secretKeyRef:
+                  name: keycloak-secret
+                  key: KEYCLOAK_USER
+            - name: KEYCLOAK_ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: keycloak-secret
+                  key: KEYCLOAK_PASSWORD
+            - name: PROXY_ADDRESS_FORWARDING
+              value: "true"
+            - name: KEYCLOAK_FRONTEND_URL
+              value: "http://localhost:9080/auth/"
+            - name: KEYCLOAK_ADMIN_URL
+              value: "http://localhost:9080/auth/realms/master/admin/"
+            - name: DB_VENDOR
+              value: "postgres"
+            - name: DB_ADDR
+              value: "postgres.default.svc.cluster.local"
+            - name: DB_DATABASE
+              value: "development"
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: USER
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: PASSWORD
+          ports:
+            - name: http
+              containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: /realms/master
+              port: 8080
+          args: [ "start-dev" ]
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: keycloak
+spec:
+  selector:
+    app: keycloak
+  ports:
+    - name: http
+      port: 9080
+      targetPort: 8080
+  type: LoadBalancer
