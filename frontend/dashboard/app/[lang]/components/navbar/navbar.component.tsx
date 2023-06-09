@@ -9,7 +9,9 @@ export default async function NavbarComponent() {
   return (
     <div className='navbar px-8 border-b border-gray-200'>
       <div className='navbar-start'>
-        <a className='btn btn-ghost normal-case text-neutral text-xl'>Heligion</a>
+        <a href='#' className='btn btn-ghost normal-case text-neutral text-xl'>
+          Heligion
+        </a>
       </div>
       <div className='navbar-end !pr-2'>
         {/*         <button className='btn btn-ghost btn-circle'>
