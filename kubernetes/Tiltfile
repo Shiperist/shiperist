@@ -1,4 +1,9 @@
 # Keycloak
+docker_build(
+  'keycloak',
+  '.',
+  dockerfile='./keycloak/Dockerfile')
+
 k8s_yaml('./keycloak/keycloak.yml')
 k8s_resource('keycloak', labels=['Services'], port_forwards=['9080:9080', '9443:9443', '9990:9990'])
 

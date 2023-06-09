@@ -30,7 +30,7 @@ spec:
     spec:
       containers:
         - name: keycloak-development
-          image: quay.io/keycloak/keycloak:latest
+          image: keycloak:latest
           imagePullPolicy: Always
           env:
             - name: KEYCLOAK_ADMIN
@@ -43,18 +43,18 @@ spec:
                 secretKeyRef:
                   name: keycloak-secret
                   key: KEYCLOAK_PASSWORD
-            - name: KC_DB
-              value: "postgres"
-            - name: KC_DB_URL_HOST
+            - name: KEYCLOAK_DATABASE_VENDOR
+              value: "postgresql"
+            - name: KEYCLOAK_DATABASE_HOST
               value: "postgres.default.svc.cluster.local"
-            - name: KC_DB_URL_DATABASE
+            - name: KEYCLOAK_DATABASE_NAME
               value: "development"
-            - name: KC_DB_USERNAME
+            - name: KEYCLOAK_DATABASE_USER
               valueFrom:
                 secretKeyRef:
                   name: postgres-secret
                   key: USER
-            - name: KC_DB_PASSWORD
+            - name: KEYCLOAK_DATABASE_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: postgres-secret
@@ -66,7 +66,6 @@ spec:
             httpGet:
               path: /realms/master
               port: 8080
-          args: [ "start-dev" ]
 ---
 apiVersion: v1
 kind: Service

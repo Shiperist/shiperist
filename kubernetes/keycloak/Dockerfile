@@ -1,5 +1,6 @@
-FROM quay.io/keycloak/keycloak:latest
+FROM bitnami/keycloak:latest
 
-COPY ./realm-export.json /data/import/realm-export.json
+COPY ./keycloak/quarkus-realm.json /opt/keycloak/data/import/quarkus-realm.json
 
-ENTRYPOINT [ "start-dev", "--import-realm" ]
+ENTRYPOINT [ "/opt/bitnami/scripts/keycloak/entrypoint.sh" ]
+CMD [ "/opt/bitnami/scripts/keycloak/run.sh", "start-dev", "--import-realm" ]
