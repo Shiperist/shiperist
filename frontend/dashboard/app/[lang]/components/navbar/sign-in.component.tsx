@@ -29,7 +29,7 @@ export default function SignInComponent() {
         </button>
       )}
       {!session && (
-        <button className='btn btn-secondary text-neutral' onClick={() => signIn()}>
+        <button className='btn btn-primary text-neutral' onClick={() => signIn()}>
           Sign In
         </button>
       )}
