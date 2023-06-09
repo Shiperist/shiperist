@@ -11,4 +11,11 @@
 
     <artifactId>heligion-backend-user-service</artifactId>
     <version>1.0-SNAPSHOT</version>
+
+    <dependencies>
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-keycloak-admin-client-reactive</artifactId>
+        </dependency>
+    </dependencies>
 </project>

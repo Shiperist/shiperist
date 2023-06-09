@@ -43,24 +43,18 @@ spec:
                 secretKeyRef:
                   name: keycloak-secret
                   key: KEYCLOAK_PASSWORD
-            - name: PROXY_ADDRESS_FORWARDING
-              value: "true"
-            - name: KEYCLOAK_FRONTEND_URL
-              value: "http://localhost:9080/auth/"
-            - name: KEYCLOAK_ADMIN_URL
-              value: "http://localhost:9080/auth/realms/master/admin/"
-            - name: DB_VENDOR
+            - name: KC_DB
               value: "postgres"
-            - name: DB_ADDR
+            - name: KC_DB_URL_HOST
               value: "postgres.default.svc.cluster.local"
-            - name: DB_DATABASE
+            - name: KC_DB_URL_DATABASE
               value: "development"
-            - name: DB_USER
+            - name: KC_DB_USERNAME
               valueFrom:
                 secretKeyRef:
                   name: postgres-secret
                   key: USER
-            - name: DB_PASSWORD
+            - name: KC_DB_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: postgres-secret
