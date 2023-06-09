@@ -12,7 +12,7 @@ export default async function Home({ params: { lang } }: { params: { lang: Local
   const dictionary = await getDictionary(lang);
 
   return (
-    <div>
+    <div className='bg-base-100 h-screen w-screen'>
       <header>
         <NavbarComponent />
         {/* <SCNavbarComponent /> //tabs */}
