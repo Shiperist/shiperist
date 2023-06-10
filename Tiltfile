@@ -1,3 +1,3 @@
 include('./kubernetes/Tiltfile')
-include('./backend/Tiltfile')
+include('./backplane/Tiltfile')
 include('./frontend/Tiltfile')

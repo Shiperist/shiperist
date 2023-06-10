@@ -21,7 +21,8 @@
     </properties>
 
     <modules>
-        <module>backend</module>
+        <module>integration-tests</module>
+        <module>backplane</module>
     </modules>
 
     <dependencyManagement>

@@ -1,16 +1,16 @@
 # Build service project
 local_resource(
-    name = "project-service-build",
+    name = "heligion-backplane-build",
     cmd = "mvn clean install -Dquarkus.profile=dev -DskipTests",
     labels = ['Build'],
 )
 
 # Docker build
 docker_build(
-  'heligion-backend-project-service',
+  'heligion-backplane',
   '.',
   dockerfile='./src/main/docker/Dockerfile.jvm')
 
 # Run k8s deployment
 k8s_yaml('./target/kubernetes/kubernetes.yml')
-k8s_resource('heligion-backend-project-service', labels=['Backend'], resource_deps=['project-service-build'], port_forwards='8081:8080')
+k8s_resource('heligion-backplane', labels=['Backend'], resource_deps=['heligion-backplane-build'], port_forwards='8080:8080')
