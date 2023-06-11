@@ -17,10 +17,19 @@ public class UserResource {
     UserService userService;
 
     @GET
+    @Path("/user")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Uni<Response> user() {
         return userService.user();
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("/test")
+    public Response test() {
+        return Response.ok().build();
     }
 
     /*@GET
