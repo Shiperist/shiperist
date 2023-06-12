@@ -11,8 +11,6 @@ import jakarta.ws.rs.Path;
 @Path("/api/users")
 public class UserResource {
 
-    // TODO - Move to reactive keycloak client
-    // TODO - Think of a better way to set dynamicaly keycloak url
     @Inject
     UserService userService;
 

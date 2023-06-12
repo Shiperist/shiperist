@@ -12,6 +12,10 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+// Theres is a currently a bug/not implemented feature in Quarkus that prevents us from using the reactive rest in here
+// since keycloack thrown BlockingNotAllowedException when trying to use in the reactive context
+// TODO - If possible, change this to use the reactive rest client
+
 @RequestScoped
 public class UserServiceImpl implements UserService {
 
