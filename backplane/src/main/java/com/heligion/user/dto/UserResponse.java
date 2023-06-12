@@ -1,4 +1,6 @@
 package com.heligion.user.dto;
 
-public class UserResponse {
+import com.heligion.user.model.User;
+
+public record UserResponse(User user) {
 }

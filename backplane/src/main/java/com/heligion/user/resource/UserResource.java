@@ -1,35 +1,31 @@
 package com.heligion.user.resource;
 
+import com.heligion.user.dto.UserResponse;
+import com.heligion.user.dto.UserUpdateRequest;
 import com.heligion.user.service.UserService;
-import io.smallrye.mutiny.Uni;
 import jakarta.inject.Inject;
-import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
+import jakarta.ws.rs.PATCH;
 import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
-import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.Response;
 
 @Path("/api/users")
 public class UserResource {
 
+    // TODO - Move to reactive keycloak client
+    // TODO - Think of a better way to set dynamicaly keycloak url
     @Inject
     UserService userService;
 
     @GET
     @Path("/user")
-    @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Uni<Response> user() {
-        return userService.user();
+    public UserResponse user() {
+        return new UserResponse(userService.currentUser());
     }
 
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Path("/test")
-    public Response test() {
-        return Response.ok().build();
+    @PATCH
+    @Path("/user")
+    public UserResponse updateUser(UserUpdateRequest request) {
+        return new UserResponse(userService.updateUser(request));
     }
 
     /*@GET
