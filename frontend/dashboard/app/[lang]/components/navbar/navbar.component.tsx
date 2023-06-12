@@ -4,7 +4,7 @@ import { authOptions } from '@/lib/auth';
 import SignInComponent from '@/app/[lang]/components/navbar/sign-in.component';
 
 export default async function NavbarComponent() {
-  const session = await getServerSession(authOptions);
+  //const session = await getServerSession(authOptions);
 
   return (
     <div className='navbar px-8 border-b border-gray-200'>
@@ -13,7 +13,7 @@ export default async function NavbarComponent() {
           Heligion
         </a>
       </div>
-      <div className='navbar-end !pr-2'>
+      <div className='navbar-end'>
         {/*         <button className='btn btn-ghost btn-circle'>
           <svg
             xmlns='http://www.w3.org/2000/svg'

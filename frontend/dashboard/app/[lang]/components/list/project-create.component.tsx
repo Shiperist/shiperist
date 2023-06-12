@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 interface OSData {
   platform: string[];
@@ -19,8 +19,23 @@ const OS: OSOptions = {
 };
 
 const ProjectCreateComponent = () => {
-  const [selectedOS, setSelectedOS] = useState<string>('');
-  const [selectedPlatforms, setSelectedPlatforms] = useState<string[]>([]);
+  const [selectedOS, setSelectedOS] = useState<string>('android');
+  const [selectedPlatforms, setSelectedPlatforms] = useState<string[]>(OS[selectedOS]?.platform || ['Java / Kotlin']);
+  const [selectedType, setSelectedType] = useState<string>('alpha');
+
+  //Autoselect Android & Kotlin/Java
+  useEffect(() => {
+    const androidRadio = document.getElementById('radio-android') as HTMLInputElement;
+    const javaKotlinRadio = document.getElementById('radio-java/kotlin') as HTMLInputElement;
+    if (androidRadio && javaKotlinRadio) {
+      androidRadio.checked = true;
+      javaKotlinRadio.checked = true;
+    }
+  }, []);
+
+  const resetReleaseTypes = () => {
+    setSelectedType('alpha');
+  };
 
   const handleOSChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const selectedOS = event.target.value.toLowerCase();
@@ -32,32 +47,62 @@ const ProjectCreateComponent = () => {
   const renderPlatforms = () => {
     return selectedPlatforms.map((platform) => (
       <div className='flex flex-row gap-2' key={`radio-${platform.toLowerCase()}`}>
-        <input type='radio' name='platform_input' id={`radio-${platform.toLowerCase()}`} className='radio' required />
+        <input
+          type='radio'
+          name='platform_input'
+          id={`radio-${platform.toLowerCase().replace(/\s/g, '')}`}
+          className='radio'
+          value={platform}
+          tabIndex={0}
+          required
+        />
         <label htmlFor={`radio-${platform.toLowerCase()}`}>{platform}</label>
       </div>
     ));
   };
 
-  const getOSRadios = () => {
+  const renderTypeOptions = () => {
+    const types: string[] = ['Alpha', 'Beta', 'Production', 'Custom'];
+
+    const handleReleaseTypeChange = (event: React.MouseEvent<HTMLLIElement>) => {
+      const value = event.currentTarget.id;
+      setSelectedType(value || '');
+    };
+
+    return types.map((type) => (
+      <li
+        key={`type_${type.toLowerCase()}`}
+        id={`${type.toLowerCase()}`}
+        tabIndex={0}
+        className='cursor-pointer select-none p-2 transition hover:bg-gray-200 rounded-lg'
+        onClick={handleReleaseTypeChange}>
+        {type.toLowerCase() === 'custom' ? `${type}...` : `${type}`}
+      </li>
+    ));
+  };
+
+  const renderOS = () => {
     const OSes: string[] = ['Android', 'Windows'];
     return OSes.map((os) => (
       <div className='flex flex-row gap-2' key={`radio-${os.toLowerCase()}`}>
         <input
           type='radio'
           name='os_input'
-          id={`radio-${os.toLowerCase()}`}
+          id={`radio-${os.toLowerCase().replace(/\s/g, '')}`}
           value={os}
           className='radio'
           required
           onChange={handleOSChange}
+          tabIndex={0}
         />
         <label htmlFor={`radio-${os.toLowerCase()}`}>{os}</label>
       </div>
     ));
   };
-
-  const OSRadios = getOSRadios();
+  //Declaration for rendering
+  const renderOSes = renderOS();
   const renderPlatform = renderPlatforms();
+  const renderTypes = renderTypeOptions();
 
   return (
     <dialog id='project_create' className='modal w-full'>
@@ -71,6 +116,7 @@ const ProjectCreateComponent = () => {
                 Project name:<span className='text-red-600'> *</span>
               </p>
               <input
+                tabIndex={0}
                 id='project_name'
                 type='text'
                 placeholder='Enter a project name'
@@ -103,18 +149,51 @@ const ProjectCreateComponent = () => {
               <p className='text-sm'>
                 Release type:<span className='text-red-600'> *</span>
               </p>
-              <select id='release_type' className='select select-bordered flex w-full' required>
-                <option disabled selected>
-                  Select a release type
-                </option>
-              </select>
+              {selectedType != 'custom' && (
+                <div id='release_type' className='dropdown w-full'>
+                  <div tabIndex={0} className='input input-bordered w-full flex cursor-pointer'>
+                    <p id='relaase_type_selected' className='my-auto'>
+                      {selectedType.charAt(0).toUpperCase() + selectedType.slice(1)}
+                    </p>
+                    <svg
+                      className='w-5 h-5 ml-auto my-auto'
+                      xmlns='http://www.w3.org/2000/svg'
+                      viewBox='0 0 24 24'
+                      fill='none'
+                      stroke='currentColor'
+                      strokeWidth='2'
+                      strokeLinecap='round'
+                      strokeLinejoin='round'>
+                      <path d='M6 9l6 6 6-6' />
+                    </svg>
+                  </div>
+                  <ul tabIndex={0} className='dropdown-content menu p-2 shadow bg-base-100 rounded-box w-full'>
+                    {renderTypes}
+                  </ul>
+                </div>
+              )}
+              {selectedType === 'custom' && (
+                <div id='release_type_custom' className='flex flex-col gap-1'>
+                  <input
+                    placeholder='Type your release type'
+                    type='text'
+                    id='release_type_input'
+                    className='input input-bordered flex w-full'
+                    required></input>
+                  <a>
+                    <p className='text-sm underline cursor-pointer' onClick={resetReleaseTypes}>
+                      Return to pre-set release types
+                    </p>
+                  </a>
+                </div>
+              )}
             </div>
           </div>
           <div className='flex flex-row gap-32 mt-3'>
             <p className='text-sm'>
               OS:<span className='text-red-600'> *</span>
             </p>
-            <div className='flex flex-col gap-1'>{OSRadios}</div>
+            <div className='flex flex-col gap-1'>{renderOSes}</div>
           </div>
           <div className='flex flex-row gap-24 mt-3'>
             <p className='text-sm'>
@@ -130,7 +209,7 @@ const ProjectCreateComponent = () => {
         </div>
       </form>
       <form method='dialog' className='modal-backdrop'>
-        <button>close</button>
+        <button></button>
       </form>
     </dialog>
   );
