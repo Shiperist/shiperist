@@ -1,0 +1,11 @@
+.now/*
+.next/*
+*.css
+examples/*
+dist/*
+esm/*
+public/*
+scripts/*
+tests/*
+*.config.js
+.DS_Store
