@@ -33,9 +33,6 @@ export default function Search({disabled}: {disabled?: boolean}) {
   return (
     <Flex className="flex-row mt-8">
       <div className="flex-1">
-        <label htmlFor="search" className="sr-only">
-          Search
-        </label>
         <div className="rounded-md shadow-sm">
           <div
             className="pointer-events-none absolute flex items-center pl-2 pt-2.5"
@@ -59,7 +56,7 @@ export default function Search({disabled}: {disabled?: boolean}) {
           </div>
           <TextInput
             disabled={disabled}
-            className="transition ease-in-out h-10 w-full duration-300"
+            className="transition ease-in-out h-10 w-full duration-300 border border-gray-300 focus:border-gray-700 ring-gray-700 ring-inset"
             placeholder="Search by name..."
             spellCheck={false}
             onChange={(e) => handleSearch(e.target.value)}
