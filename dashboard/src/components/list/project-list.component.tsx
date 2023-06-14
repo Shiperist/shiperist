@@ -1,8 +1,8 @@
-import React from "react";
-import ProjectEntryComponent from "~/components/list/project-entry.component";
-import ProjectCreateComponent from "~/components/list/project-create.component";
-import Search from "~/components/list/search.component";
-import {Button} from "@tremor/react";
+import React from 'react';
+import ProjectEntryComponent from '~/components/list/project-entry.component';
+import ProjectCreateComponent from '~/components/list/project-create.component';
+import Search from '~/components/list/search.component';
+import { Button } from '@tremor/react';
 
 declare global {
   interface Window {
@@ -24,31 +24,35 @@ export default function ProjectListComponent() {
   };
 
   const projects: Projects = {
-    "project-1": {
-      id: "435345934759839230597235",
-      name: "Project 1",
-      description: "This is a project",
-      image: "https://picsum.photos/200/300",
-      url: "https://google.com",
+    'project-1': {
+      id: '435345934759839230597235',
+      name: 'Project 1',
+      description: 'This is a project',
+      image: 'https://picsum.photos/200/300',
+      url: 'https://google.com'
     },
-    "project-2": {
-      id: "435345934759839230597235",
-      name: "Project 2",
-      description: "This is a project",
-      image: "https://picsum.photos/200/300",
-      url: "https://google.com",
+    'project-2': {
+      id: '435345934759839230597235',
+      name: 'Project 2',
+      description: 'This is a project',
+      image: 'https://picsum.photos/200/300',
+      url: 'https://google.com'
     },
-    "project-3": {
-      id: "435345934759839230597235",
-      name: "Project 3",
-      description: "This is a project",
-      image: "https://picsum.photos/200/300",
-      url: "https://google.com",
-    },
+    'project-3': {
+      id: '435345934759839230597235',
+      name: 'Project 3',
+      description: 'This is a project',
+      image: 'https://picsum.photos/200/300',
+      url: 'https://google.com'
+    }
   };
 
   const projectList = Object.keys(projects).map((project) => {
-    return <ProjectEntryComponent key={project} project={projects[project]} />;
+    const projectEntry = projects[project];
+    if (projectEntry) {
+      return <ProjectEntryComponent key={project} project={projectEntry} />;
+    }
+    return null; // or handle the case when projectEntry is undefined
   });
 
   return (
@@ -57,10 +61,12 @@ export default function ProjectListComponent() {
         <div className="flex flex-col gap-6">
           <div className="flex flex-row justify-between w-full gap-4">
             <Search />
-            <Button onClick={() => window.project_create.showModal()}>Add project</Button>
+            <Button onClick={() => window.project_create.showModal()}>
+              Add project
+            </Button>
             <ProjectCreateComponent />
           </div>
-          <div className="card card-compact bg-ghost border overflow-auto bg-neutral-content">
+          <div className="bg-gray-50 border overflow-auto shadow-md">
             {projectList}
           </div>
         </div>
