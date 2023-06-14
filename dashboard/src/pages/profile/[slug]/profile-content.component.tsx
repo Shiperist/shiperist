@@ -1,18 +1,19 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from 'react';
+import { Button, TextInput, Divider } from '@tremor/react';
 
 export default function ProfileContent() {
   const [inputValues, setInputValues] = useState({
-    input1: "",
-    input2: "",
-    input3: "",
+    input1: '',
+    input2: '',
+    input3: ''
   });
 
   const [isInputChanged, setIsInputChanged] = useState(false);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const {name, value} = event.target;
+    const { name, value } = event.target;
 
-    setInputValues((prevValues) => ({...prevValues, [name]: value}));
+    setInputValues((prevValues) => ({ ...prevValues, [name]: value }));
     setIsInputChanged(true);
   };
 
@@ -22,20 +23,25 @@ export default function ProfileContent() {
 
   useEffect(() => {
     // Check if any input value is not empty
-    const hasInputChanged = Object.values(inputValues).some((value) => value.trim() !== "");
+    const hasInputChanged = Object.values(inputValues).some(
+      (value) => value.trim() !== ''
+    );
 
     setIsInputChanged(hasInputChanged);
   }, [inputValues]);
 
   const renderGeneralTab = () => {
     return (
-      <div className="flex flex-col border p-8 rounded-lg" id="general">
-        <h1 className="text-2xl font-bold">General</h1>
-        <div className="divider" />
-        <div className="flex flex-col gap-4">
+      <div
+        className="flex flex-col border p-8 rounded-lg bg-gray-50 shadow-md"
+        id="mydetails"
+      >
+        <h1 className="text-2xl font-bold">My details</h1>
+        <Divider />
+        <div className="flex flex-col gap-2">
           <div className="flex flex-row pr-24">
             <p className="w-full text-sm">Username:</p>
-            <input
+            <TextInput
               className="input input-bordered input-sm w-full px-8"
               id="username-input"
               name="input1"
@@ -46,7 +52,7 @@ export default function ProfileContent() {
           </div>
           <div className="flex flex-row pr-24">
             <p className="w-full text-sm">E-mail:</p>
-            <input
+            <TextInput
               className="input input-bordered input-sm w-full px-8"
               id="email-input"
               name="input2"
@@ -56,20 +62,23 @@ export default function ProfileContent() {
             />
           </div>
         </div>
-        <button
-          className="btn btn-primary mt-8 btn-sm w-fit"
+        <Button
+          className="mt-6 w-fit"
           disabled={!isInputChanged}
           id="general-save"
         >
           Save changes
-        </button>
+        </Button>
       </div>
     );
   };
 
   const renderSecurityTab = () => {
     return (
-      <div className="flex flex-col border p-8 rounded-lg" id="security">
+      <div
+        className="flex flex-col border p-8 rounded-lg bg-gray-50 shadow-md"
+        id="security"
+      >
         <h1 className="text-2xl font-bold">Security</h1>
         <div className="divider" />
         <div className="flex flex-col gap-4" />
