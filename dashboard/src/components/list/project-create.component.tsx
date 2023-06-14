@@ -108,8 +108,12 @@ const ProjectCreateComponent = () => {
 
   return (
     <div>
-      <Button className="ml-4" onClick={openModal}>
-        Add project
+      <Button
+          type="submit"
+          className="rounded-md border border-transparent bg-blue-100 ml-4 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+          onClick={openModal}
+      >
+        Add new...
       </Button>
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog as="div" className="relative z-10" onClose={closeModal}>
@@ -328,16 +332,16 @@ const ProjectCreateComponent = () => {
                         </div>
                       </div>
                     </div>
+                    <div className="mt-8 mx-auto">
+                      <Button
+                          type="submit"
+                          className="rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                          onClick={closeModal}
+                      >
+                        Create
+                      </Button>
+                    </div>
                   </form>
-                  <div className="mt-8 place-items-end">
-                    <button
-                      type="submit"
-                      className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                      onClick={closeModal}
-                    >
-                      Create
-                    </button>
-                  </div>
                 </Dialog.Panel>
               </Transition.Child>
             </div>

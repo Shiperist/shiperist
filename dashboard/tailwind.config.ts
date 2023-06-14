@@ -83,8 +83,8 @@ module.exports = {
         //"dark-tremor-dropdown": "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
       },
       borderRadius: {
-        "tremor-small": "0.375rem",
-        "tremor-default": "0.5rem",
+        "tremor-small": "0.275rem",
+        "tremor-default": "0.35rem",
         "tremor-full": "9999px",
       },
       fontSize: {
@@ -93,6 +93,20 @@ module.exports = {
         "tremor-title": ["1.125rem", { lineHeight: "1.75rem" }],
         "tremor-metric": ["1.875rem", { lineHeight: "2.25rem" }],
       },
+      borderWidth: {
+        DEFAULT: '1px',
+        '0': '0',
+        '1/2': '0.5px',
+        '1': '1px',
+        '2': '2px',
+        '3': '3px',
+        '4': '4px',
+        '6': '6px',
+        '8': '8px',
+      },
+      dropShadow: {
+        's': '0 4px 6px rgba(0,0,0,.04)',
+      }
     },
   },
   safelist: [

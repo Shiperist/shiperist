@@ -47,13 +47,9 @@ const Home: NextPage = () => {
   };
 
   return (
-    <main className="px-8 mt-24 mx-auto max-w-7xl">
-      <Title>Projects</Title>
-      <Text>
-        A list of your projects. <a href="#">Learn more</a>
-      </Text>
+    <main className="px-8 mt-8 mx-auto max-w-7xl">
       <Search />
-      <Card className="mt-4 card card-compact overflow-auto p-0 cursor-pointer drop-shadow-none">
+      <Card className="mt-4 overflow-auto p-0 cursor-pointer drop-shadow-s border-1/2 border-gray-300">
         <List>
           {Object.keys(projects).map((project) => {
             return (

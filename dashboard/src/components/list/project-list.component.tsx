@@ -2,7 +2,7 @@ import React from 'react';
 import ProjectEntryComponent from '~/components/list/project-entry.component';
 import ProjectCreateComponent from '~/components/list/project-create.component';
 import Search from '~/components/list/search.component';
-import { Button } from '@tremor/react';
+import {Button, Card} from '@tremor/react';
 
 declare global {
   interface Window {
@@ -61,14 +61,14 @@ export default function ProjectListComponent() {
         <div className="flex flex-col gap-6">
           <div className="flex flex-row justify-between w-full gap-4">
             <Search />
-            <Button onClick={() => window.project_create.showModal()}>
+            <Button className="rounded-full" onClick={() => window.project_create.showModal()}>
               Add project
             </Button>
             <ProjectCreateComponent />
           </div>
-          <div className="bg-gray-50 border overflow-auto shadow-md">
+          <Card className="bg-gray-50 overflow-auto drop-shadow-s border-1/2 border-gray-300">
             {projectList}
-          </div>
+          </Card>
         </div>
       </div>
     </div>
