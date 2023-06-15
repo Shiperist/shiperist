@@ -1,32 +1,19 @@
-import { Fragment, useState } from 'react';
-import { usePathname } from 'next/navigation';
+import { Fragment } from 'react';
 import { Disclosure, Listbox, Menu, Transition } from '@headlessui/react';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import Image from 'next/image';
 import ProjectSelect from '~/components/navbar/project-select';
-import RouterHandler from '~/shared/routerHandler';
+import { useRouter } from 'next/router';
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
 }
 
-interface NavbarProps {
-  user:
-    | {
-        id: string;
-        name?: string | null | undefined;
-        email?: string | null | undefined;
-        image?: string | null | undefined;
-      }
-    | undefined;
-}
+export default function Navbar() {
+  const session = useSession();
+  const router = useRouter();
 
-export default function Navbar({ user }: NavbarProps) {
-  const { handleRouterPush } = RouterHandler();
-  //const session = useSession();
-  //const router = useRouter();
-
-  //const user = session?.data?.user;
+  const user = session?.data?.user;
 
   const handleSignOut = () => {
     signOut()
@@ -48,6 +35,18 @@ export default function Navbar({ user }: NavbarProps) {
       });
   };
 
+  const navigateToHome = () => {
+    void router.push('/');
+  };
+
+  const navigateToProfile = () => {
+    if (!user) {
+      return;
+    }
+
+    void router.push(`/profile/${user?.id}`);
+  };
+
   return (
     <Disclosure as="nav" className="bg-white border">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -55,7 +54,7 @@ export default function Navbar({ user }: NavbarProps) {
           <div className="flex">
             <div
               className="flex flex-shrink-0 items-center cursor-pointer"
-              onClick={() => handleRouterPush('/')}
+              onClick={navigateToHome}
             >
               <svg
                 width="32"
@@ -111,9 +110,7 @@ export default function Navbar({ user }: NavbarProps) {
                               active ? 'bg-gray-100' : '',
                               'flex w-full px-4 py-2 text-sm text-gray-700'
                             )}
-                            onClick={() =>
-                              handleRouterPush('/profile/' + user?.id)
-                            }
+                            onClick={navigateToProfile}
                           >
                             Profile
                           </button>

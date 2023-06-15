@@ -8,14 +8,17 @@ import { Types } from '~/types/app-types';
 
 export const appsRouter = createTRPCRouter({
   addApp: protectedProcedure
-    .input(z.object({
-      name: z.string(),
-      description: z.optional(z.string()),
-      image: z.optional(z.string()),
-      releaseType: z.string(),
-      os: z.string(),
-      platform: z.string()
-    })).mutation(async ({ ctx, input }) => {
+    .input(
+      z.object({
+        name: z.string(),
+        description: z.optional(z.string()),
+        image: z.optional(z.string()),
+        releaseType: z.string(),
+        os: z.string(),
+        platform: z.string()
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
       const os = Types[input.os];
       if (!os) {
         throw new Error('Invalid OS');
@@ -51,25 +54,31 @@ export const appsRouter = createTRPCRouter({
     }),
 
   list: protectedProcedure
-    .input(z.object({ pageToken: z.optional(z.string()), pageSize: z.number() }))
+    .input(
+      z.object({ pageToken: z.optional(z.string()), pageSize: z.number() })
+    )
     .query(async ({ ctx, input }) => {
-      const app = await (input.pageToken ? ctx.prisma.app.findMany({
-        where: { userId: ctx.session.user.id },
-        cursor: { id: input.pageToken },
-        take: input.pageSize,
-        skip: 1,
-        orderBy: { id: 'desc' }
-      }) : ctx.prisma.app.findMany({
-        where: { userId: ctx.session.user.id },
-        take: input.pageSize,
-        orderBy: { id: 'desc' }
-      }));
+      const app = await (input.pageToken
+        ? ctx.prisma.app.findMany({
+            where: { userId: ctx.session.user.id },
+            cursor: { id: input.pageToken },
+            take: input.pageSize,
+            skip: 1,
+            orderBy: { id: 'desc' }
+          })
+        : ctx.prisma.app.findMany({
+            where: { userId: ctx.session.user.id },
+            take: input.pageSize,
+            orderBy: { id: 'desc' }
+          }));
 
       return app;
     }),
 
   patch: protectedProcedure
-    .input(z.object({ id: z.string(), name: z.string(), description: z.string() }))
+    .input(
+      z.object({ id: z.string(), name: z.string(), description: z.string() })
+    )
     .mutation(async ({ ctx, input }) => {
       const updatedApp = await ctx.prisma.app.update({
         where: { id: input.id },

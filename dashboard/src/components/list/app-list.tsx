@@ -3,16 +3,20 @@ import { Badge, Button, Card, List, ListItem } from '@tremor/react';
 import { useSession } from 'next-auth/react';
 import { api } from '~/utils/api';
 import { Types } from '~/types/app-types';
-import RouterHandler from '~/shared/routerHandler';
+import { useRouter } from 'next/router';
 
 export default function AppList() {
-  const { handleRouterPush } = RouterHandler();
   const { data: sessionData } = useSession();
   const { data: data } = api.apps.list.useQuery(
     { pageSize: 25 }, // no input
     { enabled: sessionData?.user !== undefined }
   );
   const apps = data ?? [];
+  const router = useRouter();
+
+  const navigateToApp = (id: string) => {
+    void router.push(`/app/${id}`);
+  };
 
   return (
     <Card className="mt-4 overflow-auto p-0 cursor-pointer drop-shadow-s border-0 bg-white ring-0">
@@ -26,7 +30,7 @@ export default function AppList() {
             <ListItem
               key={app.id}
               className="hover:bg-gray-100 p-5 border-none"
-              onClick={() => handleRouterPush(`/app/${app.id}`)}
+              onClick={() => navigateToApp(app.id)}
             >
               <img
                 className="w-12 h-12 rounded-full mr-4"

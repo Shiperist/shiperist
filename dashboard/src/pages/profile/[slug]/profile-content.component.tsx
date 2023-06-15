@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Button, TextInput, Divider, Text } from '@tremor/react';
-import { ButtonComponent } from '~/components/base/base-components';
+import { TextInput, Divider, Text } from '@tremor/react';
+import { Button } from '~/components/base/button';
 
 export default function ProfileContent() {
   const [inputValues, setInputValues] = useState({
@@ -63,11 +63,13 @@ export default function ProfileContent() {
             />
           </div>
         </div>
-        <ButtonComponent
+        <Button
           className="w-fit mt-6"
           disabled={!isInputChanged}
           id="general-save"
-        >Save changes</ButtonComponent>
+        >
+          Save changes
+        </Button>
       </div>
     );
   };

@@ -1,14 +1,16 @@
 import React from 'react';
 import { ComponentPreview, Previews } from '@react-buddy/ide-toolbox-next';
 import { PaletteTree } from './palette';
-import Nav from '~/components/navbar/nav.component';
+import Navbar from '~/components/navbar/navbar.component';
 
 const ComponentPreviews = () => {
-  return <Previews palette={<PaletteTree />}>
-    <ComponentPreview path='/Nav'>
-      <Nav />
-    </ComponentPreview>
-  </Previews>;
+  return (
+    <Previews palette={<PaletteTree />}>
+      <ComponentPreview path="/Nav">
+        <Navbar />
+      </ComponentPreview>
+    </Previews>
+  );
 };
 
 export default ComponentPreviews;

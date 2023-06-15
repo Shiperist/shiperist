@@ -1,11 +1,11 @@
 import React, { Fragment, useState, useTransition } from 'react';
-import { Button, Text, TextInput } from '@tremor/react';
+import { Text, TextInput } from '@tremor/react';
 import { Dialog, Transition, Listbox } from '@headlessui/react';
 import { Types } from '~/types/app-types';
 import { useSession } from 'next-auth/react';
 import { api } from '~/utils/api';
 import { ChevronUpDownIcon } from '@heroicons/react/24/solid';
-import { ButtonComponent, RequiredLabel } from '../base/base-components';
+import { Button, RequiredLabel } from '../base/button';
 
 const types = [
   { id: 1, type: 'Alpha' },
@@ -99,8 +99,6 @@ const AppCreate = () => {
     const formData = new FormData(form);
     const data = Object.fromEntries(formData.entries());
 
-    console.log(data);
-
     const name = data.name as string;
     const description = data.description as string;
     const image = data.image as string;
@@ -127,9 +125,9 @@ const AppCreate = () => {
 
   return (
     <div>
-      <ButtonComponent onClick={openModal} className="ml-4">
+      <Button onClick={openModal} className="ml-4">
         Add new...
-      </ButtonComponent>
+      </Button>
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog as="div" className="relative z-10" onClose={closeModal}>
           <Transition.Child
@@ -168,13 +166,6 @@ const AppCreate = () => {
                     method="dialog"
                     onSubmit={handleSubmit}
                   >
-                    <Button
-                      className="absolute right-2 top-2 !bg-transparent text-black !border-transparent"
-                      onClick={closeModal}
-                      size="xs"
-                    >
-                      ✕
-                    </Button>
                     <div className="flex flex-col gap-2">
                       <div className="flex flex-row mt-3 flex-grow gap-4">
                         <div className="flex flex-col gap-1 flex-grow">
@@ -333,7 +324,7 @@ const AppCreate = () => {
                       </div>
                     </div>
                     <div className="mt-8 mx-auto">
-                      <ButtonComponent type="submit">Create</ButtonComponent>
+                      <Button type="submit">Create</Button>
                     </div>
                   </form>
                 </Dialog.Panel>

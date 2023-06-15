@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const ButtonComponent = ({
+export const Button = ({
   className = '',
   disabled,
   ...props
