@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Button, TextInput, Divider } from '@tremor/react';
+import { TextInput, Divider, Text } from '@tremor/react';
+import { Button } from '~/components/base/button';
 
 export default function ProfileContent() {
   const [inputValues, setInputValues] = useState({
@@ -40,7 +41,7 @@ export default function ProfileContent() {
         <Divider />
         <div className="flex flex-col gap-2">
           <div className="flex flex-row pr-24">
-            <p className="w-full text-sm">Username:</p>
+            <Text className="w-full text-sm">Username:</Text>
             <TextInput
               className="input input-bordered input-sm w-full px-8"
               id="username-input"
@@ -51,7 +52,7 @@ export default function ProfileContent() {
             />
           </div>
           <div className="flex flex-row pr-24">
-            <p className="w-full text-sm">E-mail:</p>
+            <Text className="w-full text-sm">E-mail:</Text>
             <TextInput
               className="input input-bordered input-sm w-full px-8"
               id="email-input"
@@ -63,7 +64,7 @@ export default function ProfileContent() {
           </div>
         </div>
         <Button
-          className="rounded-md border border-transparent w-fit mt-6 bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+          className="w-fit mt-6"
           disabled={!isInputChanged}
           id="general-save"
         >

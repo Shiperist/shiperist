@@ -4,10 +4,9 @@ import { type AppType } from 'next/app';
 import { api } from '~/utils/api';
 import '~/styles/globals.css';
 import React, { Suspense } from 'react';
-import Nav from '~/components/navbar/nav.component';
 import { DevSupport } from '@react-buddy/ide-toolbox-next';
 import { ComponentPreviews, useInitial } from '~/components/dev';
-import Head from 'next/head';
+import Navbar from '~/components/navbar/navbar.component';
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
@@ -17,7 +16,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
     <SessionProvider session={session}>
       <main className="h-full bg-gray-100" style={{ minHeight: '100vh' }}>
         <Suspense>
-          <Nav />
+          <Navbar />
         </Suspense>
         <DevSupport
           ComponentPreviews={ComponentPreviews}

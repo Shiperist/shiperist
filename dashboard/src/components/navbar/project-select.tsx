@@ -1,10 +1,10 @@
 import { Fragment, useState } from 'react';
 import { usePathname } from 'next/navigation';
+import { useRouter } from 'next/router';
 import { Disclosure, Listbox, Menu, Transition } from '@headlessui/react';
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/24/solid';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import Image from 'next/image';
-import { useRouter } from 'next/router';
 import { api } from '~/utils/api';
 
 function classNames(...classes: string[]) {
@@ -26,6 +26,10 @@ export default function ProjectSelect({ user }: { user: any }) {
   if (!apps || apps.length === 0 || !selectedApp) {
     return null;
   }
+
+  const navigateToApp = (id: string) => {
+    void router.push(`/app/${id}`);
+  };
 
   return (
     <Listbox value={selectedApp.id}>
@@ -55,7 +59,7 @@ export default function ProjectSelect({ user }: { user: any }) {
                   }`
                 }
                 value={app.id}
-                onClick={() => router.push('/app/' + app.id)}
+                onClick={() => navigateToApp(app.id)}
               >
                 {({ selected }) => (
                   <>

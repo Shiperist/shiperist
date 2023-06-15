@@ -5,7 +5,7 @@ import AppList from '~/components/list/app-list';
 
 const Home: NextPage = () => {
   return (
-    <main className='px-8 mt-8 mx-auto max-w-7xl'>
+    <main className="px-8 mt-8 mx-auto max-w-7xl">
       <Search />
       <AppList />
     </main>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSession } from 'next-auth/react';
-import { NextPage } from 'next';
+import type { NextPage } from 'next';
 import ProfileSidebar from '~/pages/profile/[slug]/profile-sidebar.component';
 import ProfileContent from '~/pages/profile/[slug]/profile-content.component';
 

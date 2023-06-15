@@ -1,9 +1,11 @@
 import React, { Fragment, useState, useTransition } from 'react';
-import { Button, Text, TextInput } from '@tremor/react';
+import { Text, TextInput } from '@tremor/react';
 import { Dialog, Transition, Listbox } from '@headlessui/react';
 import { Types } from '~/types/app-types';
 import { useSession } from 'next-auth/react';
 import { api } from '~/utils/api';
+import { ChevronUpDownIcon } from '@heroicons/react/24/solid';
+import { Button, RequiredLabel } from '../base/button';
 
 const types = [
   { id: 1, type: 'Alpha' },
@@ -49,15 +51,15 @@ const AppCreate = () => {
     return selectedPlatforms.map((platform) => (
       <div
         key={`radio-${platform.toLowerCase()}`}
-        className='flex flex-row gap-2'
+        className="flex flex-row gap-2"
       >
         <input
           required
-          className='radio'
+          className="radio"
           id={`radio-${platform.toLowerCase().replace(/\s/g, '')}`}
-          name='platform_input'
+          name="platform_input"
           tabIndex={0}
-          type='radio'
+          type="radio"
           value={platform}
           checked={selectedPlatform?.toLowerCase() === platform.toLowerCase()}
           onChange={() => setSelectedPlatform(platform)}
@@ -71,14 +73,14 @@ const AppCreate = () => {
     const OSes: string[] = ['Android', 'Windows'];
 
     return OSes.map((os) => (
-      <div key={`radio-${os.toLowerCase()}`} className='flex flex-row gap-2'>
+      <div key={`radio-${os.toLowerCase()}`} className="flex flex-row gap-2">
         <input
           required
-          className='radio'
+          className="radio"
           id={`radio-${os.toLowerCase().replace(/\s/g, '')}`}
-          name='os_input'
+          name="os_input"
           tabIndex={0}
-          type='radio'
+          type="radio"
           value={os}
           onChange={handleOSChange}
           checked={selectedOS.toLowerCase() === os.toLowerCase()}
@@ -96,8 +98,6 @@ const AppCreate = () => {
     const form = event.target as HTMLFormElement;
     const formData = new FormData(form);
     const data = Object.fromEntries(formData.entries());
-
-    console.log(data);
 
     const name = data.name as string;
     const description = data.description as string;
@@ -125,140 +125,120 @@ const AppCreate = () => {
 
   return (
     <div>
-      <Button
-        className='rounded-md border-transparent bg-amber-200 ml-4 px-4 py-2 text-sm font-medium text-amber-900 hover:bg-amber-400 hover:border-transparent transition duration-150 ease-in-out'
-        onClick={openModal}
-      >
+      <Button onClick={openModal} className="ml-4">
         Add new...
       </Button>
       <Transition appear show={isOpen} as={Fragment}>
-        <Dialog as='div' className='relative z-10' onClose={closeModal}>
+        <Dialog as="div" className="relative z-10" onClose={closeModal}>
           <Transition.Child
             as={Fragment}
-            enter='ease-out duration-300'
-            enterFrom='opacity-0'
-            enterTo='opacity-100'
-            leave='ease-in duration-200'
-            leaveFrom='opacity-100'
-            leaveTo='opacity-0'
+            enter="ease-out duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="ease-in duration-200"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
           >
-            <div className='fixed inset-0 bg-black bg-opacity-25' />
+            <div className="fixed inset-0 bg-black bg-opacity-25" />
           </Transition.Child>
 
-          <div className='fixed inset-0 overflow-y-auto'>
-            <div className='flex min-h-full items-center justify-center p-4 text-center'>
+          <div className="fixed inset-0 overflow-y-auto">
+            <div className="flex min-h-full items-center justify-center p-4 text-center">
               <Transition.Child
                 as={Fragment}
-                enter='ease-out duration-300'
-                enterFrom='opacity-0 scale-95'
-                enterTo='opacity-100 scale-100'
-                leave='ease-in duration-200'
-                leaveFrom='opacity-100 scale-100'
-                leaveTo='opacity-0 scale-95'
+                enter="ease-out duration-300"
+                enterFrom="opacity-0 scale-95"
+                enterTo="opacity-100 scale-100"
+                leave="ease-in duration-200"
+                leaveFrom="opacity-100 scale-100"
+                leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel
-                  className='w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all'>
+                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                   <Dialog.Title
-                    as='h3'
-                    className='text-lg font-medium leading-6 text-gray-900'
+                    as="h3"
+                    className="text-lg font-medium leading-6 text-gray-900"
                   >
                     New project
                   </Dialog.Title>
                   <form
-                    className='modal-box w-full'
-                    id='app_create_form'
-                    method='dialog'
+                    className="modal-box w-full"
+                    id="app_create_form"
+                    method="dialog"
                     onSubmit={handleSubmit}
                   >
-                    <Button
-                      className='absolute right-2 top-2 !bg-transparent text-black !border-transparent'
-                      onClick={closeModal}
-                      size='xs'
-                    >
-                      ✕
-                    </Button>
-                    <div className='flex flex-col gap-2'>
-                      <div className='flex flex-row mt-3 flex-grow gap-4'>
-                        <div className='flex flex-col gap-1 flex-grow'>
-                          <p className='text-sm'>
-                            Project name:
-                            <span className='text-red-600'> *</span>
-                          </p>
+                    <div className="flex flex-col gap-2">
+                      <div className="flex flex-row mt-3 flex-grow gap-4">
+                        <div className="flex flex-col gap-1 flex-grow">
+                          <RequiredLabel text="Project name" />
                           <TextInput
                             required
-                            className='input input-bordered flex w-full'
-                            name='name'
-                            placeholder='Enter a project name'
+                            className="flex w-full"
+                            name="name"
+                            placeholder="Enter a project name"
                             tabIndex={0}
-                            type='text'
+                            type="text"
                           />
                         </div>
-                        <div className='flex flex-col gap-1'>
-                          <p className='text-sm'>Icon:</p>
-                          <div className='w-12 h-12 bg-gray-200 rounded-full flex cursor-pointer'>
-                            <input className='hidden' id='image' type='file' />
+                        <div className="flex flex-col gap-1">
+                          <Text>Icon:</Text>
+                          <div className="w-12 h-12 bg-gray-200 rounded-full flex cursor-pointer">
+                            <input className="hidden" id="image" type="file" />
                             <label
-                              className='w-full h-full flex items-center justify-center'
-                              htmlFor='file_input'
+                              className="w-full h-full flex items-center justify-center"
+                              htmlFor="file_input"
                             >
                               <svg
-                                className='w-6 h-6 text-gray-400'
-                                fill='none'
-                                stroke='currentColor'
-                                strokeLinecap='round'
-                                strokeLinejoin='round'
-                                strokeWidth='2'
-                                viewBox='0 0 20 20'
-                                xmlns='http://www.w3.org/2000/svg'
+                                className="w-6 h-6 text-gray-400"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg"
                               >
-                                <path
-                                  d='M19 9l-6.258-5.908L12.24 1.462A1.55 1.55 0 0010.882 1H9.118a1.55 1.55 0 00-1.358.462L7.258 3.092 1 9m18 0-6.258-5.908L12.24 1.462A1.55 1.55 0 0010.882 1H9.118a1.55 1.55 0 00-1.358.462L7.258 3.092 1 9m18 0v8a2 2 0 01-2 2H3a2 2 0 01-2-2V9m0 0h18' />
+                                <path d="M19 9l-6.258-5.908L12.24 1.462A1.55 1.55 0 0010.882 1H9.118a1.55 1.55 0 00-1.358.462L7.258 3.092 1 9m18 0-6.258-5.908L12.24 1.462A1.55 1.55 0 0010.882 1H9.118a1.55 1.55 0 00-1.358.462L7.258 3.092 1 9m18 0v8a2 2 0 01-2 2H3a2 2 0 01-2-2V9m0 0h18" />
                               </svg>
                             </label>
                           </div>
                         </div>
                       </div>
-                      <div className='flex flex-col gap-1 flex-grow'>
+                      <div className="flex flex-col gap-1 flex-grow">
                         <Text>Description:</Text>
                         <TextInput
-                          className='input input-bordered flex w-full'
-                          name='description'
-                          placeholder='Enter a project name'
+                          className="flex w-full"
+                          name="description"
+                          placeholder="Enter a project description"
                           tabIndex={0}
-                          type='text'
+                          type="text"
                         />
                       </div>
-                      <div className='flex flex-row mt-3 flex-grow gap-4'>
-                        <div className='flex flex-col gap-1 flex-grow'>
-                          <p className='text-sm'>
-                            Release type:
-                            <span className='text-red-600'> *</span>
-                          </p>
+                      <div className="flex flex-row mt-3 flex-grow gap-4">
+                        <div className="flex flex-col gap-1 flex-grow">
+                          <RequiredLabel text="Release type" />
                           {selectedType && selectedType.type != 'Custom' && (
                             <Listbox
                               value={selectedType}
                               onChange={setSelectedType}
                             >
-                              <Listbox.Button
-                                className='w-full cursor-pointer my-auto flex flex-row border cursor-default font-bold rounded-md text-gray-600 py-2 px-3 hover:bg-gray-100 focus:bg-dray-100 sm:text-sm'>
-                                <span className='block truncate my-auto flex flex-grow'>
+                              <Listbox.Button className="w-full cursor-pointer my-auto flex flex-row border cursor-default font-bold rounded-md text-gray-600 py-2 px-3 hover:bg-gray-100 focus:bg-dray-100 sm:text-sm">
+                                <span className="block truncate my-auto flex flex-grow">
                                   {selectedType.type}
                                 </span>
-                                <span className='material-symbols-outlined flex ml-left'>
-                                  unfold_more
+                                <span className="flex ml-left">
+                                  <ChevronUpDownIcon className="w-5 h-5" />
                                 </span>
                               </Listbox.Button>
                               <Transition
                                 as={Fragment}
-                                enter='ease-out duration-300'
-                                enterFrom='opacity-0 scale-95'
-                                enterTo='opacity-100 scale-100'
-                                leave='ease-in duration-200'
-                                leaveFrom='opacity-100 scale-100'
-                                leaveTo='opacity-0 scale-95'
+                                enter="ease-out duration-300"
+                                enterFrom="opacity-0 scale-95"
+                                enterTo="opacity-100 scale-100"
+                                leave="ease-in duration-200"
+                                leaveFrom="opacity-100 scale-100"
+                                leaveTo="opacity-0 scale-95"
                               >
-                                <Listbox.Options
-                                  className='absolute mt-16 max-h-60 w-[400px] overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm'>
+                                <Listbox.Options className="absolute mt-16 max-h-60 w-[400px] overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
                                   {types.map((type, typeID) => (
                                     <Listbox.Option
                                       key={typeID}
@@ -285,21 +265,20 @@ const AppCreate = () => {
                                               : type.type}
                                           </span>
                                           {selected ? (
-                                            <span
-                                              className='absolute inset-y-0 left-0 flex items-center pl-3 text-amber-600'>
+                                            <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-amber-600">
                                               <svg
-                                                xmlns='http://www.w3.org/2000/svg'
-                                                className='h-5 w-5'
-                                                aria-hidden='true'
-                                                viewBox='0 0 24 24'
-                                                fill='none'
-                                                stroke='currentColor'
-                                                strokeWidth='2'
-                                                strokeLinecap='round'
-                                                strokeLinejoin='round'
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                className="h-5 w-5"
+                                                aria-hidden="true"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                strokeWidth="2"
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
                                               >
                                                 {' '}
-                                                <path d='M20 6L9 17l-5-5' />
+                                                <path d="M20 6L9 17l-5-5" />
                                               </svg>
                                             </span>
                                           ) : null}
@@ -313,18 +292,18 @@ const AppCreate = () => {
                           )}
                           {selectedType && selectedType.type == 'Custom' && (
                             <div
-                              className='flex flex-col gap-1'
-                              id='release_type_custom'
+                              className="flex flex-col gap-1"
+                              id="release_type_custom"
                             >
                               <TextInput
                                 required
-                                className='input input-bordered flex w-full'
-                                id='release_type_input'
-                                placeholder='Type your release type'
-                                type='text'
+                                className="flex w-full"
+                                id="release_type_input"
+                                placeholder="Type your release type"
+                                type="text"
                               />
                               <button
-                                className='text-sm underline cursor-pointer text-left'
+                                className="text-sm underline cursor-pointer text-left"
                                 onClick={() => resetReleaseTypes(types)}
                               >
                                 Return to pre-set release types
@@ -333,28 +312,19 @@ const AppCreate = () => {
                           )}
                         </div>
                       </div>
-                      <div className='flex flex-row gap-32 mt-3'>
-                        <p className='text-sm'>
-                          OS:<span className='text-red-600'> *</span>
-                        </p>
-                        <div className='flex flex-col gap-1'>{renderOSes}</div>
+                      <div className="flex flex-row gap-32 mt-3">
+                        <RequiredLabel text="OS" />
+                        <div className="flex flex-col gap-1">{renderOSes}</div>
                       </div>
-                      <div className='flex flex-row gap-24 mt-3'>
-                        <p className='text-sm'>
-                          Platform:<span className='text-red-600'> *</span>
-                        </p>
-                        <div className='flex flex-col gap-1'>
+                      <div className="flex flex-row gap-24 mt-3">
+                        <RequiredLabel text="Platform" />
+                        <div className="flex flex-col gap-1">
                           {renderPlatform}
                         </div>
                       </div>
                     </div>
-                    <div className='mt-8 mx-auto'>
-                      <Button
-                        type='submit'
-                        className='rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2'
-                      >
-                        Create
-                      </Button>
+                    <div className="mt-8 mx-auto">
+                      <Button type="submit">Create</Button>
                     </div>
                   </form>
                 </Dialog.Panel>

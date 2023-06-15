@@ -5,10 +5,6 @@ import AppCreate from '~/components/list/app-create';
 
 export default function Search({ disabled }: { disabled?: boolean }) {
   const [isPending, startTransition] = useTransition();
-  let [isOpen, setIsOpen] = useState(false);
-
-  const { replace } = useRouter();
-  const pathname = usePathname();
   function handleSearch(term: string) {
     const params = new URLSearchParams(window.location.search);
     if (term) {
@@ -18,16 +14,8 @@ export default function Search({ disabled }: { disabled?: boolean }) {
     }
 
     startTransition(() => {
-      replace(`${pathname}?${params.toString()}`);
+      //handleRouterReplace(`${pathname}?${params.toString()}`);
     });
-  }
-
-  function closeModal() {
-    setIsOpen(false);
-  }
-
-  function openModal() {
-    setIsOpen(true);
   }
 
   return (

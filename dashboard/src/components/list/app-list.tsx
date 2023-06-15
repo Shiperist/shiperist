@@ -14,6 +14,10 @@ export default function AppList() {
   const apps = data ?? [];
   const router = useRouter();
 
+  const navigateToApp = (id: string) => {
+    void router.push(`/app/${id}`);
+  };
+
   return (
     <Card className="mt-4 overflow-auto p-0 cursor-pointer drop-shadow-s border-0 bg-white ring-0">
       <List>
@@ -26,10 +30,11 @@ export default function AppList() {
             <ListItem
               key={app.id}
               className="hover:bg-gray-100 p-5 border-none"
-              onClick={() => router.push(`/app/${app.id}`)}
+              onClick={() => navigateToApp(app.id)}
             >
               <img
                 className="w-12 h-12 rounded-full mr-4"
+                alt="preview-img"
                 src="https://images.unsplash.com/photo-1686216941182-0f5699f4584d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=725&q=80"
               />
               <div className="flex flex-col flex-1">
