@@ -109,9 +109,9 @@ const ProjectCreateComponent = () => {
   return (
     <div>
       <Button
-          type="submit"
-          className="rounded-md border border-transparent bg-blue-100 ml-4 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-          onClick={openModal}
+        type="submit"
+        className="rounded-md border border-transparent bg-blue-100 ml-4 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+        onClick={openModal}
       >
         Add new...
       </Button>
@@ -214,24 +214,12 @@ const ProjectCreateComponent = () => {
                               value={selectedType}
                               onChange={setSelectedType}
                             >
-                              <Listbox.Button className="relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
-                                <span className="block truncate">
+                              <Listbox.Button className="w-full cursor-pointer my-auto flex flex-row border cursor-default font-bold rounded-md text-gray-600 py-2 px-3 hover:bg-gray-100 focus:bg-dray-100 sm:text-sm">
+                                <span className="block truncate my-auto flex flex-grow">
                                   {selectedType.type}
                                 </span>
-                                <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
-                                  <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    strokeWidth="2"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    className="h-5 w-5 text-gray-400"
-                                    aria-hidden="true"
-                                  >
-                                    <path d="M19 9l-7 7-7-7" />
-                                  </svg>
+                                <span className="material-symbols-outlined flex ml-left">
+                                  unfold_more
                                 </span>
                               </Listbox.Button>
                               <Transition
@@ -334,9 +322,8 @@ const ProjectCreateComponent = () => {
                     </div>
                     <div className="mt-8 mx-auto">
                       <Button
-                          type="submit"
-                          className="rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                          onClick={closeModal}
+                        type="submit"
+                        className="rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                       >
                         Create
                       </Button>
