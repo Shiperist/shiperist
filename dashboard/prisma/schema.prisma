@@ -8,24 +8,18 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Project {
-  id          String       @id @default(cuid())
+model App {
+  id          String   @id @default(cuid())
+  userId      String
   name        String
-  createdAt   DateTime     @default(now())
-  updatedAt   DateTime     @updatedAt
-  androidApps AndroidApp[]
-  User        User?        @relation(fields: [userId], references: [id])
-  userId      String?
-}
-
-model AndroidApp {
-  id        String   @id @default(cuid())
-  name      String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  projectId String
-  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
-  config    String
+  description String?
+  image       String?
+  releaseType String   @default("alpha")
+  os          String   @default("android")
+  platform    String   @default("maui")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  User        User     @relation(fields: [userId], references: [id])
 }
 
 // Necessary for Next auth
@@ -64,7 +58,7 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
-  projects      Project[]
+  apps          App[]
 }
 
 model VerificationToken {

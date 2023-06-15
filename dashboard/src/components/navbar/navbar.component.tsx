@@ -1,29 +1,23 @@
 import { Fragment, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { Disclosure, Listbox, Menu, Transition } from '@headlessui/react';
-import { signIn, signOut } from 'next-auth/react';
+import { signIn, signOut, useSession } from 'next-auth/react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-
-const people = [
-  { id: 1, name: 'Durward Reynolds', unavailable: false },
-  { id: 2, name: 'Kenton Towne', unavailable: false },
-  { id: 3, name: 'Therese Wunsch', unavailable: false },
-  { id: 4, name: 'Benedict Kessler', unavailable: true },
-  { id: 5, name: 'Katelyn Rohan', unavailable: false }
-];
+import ProjectSelect from '~/components/navbar/project-select';
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
 }
 
-export default function Navbar({ user }: { user: any }) {
-  const [selectedPerson, setSelectedPerson] = useState(people[0]);
-  const pathname = usePathname();
+export default function Navbar() {
+  const session = useSession();
   const router = useRouter();
 
+  const user = session?.data?.user;
+
   return (
-    <Disclosure as="nav" className="bg-white shadow-sm">
+    <Disclosure as="nav" className="bg-white border">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 justify-between">
           <div className="flex">
@@ -49,60 +43,7 @@ export default function Navbar({ user }: { user: any }) {
               </svg>
             </div>
             <div className="hidden sm:-my-px sm:ml-6 sm:flex sm:space-x-8">
-              <Listbox value={selectedPerson} onChange={setSelectedPerson}>
-                <div className="relative my-auto z-30">
-                  <Listbox.Button className="w-full my-auto cursor-default cursor-pointer rounded-lg text-gray-600 font-bold py-2 pl-3 pr-12 text-left hover:bg-gray-100 focus:bg-dray-100 sm:text-sm">
-                    <span className="block truncate">
-                      {selectedPerson.name}
-                    </span>
-                    <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
-                      <span className="material-symbols-outlined">
-                        unfold_more
-                      </span>
-                    </span>
-                  </Listbox.Button>
-                  <Transition
-                    as={Fragment}
-                    enter="ease-out duration-300"
-                    enterFrom="opacity-0 scale-95"
-                    enterTo="opacity-100 scale-100"
-                    leave="ease-in duration-200"
-                    leaveFrom="opacity-100 scale-100"
-                    leaveTo="opacity-0 scale-95"
-                  >
-                    <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                      {people.map((person, personIdx) => (
-                        <Listbox.Option
-                          key={personIdx}
-                          className={({ active }) =>
-                            `relative cursor-default select-none py-2 pl-10 pr-4 ${
-                              active
-                                ? 'bg-amber-100 text-amber-900'
-                                : 'text-gray-900'
-                            }`
-                          }
-                          value={person}
-                        >
-                          {({ selected }) => (
-                            <>
-                              <span
-                                className={`block truncate ${
-                                  selected ? 'font-medium' : 'font-normal'
-                                }`}
-                              >
-                                {person.name}
-                              </span>
-                              {selected ? (
-                                <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-amber-600"></span>
-                              ) : null}
-                            </>
-                          )}
-                        </Listbox.Option>
-                      ))}
-                    </Listbox.Options>
-                  </Transition>
-                </div>
-              </Listbox>
+              <ProjectSelect user={user} />
             </div>
           </div>
           <div className="hidden sm:ml-6 sm:flex sm:items-center">

@@ -1,15 +1,13 @@
-import React from "react";
-import {useSession} from "next-auth/react";
-import {NextPage} from "next";
-import ProfileSidebar from "~/pages/profile/[slug]/profile-sidebar.component";
-import ProfileContent from "~/pages/profile/[slug]/profile-content.component";
-
+import React from 'react';
+import { useSession } from 'next-auth/react';
+import { NextPage } from 'next';
+import ProfileSidebar from '~/pages/profile/[slug]/profile-sidebar.component';
+import ProfileContent from '~/pages/profile/[slug]/profile-content.component';
 
 const Profile: NextPage = () => {
   const session = useSession();
 
-  if (session.status === "authenticated") {
-
+  if (session.status === 'authenticated') {
   }
 
   return (
@@ -24,6 +22,6 @@ const Profile: NextPage = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Profile;
