@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import React from "react";
-import {signIn, useSession} from "next-auth/react";
+import React from 'react';
+import { signIn, useSession } from 'next-auth/react';
 
 export default function SignInComponent() {
-  const {data: session} = useSession();
+  const { data: session } = useSession();
 
   return (
     <div>
@@ -30,7 +30,10 @@ export default function SignInComponent() {
         </button>
       )}
       {!session && (
-        <button className="btn btn-primary text-neutral" onClick={() => signIn()}>
+        <button
+          className="btn btn-primary text-neutral"
+          onClick={() => signIn()}
+        >
           Sign In
         </button>
       )}

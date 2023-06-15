@@ -1,11 +1,12 @@
 import React from 'react';
+import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/24/solid';
 
 export default function ProfileSidebar() {
   const renderTab = () => {
     const tabs = ['My details', 'Security'];
     const icons = [
-        `<span class="material-symbols-outlined">person</span>`,
-        `<span class="material-symbols-outlined">security</span>`
+      `<ChevronUpDownIcon className='w-5 h-5' aria-hidden='true' />`,
+      `<ChevronUpDownIcon className='w-5 h-5' aria-hidden='true' />`
     ];
 
     return tabs.map((tab, index) => {

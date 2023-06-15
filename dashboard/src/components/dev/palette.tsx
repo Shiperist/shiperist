@@ -9,8 +9,8 @@ import {
 
 export const PaletteTree = () => (
   <Palette>
-    <Category name='App'>
-      <Component name='Loader'>
+    <Category name="App">
+      <Component name="Loader">
         <Variant>
           <ExampleLoaderComponent />
         </Variant>
@@ -20,7 +20,5 @@ export const PaletteTree = () => (
 );
 
 export function ExampleLoaderComponent() {
-  return (
-    <Fragment>Loading...</Fragment>
-  );
+  return <Fragment>Loading...</Fragment>;
 }

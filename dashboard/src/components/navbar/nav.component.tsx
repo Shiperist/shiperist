@@ -1,6 +1,6 @@
-import {useSession} from "next-auth/react";
-import React from "react";
-import Navbar from "~/components/navbar/navbar.component";
+import { useSession } from 'next-auth/react';
+import React from 'react';
+import Navbar from '~/components/navbar/navbar.component';
 
 export default function Nav() {
   const session = useSession();

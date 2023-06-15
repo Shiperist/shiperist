@@ -1,20 +1,20 @@
-import {usePathname, useRouter} from "next/navigation";
-import React, {useState, useTransition} from "react";
+import { usePathname, useRouter } from 'next/navigation';
+import React, { useState, useTransition } from 'react';
 import { Flex, TextInput } from '@tremor/react';
-import ProjectCreateComponent from "~/components/list/project-create.component";
+import AppCreate from '~/components/list/app-create';
 
-export default function Search({disabled}: {disabled?: boolean}) {
+export default function Search({ disabled }: { disabled?: boolean }) {
   const [isPending, startTransition] = useTransition();
   let [isOpen, setIsOpen] = useState(false);
 
-  const {replace} = useRouter();
+  const { replace } = useRouter();
   const pathname = usePathname();
   function handleSearch(term: string) {
     const params = new URLSearchParams(window.location.search);
     if (term) {
-      params.set("q", term);
+      params.set('q', term);
     } else {
-      params.delete("q");
+      params.delete('q');
     }
 
     startTransition(() => {
@@ -56,7 +56,7 @@ export default function Search({disabled}: {disabled?: boolean}) {
           </div>
           <TextInput
             disabled={disabled}
-            className="transition ease-in-out h-10 w-full duration-300 border-1/2 border-gray-300 ring-gray-700 ring-0 hover:ring-1 focus:ring-1"
+            className="transition ease-in-out h-10 w-full duration-150 border-0 ring-inset ring-gray-500 bg-gray-200"
             placeholder="Search by name..."
             spellCheck={false}
             onChange={(e) => handleSearch(e.target.value)}
@@ -88,7 +88,7 @@ export default function Search({disabled}: {disabled?: boolean}) {
           </div>
         )}
       </div>
-      <ProjectCreateComponent />
+      <AppCreate />
     </Flex>
   );
 }
