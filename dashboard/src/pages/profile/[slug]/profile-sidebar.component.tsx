@@ -1,19 +1,21 @@
 import React from 'react';
-import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/24/solid';
+import { LockClosedIcon, UserIcon } from '@heroicons/react/24/outline';
 
 export default function ProfileSidebar() {
   const renderTab = () => {
     const tabs = ['My details', 'Security'];
     const icons = [
-      `<ChevronUpDownIcon className='w-5 h-5' aria-hidden='true' />`,
-      `<ChevronUpDownIcon className='w-5 h-5' aria-hidden='true' />`
+      <UserIcon key="icon-details" className="w-6 h-6" aria-hidden="true" />,
+      <LockClosedIcon
+        key="icon-security"
+        className="w-6 h-6"
+        aria-hidden="true"
+      />
     ];
 
     return tabs.map((tab, index) => {
       const icon = icons[index];
-      const trustedIcon: { __html: string | TrustedHTML } | undefined = icon
-        ? { __html: icon as string | TrustedHTML }
-        : undefined;
+      const trustedIcon = icon ? icon : null;
 
       return (
         <button
@@ -24,10 +26,7 @@ export default function ProfileSidebar() {
             className="flex flex-row gap-4 my-auto text-gray-600 font-bold"
             href={`#${tab.replace(/\s/g, '').toLowerCase()}`}
           >
-            <span
-              className="icon my-auto w-6 h-6"
-              dangerouslySetInnerHTML={trustedIcon}
-            ></span>
+            <span className="icon my-auto w-6 h-6">{trustedIcon}</span>
             {tab}
           </a>
         </button>

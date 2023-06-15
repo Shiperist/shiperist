@@ -6,12 +6,14 @@ import { signIn, signOut, useSession } from 'next-auth/react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { api } from '~/utils/api';
+import RouterHandler from '~/shared/routerHandler';
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
 }
 
 export default function ProjectSelect({ user }: { user: any }) {
+  const { handleRouterPush } = RouterHandler();
   const { data: sessionData } = useSession();
   const { data: data } = api.apps.list.useQuery(
     { pageSize: 25 }, // no input
@@ -55,7 +57,7 @@ export default function ProjectSelect({ user }: { user: any }) {
                   }`
                 }
                 value={app.id}
-                onClick={() => router.push('/app/' + app.id)}
+                onClick={() => handleRouterPush('/app/' + app.id)}
               >
                 {({ selected }) => (
                   <>
