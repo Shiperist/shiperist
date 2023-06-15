@@ -2,13 +2,16 @@ import { usePathname, useRouter } from 'next/navigation';
 import React, { useState, useTransition } from 'react';
 import { Flex, TextInput } from '@tremor/react';
 import AppCreate from '~/components/list/app-create';
+import RouterHandler from '~/shared/routerHandler';
 
 export default function Search({ disabled }: { disabled?: boolean }) {
   const [isPending, startTransition] = useTransition();
-  let [isOpen, setIsOpen] = useState(false);
+  //let [isOpen, setIsOpen] = useState(false);
 
-  const { replace } = useRouter();
+  //const { replace } = useRouter();
+  //const router = useRouter();
   const pathname = usePathname();
+  const { handleRouterReplace } = RouterHandler();
   function handleSearch(term: string) {
     const params = new URLSearchParams(window.location.search);
     if (term) {
@@ -18,17 +21,17 @@ export default function Search({ disabled }: { disabled?: boolean }) {
     }
 
     startTransition(() => {
-      replace(`${pathname}?${params.toString()}`);
+      handleRouterReplace(`${pathname}?${params.toString()}`);
     });
   }
 
-  function closeModal() {
+  /*   function closeModal() {
     setIsOpen(false);
   }
 
   function openModal() {
     setIsOpen(true);
-  }
+  } */
 
   return (
     <Flex className="flex-row mt-8">
