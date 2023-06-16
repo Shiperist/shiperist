@@ -62,18 +62,20 @@ export const appsRouter = createTRPCRouter({
     .meta({ openapi: { method: 'GET', path: '/get/{id}' } })
     .input(z.object({ id: z.string() }))
     .output(
-      z.object({
-        id: z.string(),
-        userId: z.string(),
-        name: z.string(),
-        description: z.nullable(z.string()),
-        image: z.nullable(z.string()),
-        releaseType: z.string(),
-        os: z.string(),
-        platform: z.string(),
-        createdAt: z.date(),
-        updatedAt: z.date()
-      })
+      z.nullable(
+        z.object({
+          id: z.string(),
+          userId: z.string(),
+          name: z.string(),
+          description: z.nullable(z.string()),
+          image: z.nullable(z.string()),
+          releaseType: z.string(),
+          os: z.string(),
+          platform: z.string(),
+          createdAt: z.date(),
+          updatedAt: z.date()
+        })
+      )
     )
     .query(async ({ ctx, input }) => {
       const app = await ctx.prisma.app.findUnique({
