@@ -8,6 +8,7 @@ import { Types } from '~/types/app-types';
 
 export const appsRouter = createTRPCRouter({
   addApp: protectedProcedure
+    .meta({ openapi: { method: 'POST', path: '/addApp' } })
     .input(
       z.object({
         name: z.string(),
@@ -16,6 +17,20 @@ export const appsRouter = createTRPCRouter({
         releaseType: z.string(),
         os: z.string(),
         platform: z.string()
+      })
+    )
+    .output(
+      z.object({
+        id: z.string(),
+        userId: z.string(),
+        name: z.string(),
+        description: z.nullable(z.string()),
+        image: z.nullable(z.string()),
+        releaseType: z.string(),
+        os: z.string(),
+        platform: z.string(),
+        createdAt: z.date(),
+        updatedAt: z.date()
       })
     )
     .mutation(async ({ ctx, input }) => {
@@ -44,7 +59,24 @@ export const appsRouter = createTRPCRouter({
     }),
 
   get: protectedProcedure
+    .meta({ openapi: { method: 'GET', path: '/get/{id}' } })
     .input(z.object({ id: z.string() }))
+    .output(
+      z.nullable(
+        z.object({
+          id: z.string(),
+          userId: z.string(),
+          name: z.string(),
+          description: z.nullable(z.string()),
+          image: z.nullable(z.string()),
+          releaseType: z.string(),
+          os: z.string(),
+          platform: z.string(),
+          createdAt: z.date(),
+          updatedAt: z.date()
+        })
+      )
+    )
     .query(async ({ ctx, input }) => {
       const app = await ctx.prisma.app.findUnique({
         where: { id: input.id }
@@ -54,8 +86,25 @@ export const appsRouter = createTRPCRouter({
     }),
 
   list: protectedProcedure
+    .meta({ openapi: { method: 'GET', path: '/list' } })
     .input(
       z.object({ pageToken: z.optional(z.string()), pageSize: z.number() })
+    )
+    .output(
+      z.array(
+        z.object({
+          id: z.string(),
+          userId: z.string(),
+          name: z.string(),
+          description: z.nullable(z.string()),
+          image: z.nullable(z.string()),
+          releaseType: z.string(),
+          os: z.string(),
+          platform: z.string(),
+          createdAt: z.date(),
+          updatedAt: z.date()
+        })
+      )
     )
     .query(async ({ ctx, input }) => {
       const app = await (input.pageToken
@@ -76,8 +125,27 @@ export const appsRouter = createTRPCRouter({
     }),
 
   patch: protectedProcedure
+    .meta({ openapi: { method: 'PATCH', path: '/patch/{id}' } })
     .input(
-      z.object({ id: z.string(), name: z.string(), description: z.string() })
+      z.object({
+        id: z.string(),
+        name: z.string(),
+        description: z.string()
+      })
+    )
+    .output(
+      z.object({
+        id: z.string(),
+        userId: z.string(),
+        name: z.string(),
+        description: z.nullable(z.string()),
+        image: z.nullable(z.string()),
+        releaseType: z.string(),
+        os: z.string(),
+        platform: z.string(),
+        createdAt: z.date(),
+        updatedAt: z.date()
+      })
     )
     .mutation(async ({ ctx, input }) => {
       const updatedApp = await ctx.prisma.app.update({

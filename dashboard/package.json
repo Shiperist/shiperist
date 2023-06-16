@@ -7,6 +7,7 @@
     "dev": "next dev",
     "postinstall": "prisma generate",
     "lint": "next lint",
+    "format": "prettier --write **/*.{js,jsx,ts,tsx,json,md}",
     "start": "next start"
   },
   "dependencies": {
@@ -22,10 +23,12 @@
     "@trpc/server": "^10.30.0",
     "next": "^13.4.5",
     "next-auth": "^4.22.1",
+    "nextjs-cors": "^2.1.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.44.3",
     "superjson": "1.12.2",
+    "trpc-openapi": "^1.2.0",
     "zod": "^3.21.4"
   },
   "devDependencies": {
