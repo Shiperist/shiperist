@@ -323,8 +323,10 @@ const AppCreate = () => {
                         </div>
                       </div>
                     </div>
-                    <div className="mt-8 mx-auto">
-                      <Button type="submit">Create</Button>
+                    <div className="mt-8 ml-auto">
+                      <Button type="submit" className="ml-auto flex">
+                        Create
+                      </Button>
                     </div>
                   </form>
                 </Dialog.Panel>

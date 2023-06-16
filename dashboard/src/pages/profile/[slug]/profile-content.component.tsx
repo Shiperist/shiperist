@@ -25,9 +25,8 @@ export default function ProfileContent() {
   useEffect(() => {
     // Check if any input value is not empty
     const hasInputChanged = Object.values(inputValues).some(
-      (value) => value.trim() !== ''
+      (value) => value.trim() != ''
     );
-
     setIsInputChanged(hasInputChanged);
   }, [inputValues]);
 
