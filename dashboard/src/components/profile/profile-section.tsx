@@ -13,7 +13,7 @@ export default function ProfileSection({
 }) {
   return (
     <Card
-      className="flex flex-col p-8 rounded-lg shadow-0 ring-0 border-1 border-gray-300"
+      className="content-section flex flex-col p-8 rounded-lg shadow-0 ring-0 border-1 border-gray-300"
       id={id}
       key={id}
     >
