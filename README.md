@@ -13,12 +13,12 @@ analytics, designed to streamline the process of app development and deployment.
 
 ## Contributing
 
-We welcome contributions to the OADP! Please read our [Contributing Guide](docs/CONTRIBUTING.md) to learn about our
-development process, how to propose bugfixes and improvements, and how to build and test your changes to OADP.
+We welcome contributions to the Shiperist! Please read our [Contributing Guide](docs/CONTRIBUTING.md) to learn about our
+development process, how to propose bugfixes and improvements, and how to build and test your changes to Shiperist.
 
 ## License
 
-Heligion is open source software licensed under the [Mozilla Public License](LICENSE).
+Shiperist is open source software licensed under the [Mozilla Public License](LICENSE).
 
 ## Contributors
 

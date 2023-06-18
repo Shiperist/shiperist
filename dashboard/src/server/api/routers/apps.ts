@@ -86,7 +86,7 @@ export const appsRouter = createTRPCRouter({
     }),
 
   list: protectedProcedure
-    .meta({ openapi: { method: 'GET', path: '/list' } })
+    .meta({ openapi: { method: 'GET', path: '/app' } })
     .input(
       z.object({ pageToken: z.optional(z.string()), pageSize: z.number() })
     )

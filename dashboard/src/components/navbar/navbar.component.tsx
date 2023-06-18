@@ -48,7 +48,7 @@ export default function Navbar() {
   };
 
   return (
-    <Disclosure as="nav" className="bg-white border">
+    <Disclosure as="nav" className="bg-white border-b-1 shadow-none">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 justify-between">
           <div className="flex">

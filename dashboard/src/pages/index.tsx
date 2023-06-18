@@ -1,11 +1,11 @@
 import { type NextPage } from 'next';
 import React from 'react';
-import Search from '~/components/list/app-search';
-import AppList from '~/components/list/app-list';
+import Search from '~/components/app/app-search';
+import AppList from '~/components/app/app-list';
 
 const Home: NextPage = () => {
   return (
-    <main className="px-8 mt-8 mx-auto max-w-7xl">
+    <main>
       <Search />
       <AppList />
     </main>
