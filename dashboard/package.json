@@ -13,6 +13,7 @@
   "dependencies": {
     "@heroicons/react": "^2.0.18",
     "@next-auth/prisma-adapter": "^1.0.7",
+    "@octokit/types": "^10.0.0",
     "@prisma/client": "^4.15.0",
     "@react-buddy/ide-toolbox-next": "^2.4.0",
     "@t3-oss/env-nextjs": "^0.3.1",
@@ -24,6 +25,7 @@
     "next": "^13.4.5",
     "next-auth": "^4.22.1",
     "nextjs-cors": "^2.1.2",
+    "octokit": "^2.0.22",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.44.3",
