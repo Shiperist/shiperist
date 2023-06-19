@@ -252,7 +252,7 @@ const Profile: NextPage = () => {
             </div>
           </div>
           <div className="mt-8 sticky top-[394px]">
-            <div className="flex flex-col w-full text-black">{tabs}</div>
+            <div className="flex flex-col w-full text-black gap-2">{tabs}</div>
           </div>
         </div>
         <div className="w-[1200px] flex ml-32 flex-col overflow-y-auto">
