@@ -10,6 +10,7 @@ import {
 import ProfileSection from '~/components/profile/profile-section';
 import ProfileSectionContent from '~/components/profile/profile-section-content';
 import SecuritySectionContent from '~/components/profile/security-section-content';
+import { scrollToPos, scrollToTop } from '~/utils/scroll';
 
 type Section = {
   icon: React.ReactNode;
@@ -86,36 +87,17 @@ const Profile: NextPage = () => {
 
   const scrollToElement = (elementId: string) => {
     setActiveTab(elementId.toLowerCase());
-    const navbarElement = document.querySelector('.navbar');
-    const navbarHeight = navbarElement
-      ? (navbarElement as HTMLElement).offsetHeight
-      : 0;
-
     const element = document.getElementById(elementId);
     if (element) {
-      const elementPosition =
-        element.getBoundingClientRect().top + window.pageYOffset;
-      const offsetPosition = elementPosition - navbarHeight;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
+      const boundingRect = element.getBoundingClientRect().top;
+      const elementPosition = boundingRect + window.scrollY;
+      scrollToPos(elementPosition);
     }
-    if (
-      elementId === 'Profile' ||
-      elementId === 'Connections' ||
-      elementId === 'Security'
-    ) {
+    const targetElements = ['Profile', 'Connections', 'Security'];
+
+    if (targetElements.includes(elementId)) {
       scrollToTop();
     }
-  };
-
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
   };
 
   const sections: Section[] = [
@@ -215,8 +197,8 @@ const Profile: NextPage = () => {
         className={`${
           activeTab == section.name.toLowerCase()
             ? 'bg-gray-200 hover:bg-gray-300'
-            : ''
-        } text-left hover:bg-gray-200 w-full pl-4 pr-3 h-10 rounded-lg flex my-auto transition`}
+            : 'hover:bg-gray-200'
+        } text-left w-full pl-4 pr-3 h-10 rounded-lg flex my-auto transition`}
         key={section.name}
         onClick={() => scrollToElement(section.name)}
       >
@@ -238,7 +220,7 @@ const Profile: NextPage = () => {
 
   return (
     <div className="midwrap max-w-full w-[1200px] mx-auto px-4">
-      <div className="tbwrap my-8 flex flex-row">
+      <div className="tbwrap py-8 flex flex-row">
         <div className="w-[256px] flex flex-col px-4 gap-2">
           <div className="sticky top-24">
             <div className="w-[256px] h-[256px] bg-gray-200 rounded-full flex cursor-pointer">

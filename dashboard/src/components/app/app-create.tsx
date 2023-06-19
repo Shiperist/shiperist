@@ -4,7 +4,10 @@ import { Dialog, Transition, Listbox } from '@headlessui/react';
 import { Types } from '~/types/app-types';
 import { useSession } from 'next-auth/react';
 import { api } from '~/utils/api';
-import { ChevronUpDownIcon } from '@heroicons/react/24/solid';
+import {
+  ArrowUpTrayIcon,
+  ChevronUpDownIcon
+} from '@heroicons/react/24/outline';
 import { Button, RequiredLabel } from '../base/button';
 
 const types = [
@@ -187,18 +190,7 @@ const AppCreate = () => {
                               className="w-full h-full flex items-center justify-center"
                               htmlFor="file_input"
                             >
-                              <svg
-                                className="w-6 h-6 text-gray-400"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth="2"
-                                viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg"
-                              >
-                                <path d="M19 9l-6.258-5.908L12.24 1.462A1.55 1.55 0 0010.882 1H9.118a1.55 1.55 0 00-1.358.462L7.258 3.092 1 9m18 0-6.258-5.908L12.24 1.462A1.55 1.55 0 0010.882 1H9.118a1.55 1.55 0 00-1.358.462L7.258 3.092 1 9m18 0v8a2 2 0 01-2 2H3a2 2 0 01-2-2V9m0 0h18" />
-                              </svg>
+                              <ArrowUpTrayIcon className="h-6 w-6 stroke-gray-500" />
                             </label>
                           </div>
                         </div>
@@ -226,7 +218,7 @@ const AppCreate = () => {
                                   {selectedType.type}
                                 </span>
                                 <span className="flex ml-left">
-                                  <ChevronUpDownIcon className="w-5 h-5" />
+                                  <ChevronUpDownIcon className="w-5 h-5 stroke-gray-200" />
                                 </span>
                               </Listbox.Button>
                               <Transition
