@@ -86,7 +86,7 @@ export default function Navbar() {
                 <Menu.Button className="flex rounded-full text-sm items-center focus:outline-none">
                   <span className="sr-only">Open user menu</span>
                   <Image
-                    className="h-8 w-8 rounded-full"
+                    className="h-6 w-6 rounded-full"
                     src={user?.image || 'https://avatar.vercel.sh/leerob'}
                     height={32}
                     width={32}
