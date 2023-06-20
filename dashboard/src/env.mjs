@@ -1,6 +1,6 @@
 import { createEnv } from '@t3-oss/env-nextjs';
 import { z } from 'zod';
-import * as fs from 'fs';
+import { Base64 } from 'js-base64';
 
 export const env = createEnv({
   /**
@@ -61,8 +61,7 @@ export const env = createEnv({
     NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
     NEXTAUTH_URL: process.env.NEXTAUTH_URL,
     GITHUB_APP_ID: process.env.GITHUB_APP_ID,
-    // @ts-ignore
-    GITHUB_APP_PRIVATE_KEY: fs.readFileSync(process.env.GITHUB_APP_PRIVATE_KEY, { encoding: 'utf-8' }),
+    GITHUB_APP_PRIVATE_KEY: Base64.decode(process.env.GITHUB_APP_PRIVATE_KEY ?? ''),
     GITHUB_CLIENT_ID: process.env.GITHUB_CLIENT_ID,
     GITHUB_CLIENT_SECRET: process.env.GITHUB_CLIENT_SECRET,
     GITLAB_CLIENT_ID: process.env.GITLAB_CLIENT_ID,
