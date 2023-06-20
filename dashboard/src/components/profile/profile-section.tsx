@@ -13,13 +13,13 @@ export default function ProfileSection({
 }) {
   return (
     <Card
-      className="content-section flex flex-col p-8 rounded-lg shadow-0 ring-0 border-1 border-gray-300"
+      className="content-section flex flex-col p-8 rounded-lg shadow-0 ring-0 border-1 border-cat-overlay1"
       id={id}
       key={id}
     >
-      <Title className="text-2xl">{title}</Title>
+      <Title className="text-2xl font-bold text-cat-text">{title}</Title>
       <div className="divider" />
-      <div className="flex flex-col gap-4">{children}</div>
+      <div className="flex flex-col gap-4 text-cat-text">{children}</div>
     </Card>
   );
 }

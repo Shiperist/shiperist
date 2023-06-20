@@ -10,7 +10,7 @@ export const Button = ({
 } & React.ButtonHTMLAttributes<HTMLButtonElement>) => {
   const buttonClasses = `rounded-md border-transparent text-sm font-medium ${
     !disabled
-      ? 'hover:bg-amber-400 bg-amber-200 text-amber-900 hover:border-transparent cursor-pointer'
+      ? 'hover:bg-cat-overlay2 bg-cat-overlay1 text-cat-text hover:border-transparent cursor-pointer'
       : '!cursor-default bg-gray-200 text-gray-400 opacity-80'
   } transition duration-150 ease-in-out ${className}`;
 
