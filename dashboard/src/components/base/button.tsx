@@ -19,7 +19,7 @@ export const Button = ({
 
 export const RequiredLabel = ({ text }: { text: string }) => {
   return (
-    <p className="text-sm text-gray-500">
+    <p className="text-sm text-cat-text">
       {text}:<span className="text-red-600"> *</span>
     </p>
   );

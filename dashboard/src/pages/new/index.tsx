@@ -28,9 +28,9 @@ const New: NextPage = () => {
   const [selectedProvider, setSelectedProvider] = useState(providers[0]);
 
   return (
-    <div className="midwrap max-w-full w-[1200px] mx-auto px-4">
+    <div className="midwrap max-w-full w-[800px] mx-auto px-4">
       <div className="tbwrap py-8 flex">
-        <Card className="border border-cat-overlay1 bg-cat-mantle">
+        <Card className="border border-dashed border-cat-overlay1 pb-48 bg-cat-mantle">
           <Title className="text-cat-text mb-2">Import Git Repository</Title>
           <div className="flex flex-col gap-2">
             <div className="flex flex-row gap-2 mt-1">
@@ -53,12 +53,12 @@ const New: NextPage = () => {
                       </span>
                     </Listbox.Button>
                   </div>
-                  <Listbox.Options className="absolute mt-1 max-h-60 w-72 overflow-auto rounded-md bg-cat-crust py-1 text-cat-text shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                  <Listbox.Options className="absolute mt-1 max-h-60 w-[204px] overflow-y-auto rounded-md bg-cat-crust py-1 text-cat-text shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
                     {providers.map((provider, providerId) => (
                       <Listbox.Option
                         key={providerId}
                         className={({ active }) =>
-                          `relative cursor-default select-none py-2 pl-10 pr-4 ${
+                          `relative cursor-default select-none py-2 px-4 ${
                             active
                               ? 'bg-cat-mantle text-cat-text cursor-pointer'
                               : 'text-cat-text'
