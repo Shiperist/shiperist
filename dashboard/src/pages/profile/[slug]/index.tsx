@@ -196,13 +196,13 @@ const Profile: NextPage = () => {
       <button
         className={`${
           activeTab == section.name.toLowerCase()
-            ? 'bg-gray-200 hover:bg-gray-300'
-            : 'hover:bg-gray-200'
+            ? 'bg-cat-mantle hover:bg-cat-crust'
+            : 'hover:bg-cat-mantle'
         } text-left w-full pl-4 pr-3 h-10 rounded-lg flex my-auto transition`}
         key={section.name}
         onClick={() => scrollToElement(section.name)}
       >
-        <a className="flex flex-row gap-4 w-full my-auto text-gray-600 font-bold capitalize">
+        <a className="flex flex-row gap-4 w-full my-auto text-cat-text font-bold capitalize">
           <span className="icon my-auto w-6 h-6">{trustedIcon}</span>
           {section.name}
         </a>
@@ -223,13 +223,13 @@ const Profile: NextPage = () => {
       <div className="tbwrap py-8 flex flex-row">
         <div className="w-[256px] flex flex-col px-4 gap-2">
           <div className="sticky top-24">
-            <div className="w-[256px] h-[256px] bg-gray-200 rounded-full flex cursor-pointer">
+            <div className="w-[256px] h-[256px] bg-cat-overlay1 rounded-full flex cursor-pointer">
               <input className="hidden" id="file_input" type="file" />
               <label
                 className="w-full h-full flex items-center justify-center"
                 htmlFor="file_input"
               >
-                <ArrowUpTrayIcon className="h-10 w-10 stroke-gray-500" />
+                <ArrowUpTrayIcon className="h-10 w-10 stroke-cat-overlay2" />
               </label>
             </div>
           </div>

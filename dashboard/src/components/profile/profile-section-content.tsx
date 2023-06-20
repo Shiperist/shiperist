@@ -45,7 +45,7 @@ const ProfileSectionContent = () => {
         <div className="flex flex-row pr-24">
           <Text className="w-full text-sm">Username:</Text>
           <TextInput
-            className="input input-bordered input-sm w-full px-8"
+            className="input-sm border-cat-overlay2 w-full px-8"
             id="username-input"
             name="input1"
             type="text"
@@ -56,7 +56,7 @@ const ProfileSectionContent = () => {
         <div className="flex flex-row pr-24">
           <Text className="w-full text-sm">E-mail:</Text>
           <TextInput
-            className="input input-bordered input-sm w-full px-8"
+            className="input-sm border-cat-overlay2 w-full px-8"
             id="email-input"
             name="input2"
             type="text"
@@ -66,7 +66,7 @@ const ProfileSectionContent = () => {
         </div>
       </div>
       <Button
-        className="w-fit mt-6"
+        className="w-fit mt-6 p-1 px-2"
         disabled={!isInputChanged}
         id="general-save"
       >
