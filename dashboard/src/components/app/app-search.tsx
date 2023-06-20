@@ -19,7 +19,7 @@ const Search = ({ disabled }: { disabled?: boolean }) => {
   }
 
   return (
-    <Flex className="bg-white border-b-2 shadow-none">
+    <Flex className="">
       <div className="flex flex-row my-12 mx-auto max-w-7xl w-full px-8 items-center">
         <Title className="text-[35px] flex-1">Apps</Title>
         <AppCreate />

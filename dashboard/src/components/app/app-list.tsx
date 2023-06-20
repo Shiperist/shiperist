@@ -11,9 +11,11 @@ import {
 } from '@tremor/react';
 import { useSession } from 'next-auth/react';
 import { api } from '~/utils/api';
-import { Types } from '~/types/app-types';
 import { useRouter } from 'next/router';
-import { EllipsisVerticalIcon } from '@heroicons/react/24/solid';
+import { EllipsisVerticalIcon, PlusIcon } from '@heroicons/react/24/solid';
+import AppCreate from '~/components/app/app-create';
+import { Squares2X2Icon } from '@heroicons/react/24/outline';
+import Image from 'next/image';
 
 const AppList = () => {
   const { data: sessionData } = useSession();
@@ -29,30 +31,61 @@ const AppList = () => {
   };
 
   return (
-    <Grid className="gap-4 grid-cols-3 grid-rows-3 px-8 mt-8 mx-auto max-w-7xl">
-      {apps?.map((app) => {
-        const icon = Types[app.os]?.icon;
-        const trustedIcon: { __html: string | TrustedHTML } | undefined = icon
-          ? { __html: icon as string | TrustedHTML }
-          : undefined;
-        return (
-          <Card
-            key={app.id}
-            className="transition ease-in-out duration-300 px-3 py-6 h-36 cursor-pointer shadow-0 ring-0 border-1 border-gray-300 hover:shadow-lg"
-            onClick={() => navigateToApp(app.id)}
+    <div className="py-24  mx-auto max-w-7xl w-full">
+      <div className="flex flex-row px-8 items-center">
+        <Squares2X2Icon className="w-8 h-8 text-tremor-metric" />
+        <Title className="text-tremor-display flex-1 ml-4">My Workspace</Title>
+      </div>
+      <Grid className="gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 px-8 mt-8">
+        <Card
+          key={'create-app'}
+          className="transition ease-in-out duration-300 p-3 h-48 cursor-pointer shadow-0 ring-0 border-1 border-dashed border-gray-300 bg-gray-50 hover:shadow-lg hover:border-amber-600 hover:bg-white"
+          //onClick={() => navigateToApp(app.id)}
+        >
+          <Flex
+            justifyContent="center"
+            alignItems="center"
+            flexDirection="col"
+            className="h-full gap-2"
           >
-            <div className="flex flex-row items-center gap-8 h-full">
-              <div className="flex flex-row">
-                <img
-                  className="w-8 h-8 rounded-full"
-                  alt="preview-img"
-                  src="https://images.unsplash.com/photo-1686216941182-0f5699f4584d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=725&q=80"
-                />
-              </div>
-              <div className="flex flex-col flex-1">
-                <Title className="font-bold">{app.name}</Title>
-                <text className="text-sm text-gray-500">{app.description}</text>
-                <div className="flex flex-row gap-2 mt-2">
+            <PlusIcon className="w-8 h-8 text-gray-800" />
+            <Title className="font-bold">Create App</Title>
+          </Flex>
+        </Card>
+        {apps?.map((app) => {
+          return (
+            <Card
+              key={app.id}
+              className="transition ease-in-out duration-300 p-3 h-48 cursor-pointer shadow-0 ring-0 border-1 border-gray-300 bg-gray-50 hover:shadow-lg hover:bg-white"
+              onClick={() => navigateToApp(app.id)}
+            >
+              <Flex
+                justifyContent="start"
+                alignItems="stretch"
+                flexDirection="col"
+                className="h-full gap-2"
+              >
+                <Flex className="gap-2">
+                  <Image
+                    className="w-6 h-6 rounded-full"
+                    alt="preview-img"
+                    src={'https://avatar.vercel.sh/leerob'}
+                    height={32}
+                    width={32}
+                  />
+                  <Title className="font-bold flex-1">{app.name}</Title>
+                  <Button className="w-8 h-8 bg-transparent border-0 hover:bg-gray-100">
+                    <EllipsisVerticalIcon className="w-6 h-6 text-gray-800" />
+                  </Button>
+                </Flex>
+                <text className="text-sm text-gray-500 flex-1">
+                  {app.description}
+                </text>
+                <Flex
+                  justifyContent="start"
+                  alignItems="stretch"
+                  className="gap-2"
+                >
                   <Badge
                     size="xs"
                     color="green"
@@ -62,21 +95,18 @@ const AppList = () => {
                   </Badge>
                   <Badge
                     size="xs"
-                    color="green"
+                    color="blue"
                     className="self-center capitalize"
                   >
                     {app.platform}
                   </Badge>
-                </div>
-              </div>
-              <Button className="w-8 h-8 bg-transparent border-0 hover:bg-gray-100">
-                <EllipsisVerticalIcon className="w-6 h-6 text-gray-800" />
-              </Button>
-            </div>
-          </Card>
-        );
-      })}
-    </Grid>
+                </Flex>
+              </Flex>
+            </Card>
+          );
+        })}
+      </Grid>
+    </div>
   );
 };
 

@@ -6,7 +6,6 @@ import AppList from '~/components/app/app-list';
 const Home: NextPage = () => {
   return (
     <main>
-      <Search />
       <AppList />
     </main>
   );

@@ -53,7 +53,6 @@ model Session {
 model User {
   id            String    @id @default(cuid())
   name          String?
-  username      String?   @unique
   email         String?   @unique
   emailVerified DateTime?
   image         String?
@@ -71,8 +70,8 @@ model VerificationToken {
 }
 
 model GitHubInstallationToken {
-  id                   String @id @default(cuid())
-  installationId       Int    @unique
+  id                   String   @id @default(cuid())
+  installationId       Int      @unique
   token                String
   expires_at           DateTime
   repository_selection String

@@ -8,7 +8,7 @@ export const Button = ({
   className?: string;
   disabled?: boolean;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>) => {
-  const buttonClasses = `rounded-md border-transparent px-4 py-2 text-sm font-medium ${
+  const buttonClasses = `rounded-md border-transparent text-sm font-medium ${
     !disabled
       ? 'hover:bg-amber-400 bg-amber-200 text-amber-900 hover:border-transparent cursor-pointer'
       : '!cursor-default bg-gray-200 text-gray-400 opacity-80'

@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useTransition } from 'react';
-import { Text, TextInput } from '@tremor/react';
+import { Icon, Text, TextInput } from '@tremor/react';
 import { Dialog, Transition, Listbox } from '@headlessui/react';
 import { Types } from '~/types/app-types';
 import { useSession } from 'next-auth/react';
@@ -9,6 +9,7 @@ import {
   ChevronUpDownIcon
 } from '@heroicons/react/24/outline';
 import { Button, RequiredLabel } from '../base/button';
+import { PlusIcon } from '@heroicons/react/24/solid';
 
 const types = [
   { id: 1, type: 'Alpha' },
@@ -128,8 +129,8 @@ const AppCreate = () => {
 
   return (
     <div>
-      <Button onClick={openModal} className="ml-4">
-        Add new...
+      <Button onClick={openModal} className="w-9 h-9">
+        <Icon size="md" icon={PlusIcon} />
       </Button>
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog as="div" className="relative z-10" onClose={closeModal}>

@@ -1,9 +1,11 @@
-import { Fragment } from 'react';
+import React, { Fragment } from 'react';
 import { Disclosure, Listbox, Menu, Transition } from '@headlessui/react';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import Image from 'next/image';
 import ProjectSelect from '~/components/navbar/project-select';
 import { useRouter } from 'next/router';
+import AppCreate from '~/components/app/app-create';
+import { ChevronDownIcon } from '@heroicons/react/20/solid';
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
@@ -48,10 +50,7 @@ export default function Navbar() {
   };
 
   return (
-    <Disclosure
-      as="nav"
-      className="bg-white border-b-1 shadow-none sticky top-0 z-50"
-    >
+    <Disclosure as="nav" className="shadow-none sticky top-0 z-50">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 justify-between">
           <div className="flex">
@@ -81,9 +80,10 @@ export default function Navbar() {
             </div>
           </div>
           <div className="hidden sm:ml-6 sm:flex sm:items-center">
-            <Menu as="div" className="relative ml-3">
+            <AppCreate />
+            <Menu as="div" className="relative ml-5">
               <div>
-                <Menu.Button className="flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2">
+                <Menu.Button className="flex rounded-full bg-white text-sm items-center focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2">
                   <span className="sr-only">Open user menu</span>
                   <Image
                     className="h-8 w-8 rounded-full"
@@ -92,6 +92,7 @@ export default function Navbar() {
                     width={32}
                     alt={`${user?.name || 'placeholder'} avatar`}
                   />
+                  <ChevronDownIcon className="ml-2 h-5 w-5 text-gray-400" />
                 </Menu.Button>
               </div>
               <Transition

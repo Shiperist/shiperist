@@ -42,9 +42,7 @@ export const authOptions: NextAuthOptions = {
       ...session,
       user: {
         ...session.user,
-        id: user.id,
-        // @ts-ignore
-        username: user.username as string
+        id: user.id
       }
     })
   },
@@ -56,8 +54,7 @@ export const authOptions: NextAuthOptions = {
       profile(profile: GithubProfile) {
         return {
           id: profile.id.toString(),
-          name: profile.name,
-          username: profile.login,
+          name: profile.login || profile.name || '',
           email: profile.email,
           image: profile.avatar_url
         };

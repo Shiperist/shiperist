@@ -24,7 +24,7 @@ const app = new App({
 });
 
 export async function listRepositories(user: User, namespace?: string) {
-  const installationId = await getInstallationId(user.username);
+  const installationId = await getInstallationId(user.name);
   const installationToken = await getInstallationToken(installationId);
 
   const octokit = new Octokit({
