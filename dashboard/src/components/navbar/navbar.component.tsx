@@ -4,7 +4,6 @@ import { signIn, signOut, useSession } from 'next-auth/react';
 import Image from 'next/image';
 import ProjectSelect from '~/components/navbar/project-select';
 import { useRouter } from 'next/router';
-import AppCreate from '~/components/app/app-create';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
 
 function classNames(...classes: string[]) {
@@ -80,7 +79,6 @@ export default function Navbar() {
             </div>
           </div>
           <div className="hidden sm:ml-6 sm:flex sm:items-center">
-            <AppCreate />
             <Menu as="div" className="relative ml-5">
               <div>
                 <Menu.Button className="flex rounded-full text-sm items-center focus:outline-none">

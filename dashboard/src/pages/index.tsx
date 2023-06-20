@@ -1,14 +1,9 @@
 import { type NextPage } from 'next';
 import React from 'react';
-import Search from '~/components/app/app-search';
-import AppList from '~/components/app/app-list';
+import { AppList } from '~/components/app/app-list';
 
 const Home: NextPage = () => {
-  return (
-    <main>
-      <AppList />
-    </main>
-  );
+  return <AppList />;
 };
 
 export default Home;

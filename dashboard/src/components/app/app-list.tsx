@@ -11,25 +11,13 @@ import {
 } from '@tremor/react';
 import { useSession } from 'next-auth/react';
 import { api } from '~/utils/api';
-import { useRouter } from 'next/router';
-import { EllipsisVerticalIcon, PlusIcon } from '@heroicons/react/24/solid';
-import AppCreate from '~/components/app/app-create';
 import { Squares2X2Icon } from '@heroicons/react/24/outline';
-import Image from 'next/image';
-import AppCard from '~/components/app/app-card';
+import AppCreateCard from '~/components/app/app-create-card';
+import { AppCard } from '~/components/app/app-card';
+import { useApps } from '~/components/app/hooks/useApps';
 
-const AppList = () => {
-  const { data: sessionData } = useSession();
-  const { data: data } = api.apps.list.useQuery(
-    { pageSize: 25 }, // no input
-    { enabled: sessionData?.user !== undefined }
-  );
-  const apps = data ?? [];
-  const router = useRouter();
-
-  const navigateToApp = (id: string) => {
-    void router.push(`/app/${id}`);
-  };
+export function AppList() {
+  const apps = useApps();
 
   return (
     <div className="py-24 mx-auto max-w-7xl w-full">
@@ -40,21 +28,7 @@ const AppList = () => {
         </Title>
       </div>
       <Grid className="gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 px-8 mt-8">
-        <Card
-          key={'create-app'}
-          className="transition ease-in-out duration-300 p-3 h-48 cursor-pointer shadow-0 ring-0 border-1 border-dashed border-cat-overlay1 bg-cat-mantle hover:bg-cat-crust"
-          //onClick={() => navigateToApp(app.id)}
-        >
-          <Flex
-            justifyContent="center"
-            alignItems="center"
-            flexDirection="col"
-            className="h-full gap-2"
-          >
-            <PlusIcon className="w-8 h-8 text-cat-text" />
-            <Title className="font-bold text-cat-text">Create App</Title>
-          </Flex>
-        </Card>
+        <AppCreateCard />
         {apps?.map((app) => {
           return (
             <AppCard
@@ -68,6 +42,4 @@ const AppList = () => {
       </Grid>
     </div>
   );
-};
-
-export default AppList;
+}
