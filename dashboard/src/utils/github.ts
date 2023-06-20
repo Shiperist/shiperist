@@ -14,6 +14,16 @@ type repositoriesParameters =
 type repositoriesResponse =
   Endpoints['GET /installation/repositories']['response'];
 
+type createInstallationTokenParameters =
+  Endpoints['POST /app/installations/{installation_id}/access_tokens']['parameters'];
+type createInstallationTokenResponse =
+  Endpoints['POST /app/installations/{installation_id}/access_tokens']['response'];
+
+type listAcessibleRepositoriesParameters =
+  Endpoints['GET /installation/repositories']['parameters'];
+type listAcessibleRepositoriesResponse =
+  Endpoints['GET /installation/repositories']['response'];
+
 const app = new App({
   appId: env.GITHUB_APP_ID,
   privateKey: env.GITHUB_APP_PRIVATE_KEY,
@@ -23,30 +33,34 @@ const app = new App({
   }
 });
 
-export async function listRepositories(user: User, namespace?: string) {
+export async function listRepositories(
+  user: User,
+  namespace?: string
+): Promise<repositoriesResponse['data']['repositories']> {
+  if (!user.name) throw new Error('User name not found');
+
   const installationId = await getInstallationId(user.name);
   const installationToken = await getInstallationToken(installationId);
 
   const octokit = new Octokit({
-    auth: installationToken as string
+    auth: installationToken
   });
 
-  const repositories = await octokit
-    .request('GET /installation/repositories', {
-      headers: {
-        'X-GitHub-Api-Version': '2022-11-28'
-      }
-    })
-    .catch((e) => {
-      console.log(e);
-    });
+  const repositories: listAcessibleRepositoriesResponse = await octokit.request(
+    'GET /installation/repositories',
+    {
+      per_page: 100,
+      page: 1
+    }
+  );
 
-  console.log(repositories);
-
-  //Print out all repositories
-  for (const repository of repositories?.data.repositories) {
-    console.log(repository);
+  if (repositories.status !== 200) {
+    throw new Error(
+      `Failed to list repositories for installation ${installationId}`
+    );
   }
+
+  return repositories.data.repositories;
 }
 
 async function getInstallationId(username: string) {
@@ -78,24 +92,27 @@ async function getInstallationToken(installationId: number) {
     return installationToken.token;
   }
 
-  const response = await app.octokit
-    .auth({
-      type: 'installation',
-      installationId: installationId
-    })
-    .catch((e) => {
-      console.log(e);
-    });
+  const response: createInstallationTokenResponse = await app.octokit.request(
+    'POST /app/installations/{installation_id}/access_tokens',
+    {
+      installation_id: installationId
+    }
+  );
+
+  if (response.status !== 201) {
+    throw new Error(
+      `Failed to create installation token for installation ${installationId}`
+    );
+  }
 
   await prisma.gitHubInstallationToken.create({
     data: {
       installationId: installationId,
-      token: response.token,
-      expires_at: response.expiresAt,
-      repository_selection: response.repositorySelection,
-      permissions: response.permissions.toString()
+      token: response.data.token,
+      expires_at: response.data.expires_at,
+      repository_selection: response.data.repository_selection ?? 'all'
     }
   });
 
-  return response.token;
+  return response.data.token;
 }

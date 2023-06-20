@@ -1,5 +1,3 @@
-import { Session } from 'next-auth';
-
 interface OSData {
   platform: string[];
   icon: string;

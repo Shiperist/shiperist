@@ -31,6 +31,12 @@ const AppCreate = () => {
     selectedPlatforms[0]
   );
 
+  const { data: repositories } = api.integrations.listRepositories.useQuery({
+    provider: 'github'
+  });
+
+  console.log(repositories);
+
   const addApp = api.apps.addApp.useMutation({
     onSuccess: () => {
       closeModal();

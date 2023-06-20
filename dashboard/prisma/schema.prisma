@@ -75,8 +75,6 @@ model GitHubInstallationToken {
   token                String
   expires_at           DateTime
   repository_selection String
-  permissions          String
-  repository_ids       String?
 
   @@unique([installationId, token])
 }
