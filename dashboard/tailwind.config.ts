@@ -5,74 +5,13 @@ module.exports = {
     './src/**/*.{js,ts,jsx,tsx}',
     './node_modules/@tremor/**/*.{js,ts,jsx,tsx}'
   ],
-  darkMode: 'class',
   theme: {
     transparent: 'transparent',
     current: 'currentColor',
     extend: {
-      colors: {
-        // light mode
-        tremor: {
-          brand: {
-            faint: '#fffbeb', // amber-50
-            muted: '#fef08a', // amber-200
-            subtle: '#fbbf24', // amber-400
-            DEFAULT: '#f59e0b', // amber-500
-            emphasis: '#b45309', // amber-700
-            inverted: '#ffffff' // white
-          },
-          background: {
-            muted: '#f9fafb', // gray-50
-            subtle: '#f3f4f6', // gray-100
-            DEFAULT: '#ffffff', // white
-            emphasis: '#374151' // gray-700
-          },
-          border: {
-            DEFAULT: '#e5e7eb' // gray-200
-          },
-          ring: {
-            DEFAULT: '#e5e7eb' // gray-200
-          },
-          content: {
-            subtle: '#9ca3af', // gray-400
-            DEFAULT: '#6b7280', // gray-500
-            emphasis: '#374151', // gray-700
-            strong: '#111827', // gray-900
-            inverted: '#ffffff' // white
-          }
-        },
-        // dark mode
-        'dark-tremor': {
-          brand: {
-            faint: '#0B1229', // custom
-            muted: '#451a03', // amber-950
-            subtle: '#92400e', // amber-800
-            DEFAULT: '#f59e0b', // amber-500
-            emphasis: '#fbbf24', // amber-400
-            inverted: '#030712' // gray-950
-          },
-          background: {
-            muted: '#131A2B', // custom
-            subtle: '#1f2937', // gray-800
-            DEFAULT: '#111827', // gray-900
-            emphasis: '#d1d5db' // gray-300
-          },
-          border: {
-            DEFAULT: '#1f2937' // gray-800
-          },
-          ring: {
-            DEFAULT: '#1f2937' // gray-800
-          },
-          content: {
-            subtle: '#4b5563', // gray-600
-            DEFAULT: '#6b7280', // gray-600
-            emphasis: '#e5e7eb', // gray-200
-            strong: '#f9fafb', // gray-50
-            inverted: '#000000' // black
-          }
-        }
-      },
+      colors: {},
       boxShadow: {
+        bloom: '0 1px 2px 0 rgb(0 0 0 / 0.05)'
         // light
         //"tremor-input": "0 1px 2px 0 rgb(0 0 0 / 0.05)",
         //"tremor-card": "0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)",
@@ -138,5 +77,12 @@ module.exports = {
         /^(fill-(?:slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-(?:50|100|200|300|400|500|600|700|800|900|950))$/
     }
   ],
-  plugins: [require('@headlessui/tailwindcss')]
+  plugins: [
+    require('@headlessui/tailwindcss'),
+    require('@catppuccin/tailwindcss')({
+      prefix: 'cat',
+      // which flavour of colours to use by default, in the `:root`
+      defaultFlavour: 'latte'
+    })
+  ]
 };

@@ -14,7 +14,10 @@ const MyApp: AppType<{ session: Session | null }> = ({
 }) => {
   return (
     <SessionProvider session={session}>
-      <main className="h-full" style={{ minHeight: '100vh' }}>
+      <main
+        className="h-full cat-frappe bg-cat-base"
+        style={{ minHeight: '100vh' }}
+      >
         <Suspense>
           <Navbar />
         </Suspense>

@@ -70,6 +70,9 @@ dependencies:
     version: 3.21.4
 
 devDependencies:
+  '@catppuccin/tailwindcss':
+    specifier: ^0.1.1
+    version: 0.1.1
   '@headlessui/react':
     specifier: ^1.7.15
     version: 1.7.15(react-dom@18.2.0)(react@18.2.0)
@@ -163,6 +166,19 @@ packages:
       '@babel/helper-string-parser': 7.22.5
       '@babel/helper-validator-identifier': 7.22.5
       to-fast-properties: 2.0.0
+    dev: true
+
+  /@catppuccin/palette@0.1.5:
+    resolution: {integrity: sha512-IQLsZwXDMpLc5CFGjIMa/gFnnFL/QLB280F11B51JweZHerZ/FgPXdIR4eQqn1CgrqI3wGfgnj1LVPx12DV/Uw==}
+    dev: true
+
+  /@catppuccin/tailwindcss@0.1.1:
+    resolution: {integrity: sha512-WWOzx8uOf3QPZ1HdVSkpgaqzMzrfYpOgAketQAQ7493eFhlYC4bJ1ViT5ukhwfhzuu3xnmke+Op2qjhHnyjt8g==}
+    dependencies:
+      '@catppuccin/palette': 0.1.5
+      tailwindcss: 3.3.2
+    transitivePeerDependencies:
+      - ts-node
     dev: true
 
   /@emotion/use-insertion-effect-with-fallbacks@1.0.1(react@18.2.0):

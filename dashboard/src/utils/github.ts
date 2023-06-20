@@ -105,8 +105,17 @@ async function getInstallationToken(installationId: number) {
     );
   }
 
-  await prisma.gitHubInstallationToken.create({
-    data: {
+  await prisma.gitHubInstallationToken.upsert({
+    where: {
+      installationId: installationId
+    },
+    create: {
+      installationId: installationId,
+      token: response.data.token,
+      expires_at: response.data.expires_at,
+      repository_selection: response.data.repository_selection ?? 'all'
+    },
+    update: {
       installationId: installationId,
       token: response.data.token,
       expires_at: response.data.expires_at,
