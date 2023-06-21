@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { TextInput, Divider, Text, Card, Title } from '@tremor/react';
-import { Button } from '~/components/base/button';
+import React from 'react';
+import { Card, Title } from '@tremor/react';
 
 export default function ProfileSection({
   title,

@@ -1,26 +1,74 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-export const Button = ({
-  className = '',
-  disabled,
-  ...props
-}: {
-  className?: string;
-  disabled?: boolean;
-} & React.ButtonHTMLAttributes<HTMLButtonElement>) => {
-  const buttonClasses = `rounded-md border-transparent text-sm font-medium ${
-    !disabled
-      ? 'hover:bg-cat-overlay2 bg-cat-overlay1 text-cat-text hover:border-transparent cursor-pointer'
-      : '!cursor-default bg-gray-200 text-gray-400 opacity-80'
-  } transition duration-150 ease-in-out ${className}`;
+type ButtonVariant = 'outline' | 'ghost' | 'solid';
+type ButtonColor =
+  | 'rosewater'
+  | 'lavender'
+  | 'yellow'
+  | 'red'
+  | 'green'
+  | 'blue'
+  | 'pink'
+  | 'teal';
 
-  return <button className={buttonClasses.trim()} {...props}></button>;
-};
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  icon?: React.ElementType;
+  iconPosition?: 'left' | 'right';
+  loading?: boolean;
+  tooltip?: string;
+  variant?: ButtonVariant;
+  color?: ButtonColor;
+}
 
-export const RequiredLabel = ({ text }: { text: string }) => {
+const Button: React.FC<ButtonProps> = ({
+  icon: Icon,
+  iconPosition = 'left',
+  loading = false,
+  tooltip,
+  variant = 'outline',
+  color = 'green',
+  children,
+  className,
+  ...other
+}) => {
+  const [showTooltip, setShowTooltip] = useState(false);
+
+  let buttonClasses =
+    'flex items-center justify-center px-4 py-2 rounded-lg transition duration-200 ';
+
+  if (variant === 'outline') {
+    buttonClasses += `border-1 border-cat-${color} text-cat-${color} hover:bg-cat-${color} hover:text-cat-base`;
+  } else if (variant === 'ghost') {
+    buttonClasses += `text-${color} hover:bg-cat-${color}-opacity-20`;
+  } else if (variant === 'solid') {
+    buttonClasses += `bg-${color} text-cat-overlay0 hover:bg-cat-${color}-dark`;
+  }
+
   return (
-    <p className="text-sm text-cat-text">
-      {text}:<span className="text-red-600"> *</span>
-    </p>
+    <button
+      className={`${buttonClasses} ${className || ''}`}
+      onMouseEnter={() => setShowTooltip(true)}
+      onMouseLeave={() => setShowTooltip(false)}
+      {...other}
+    >
+      {showTooltip && <div className="absolute top-0 left-0">{tooltip}</div>}
+      {Icon &&
+        iconPosition === 'left' &&
+        (loading ? (
+          <div>Loading...</div>
+        ) : (
+          <Icon className="h-4 w-4 text-cat-subtext1" />
+        ))}
+      <span className="mx-2">{children}</span>
+      {Icon &&
+        iconPosition === 'right' &&
+        (loading ? (
+          <div>Loading...</div>
+        ) : (
+          <Icon className="h-4 w-4 text-cat-subtext1" />
+        ))}
+    </button>
   );
 };
+
+export default Button;

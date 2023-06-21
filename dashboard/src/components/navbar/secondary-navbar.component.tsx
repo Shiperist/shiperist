@@ -1,6 +1,4 @@
 import React from 'react';
-import { getServerSession } from 'next-auth';
-import { authOptions } from '~/server/auth';
 
 export default function SCNavbarComponent() {
   return (

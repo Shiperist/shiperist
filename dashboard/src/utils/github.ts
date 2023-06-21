@@ -1,7 +1,7 @@
 import { App, Octokit } from 'octokit';
 import { env } from '~/env.mjs';
-import { User } from 'next-auth';
-import { Endpoints } from '@octokit/types';
+import type { User } from 'next-auth';
+import type { Endpoints } from '@octokit/types';
 import { prisma } from '~/server/db';
 
 type installationParameters =

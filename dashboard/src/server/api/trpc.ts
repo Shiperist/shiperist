@@ -14,7 +14,7 @@ import superjson from 'superjson';
 import { ZodError } from 'zod';
 import { getServerAuthSession } from '~/server/auth';
 import { prisma } from '~/server/db';
-import { OpenApiMeta } from 'trpc-openapi';
+import type { OpenApiMeta } from 'trpc-openapi';
 
 /**
  * 1. CONTEXT

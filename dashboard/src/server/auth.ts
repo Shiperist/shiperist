@@ -5,8 +5,8 @@ import {
   getServerSession,
   type NextAuthOptions
 } from 'next-auth';
-import GithubProvider, { GithubProfile } from 'next-auth/providers/github';
-import GitlabProvider from 'next-auth/providers/gitlab';
+import type { GithubProfile } from 'next-auth/providers/github';
+import GithubProvider from 'next-auth/providers/github';
 import { env } from '~/env.mjs';
 import { prisma } from '~/server/db';
 

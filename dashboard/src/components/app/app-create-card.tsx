@@ -1,14 +1,5 @@
 import React from 'react';
-import {
-  Badge,
-  Button,
-  Card,
-  Flex,
-  Grid,
-  List,
-  ListItem,
-  Title
-} from '@tremor/react';
+import { Card, Flex, Title } from '@tremor/react';
 import { useRouter } from 'next/router';
 import { PlusIcon } from '@heroicons/react/24/solid';
 

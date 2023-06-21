@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Disclosure, Listbox, Menu, Transition } from '@headlessui/react';
+import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import Image from 'next/image';
 import ProjectSelect from '~/components/navbar/project-select';

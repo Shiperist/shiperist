@@ -6,13 +6,13 @@ import {
   FolderIcon
 } from '@heroicons/react/24/outline';
 import { useRouter } from 'next/router';
-import { TextInput, Title, Text, Card, Divider } from '@tremor/react';
+import { Card, Divider, Text, TextInput, Title } from '@tremor/react';
 import { type NextPage } from 'next';
 import { useSession } from 'next-auth/react';
-import { Fragment, useState, useTransition } from 'react';
-import { Button, RequiredLabel } from '~/components/base/button';
+import React, { Fragment, useState, useTransition } from 'react';
 import { api } from '~/utils/api';
 import { Types } from '~/types/app-types';
+import Button from '~/components/base/button';
 
 const types = [
   { id: 1, type: 'Alpha' },

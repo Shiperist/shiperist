@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { InitialHookStatus } from '@react-buddy/ide-toolbox-next';
+import type { InitialHookStatus } from '@react-buddy/ide-toolbox-next';
 
 export const useInitial: () => InitialHookStatus = () => {
   const [status, setStatus] = useState<InitialHookStatus>({

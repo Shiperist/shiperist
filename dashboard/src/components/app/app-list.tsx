@@ -1,23 +1,12 @@
 import React from 'react';
-import {
-  Badge,
-  Button,
-  Card,
-  Flex,
-  Grid,
-  List,
-  ListItem,
-  Title
-} from '@tremor/react';
-import { useSession } from 'next-auth/react';
-import { api } from '~/utils/api';
+import { Grid, Title } from '@tremor/react';
 import { Squares2X2Icon } from '@heroicons/react/24/outline';
 import AppCreateCard from '~/components/app/app-create-card';
 import { AppCard } from '~/components/app/app-card';
 import { useApps } from '~/components/app/hooks/useApps';
 
 export function AppList() {
-  const apps = useApps();
+  const { apps } = useApps();
 
   return (
     <div className="py-24 mx-auto max-w-7xl w-full">

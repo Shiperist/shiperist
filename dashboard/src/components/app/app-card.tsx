@@ -1,16 +1,7 @@
 import React from 'react';
-import {
-  Badge,
-  Button,
-  Card,
-  Flex,
-  Grid,
-  List,
-  ListItem,
-  Title
-} from '@tremor/react';
+import { Button, Card, Flex, Title } from '@tremor/react';
 import { useRouter } from 'next/router';
-import { EllipsisVerticalIcon, PlusIcon } from '@heroicons/react/24/solid';
+import { EllipsisVerticalIcon } from '@heroicons/react/24/solid';
 import Image from 'next/image';
 
 interface IAppCardProps {

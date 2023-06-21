@@ -9,16 +9,8 @@ module.exports = {
     transparent: 'transparent',
     current: 'currentColor',
     extend: {
-      boxShadow: {
-        bloom: '0 1px 2px 0 rgb(0 0 0 / 0.05)'
-        // light
-        //"tremor-input": "0 1px 2px 0 rgb(0 0 0 / 0.05)",
-        //"tremor-card": "0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)",
-        //"tremor-dropdown": "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
-        // dark
-        //"dark-tremor-input": "0 1px 2px 0 rgb(0 0 0 / 0.05)",
-        //"dark-tremor-card": "0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)",
-        //"dark-tremor-dropdown": "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
+      ringWidth: {
+        '0': '0px'
       },
       borderRadius: {
         'tremor-small': '0.275rem',
@@ -26,6 +18,13 @@ module.exports = {
         'tremor-full': '9999px'
       },
       fontSize: {
+        sm: '0.8rem',
+        base: '1rem',
+        xl: '1.25rem',
+        '2xl': '1.563rem',
+        '3xl': '1.953rem',
+        '4xl': '2.441rem',
+        '5xl': '3.052rem',
         'tremor-label': ['0.75rem'],
         'tremor-default': ['0.875rem', { lineHeight: '1.25rem' }],
         'tremor-title': ['1.125rem', { lineHeight: '1.75rem' }],

@@ -1,49 +1,50 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const path = require("path");
+const path = require('path');
 
-/** @type {import("eslint").Linter.Config} */
+/** @type {import('eslint').Linter.Config} */
 const config = {
   overrides: [
     {
       extends: [
-        "plugin:@typescript-eslint/recommended-requiring-type-checking",
+        'plugin:@typescript-eslint/recommended-requiring-type-checking'
       ],
-      files: ["*.ts", "*.tsx"],
+      files: ['*.ts', '*.tsx'],
       parserOptions: {
-        project: path.join(__dirname, "tsconfig.json"),
-      },
-    },
+        project: path.join(__dirname, 'tsconfig.json')
+      }
+    }
   ],
-  parser: "@typescript-eslint/parser",
+  parser: '@typescript-eslint/parser',
   parserOptions: {
-    project: path.join(__dirname, "tsconfig.json"),
+    project: path.join(__dirname, 'tsconfig.json')
   },
-  plugins: ["@typescript-eslint"],
-  extends: ["next/core-web-vitals", "plugin:@typescript-eslint/recommended"],
+  plugins: ['@typescript-eslint'],
+  extends: ['next/core-web-vitals', 'plugin:@typescript-eslint/recommended'],
+  ignorePatterns: ['node_modules', 'out', 'public', '!.eslintrc.cjs', 'tailwind.config.ts'],
   rules: {
-    "@typescript-eslint/consistent-type-imports": "warn",
-    "@typescript-eslint/no-unused-vars": "off",
-    "@typescript-eslint/no-unsafe-return": "off",
-    "@typescript-eslint/no-unsafe-member-access": "off",
-    "@typescript-eslint/no-unsafe-call": "off",
-    "@typescript-eslint/no-unsafe-assignment": "off",
-    "@typescript-eslint/no-unsafe-argument": "off",
-    "@typescript-eslint/ban-ts-comment": "off",
-    "@typescript-eslint/no-restricted-imports": [
-      "error",
+    '@typescript-eslint/consistent-type-imports': 'warn',
+    '@typescript-eslint/no-unused-vars': 'off',
+    '@typescript-eslint/no-unsafe-return': 'off',
+    '@typescript-eslint/no-unsafe-member-access': 'off',
+    '@typescript-eslint/no-unsafe-call': 'off',
+    '@typescript-eslint/no-unsafe-assignment': 'off',
+    '@typescript-eslint/no-unsafe-argument': 'off',
+    '@typescript-eslint/ban-ts-comment': 'off',
+    '@typescript-eslint/no-restricted-imports': [
+      'error',
       {
-        "paths": [
+        'paths': [
           {
-            "name": "react-i18next",
-            "importNames": [
-              "useTranslation"
+            'name': 'react-i18next',
+            'importNames': [
+              'useTranslation'
             ],
-            "message": "Import useTranslation from next-i18next instead."
+            'message': 'Import useTranslation from next-i18next instead.'
           }
         ]
       }
     ]
-  },
+  }
 };
 
 module.exports = config;

@@ -1,10 +1,9 @@
-import { Fragment, useState } from 'react';
+import { Fragment } from 'react';
 import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/router';
-import { Disclosure, Listbox, Menu, Transition } from '@headlessui/react';
+import { Listbox, Transition } from '@headlessui/react';
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/24/solid';
-import { signIn, signOut, useSession } from 'next-auth/react';
-import Image from 'next/image';
+import { useSession } from 'next-auth/react';
 import { api } from '~/utils/api';
 
 function classNames(...classes: string[]) {
