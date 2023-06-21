@@ -1,12 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
 import type { NextPage } from 'next';
-import {
-  ArrowUpTrayIcon,
-  LinkIcon,
-  LockClosedIcon,
-  UserIcon
-} from '@heroicons/react/24/outline';
+import { ArrowUpTrayIcon, LinkIcon, LockClosedIcon, UserIcon } from '@heroicons/react/24/outline';
 import ProfileSection from '~/components/profile/profile-section';
 import ProfileSectionContent from '~/components/profile/profile-section-content';
 import SecuritySectionContent from '~/components/profile/security-section-content';

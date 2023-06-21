@@ -6,8 +6,27 @@ import TextInput from '~/components/base/text-input';
 import { useRepositories } from '~/components/app/create/hooks/useRepositories';
 import { AppCreateList } from '~/components/app/create/app-create-list';
 import { AppCreateProviderSelect } from '~/components/app/create/app-create-provider-select';
+import { Github, Gitlab } from 'lucide-react';
+import { GitProvider } from '~/types/app-types';
+import { AppCreateProviderCard } from '~/components/app/create/app-create-provider-card';
 
-const providers = ['GitHub', 'GitLab', 'Bitbucket'];
+export const providers: GitProvider[] = [
+  {
+    key: 'github',
+    name: 'GitHub',
+    icon: <Github className="w-5 h-5 text-cat-text" />
+  },
+  {
+    key: 'gitlab',
+    name: 'GitLab',
+    icon: <Gitlab className="w-5 h-5 text-cat-text" />
+  },
+  {
+    key: 'bitbucket',
+    name: 'Bitbucket',
+    icon: <Github className="w-5 h-5 text-cat-text" />
+  }
+];
 
 const Create: NextPage = () => {
   const {
@@ -57,6 +76,28 @@ const Create: NextPage = () => {
             </div>
           </div>
         </Card>
+        <Flex
+          justifyContent={'center'}
+          alignItems={'center'}
+          className="mt-4 gap-4"
+        >
+          {providers.map((provider, providerId) => {
+            const profileUrl = `https://github.com/zZHorizonZz`;
+            const editScopeUrl = `https://github.com/apps/shiperist/installations/new`;
+            return (
+              <AppCreateProviderCard
+                key={providerId}
+                provider={provider.name}
+                icon={provider.icon}
+                profile="@cat"
+                profileUrl={profileUrl}
+                repositories={0}
+                editScopeUrl={editScopeUrl}
+                connected={true}
+              />
+            );
+          })}
+        </Flex>
       </div>
     </Flex>
   );

@@ -23,6 +23,7 @@
     "@trpc/react-query": "^10.30.0",
     "@trpc/server": "^10.30.0",
     "js-base64": "^3.7.5",
+    "lucide-react": "^0.248.0",
     "luxon": "^3.3.0",
     "next": "^13.4.5",
     "next-auth": "^4.22.1",

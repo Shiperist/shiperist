@@ -1,8 +1,8 @@
 import { Menu, Transition } from '@headlessui/react';
 import Image from 'next/image';
-import { ChevronDownIcon } from '@heroicons/react/20/solid';
 import React, { Fragment } from 'react';
 import { useUserProfile } from '~/components/navbar/hooks/useUserProfile';
+import { ChevronDown, LogIn, LogOut, User } from 'lucide-react';
 
 export function NavbarUserIcon() {
   const { user, handleSignOut, handleSignIn, navigateToProfile } =
@@ -20,7 +20,7 @@ export function NavbarUserIcon() {
             width={32}
             alt={`${user?.name || 'placeholder'} avatar`}
           />
-          <ChevronDownIcon className="ml-2 h-5 w-5 text-gray-400" />
+          <ChevronDown className="ml-2 h-5 w-5 text-gray-400" />
         </Menu.Button>
       </div>
       <Transition
@@ -37,28 +37,31 @@ export function NavbarUserIcon() {
             <div>
               <Menu.Item>
                 <button
-                  className="flex w-full px-4 py-2 text-sm text-cat-text"
+                  className="flex w-full px-4 py-2 text-sm text-cat-text hover:bg-cat-mantle"
                   onClick={navigateToProfile}
                 >
-                  Profile
+                  <User className="h-5 w-5 text-gray-400" />
+                  <span className="ml-2">Profile</span>
                 </button>
               </Menu.Item>
               <Menu.Item>
                 <button
-                  className="flex w-full px-4 py-2 text-sm text-cat-text"
+                  className="flex w-full px-4 py-2 text-sm text-cat-text hover:bg-cat-mantle"
                   onClick={() => handleSignOut}
                 >
-                  Sign out
+                  <LogOut className="h-5 w-5 text-gray-400" />
+                  <span className="ml-2">Sign out</span>
                 </button>
               </Menu.Item>
             </div>
           ) : (
             <Menu.Item>
               <button
-                className="flex w-full px-4 py-2 text-sm text-cat-text"
+                className="flex w-full px-4 py-2 text-sm text-cat-text hover:bg-cat-mantle"
                 onClick={() => handleSignIn('github')}
               >
-                Sign in
+                <LogIn className="h-5 w-5 text-gray-400" />
+                <span className="ml-2">Sign in</span>
               </button>
             </Menu.Item>
           )}

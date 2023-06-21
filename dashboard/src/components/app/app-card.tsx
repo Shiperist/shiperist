@@ -1,8 +1,8 @@
 import React from 'react';
 import { Button, Card, Flex, Title } from '@tremor/react';
 import { useRouter } from 'next/router';
-import { EllipsisVerticalIcon } from '@heroicons/react/24/solid';
 import Image from 'next/image';
+import { MoreVertical } from 'lucide-react';
 
 interface IAppCardProps {
   id: string;
@@ -38,7 +38,7 @@ export function AppCard(props: IAppCardProps) {
           />
           <Title className="font-bold flex-1 text-cat-text">{props.name}</Title>
           <Button className="w-8 h-8 bg-transparent border-0 hover:bg-cat-mantle">
-            <EllipsisVerticalIcon className="w-6 h-6 text-cat-text" />
+            <MoreVertical className="w-6 h-6 text-cat-text" />
           </Button>
         </Flex>
         <text className="text-sm text-cat-subtext0 flex-1">

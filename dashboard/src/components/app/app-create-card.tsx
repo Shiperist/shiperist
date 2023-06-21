@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, Flex, Title } from '@tremor/react';
 import { useRouter } from 'next/router';
-import { PlusIcon } from '@heroicons/react/24/solid';
+import { Plus } from 'lucide-react';
 
 const CreateAppCard = () => {
   const router = useRouter();
@@ -22,7 +22,7 @@ const CreateAppCard = () => {
         flexDirection="col"
         className="h-full gap-2"
       >
-        <PlusIcon className="w-8 h-8 text-cat-text" />
+        <Plus className="w-8 h-8 text-cat-text" />
         <Title className="font-bold text-cat-text">Create App</Title>
       </Flex>
     </Card>

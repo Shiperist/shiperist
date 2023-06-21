@@ -1,15 +1,12 @@
 import React, { useState } from 'react';
-
-type ButtonVariant = 'outline' | 'ghost' | 'solid';
-type ButtonColor =
-  | 'rosewater'
-  | 'lavender'
-  | 'yellow'
-  | 'red'
-  | 'green'
-  | 'blue'
-  | 'pink'
-  | 'teal';
+import {
+  ButtonVariant,
+  Color,
+  getBackgroundColor,
+  getBorderColor,
+  getHoverBackgroundColor,
+  getTextColor
+} from '~/utils/colors';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   icon?: React.ElementType;
@@ -17,7 +14,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   loading?: boolean;
   tooltip?: string;
   variant?: ButtonVariant;
-  color?: ButtonColor;
+  color?: Color;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -37,11 +34,15 @@ const Button: React.FC<ButtonProps> = ({
     'flex items-center justify-center px-4 py-2 rounded-lg transition duration-200 ';
 
   if (variant === 'outline') {
-    buttonClasses += `border-1 border-cat-${color} text-cat-${color} hover:bg-cat-${color} hover:text-cat-base`;
+    buttonClasses += `border-1 ${getBorderColor(color)} ${getTextColor(
+      color
+    )} ${getHoverBackgroundColor(color)} hover:text-cat-base`;
   } else if (variant === 'ghost') {
     buttonClasses += `text-${color} hover:bg-cat-${color}-opacity-20`;
   } else if (variant === 'solid') {
-    buttonClasses += `bg-${color} text-cat-overlay0 hover:bg-cat-${color}-dark`;
+    buttonClasses += `${getBackgroundColor(
+      color
+    )} text-cat-overlay0 hover:bg-cat-${color}-dark`;
   }
 
   return (
