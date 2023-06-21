@@ -27,7 +27,7 @@ export function AppList() {
               description={app.description}
             />
           );
-        })}
+        }) ?? null}
       </Grid>
     </div>
   );

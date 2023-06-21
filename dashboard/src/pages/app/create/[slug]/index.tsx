@@ -13,6 +13,8 @@ import React, { Fragment, useState, useTransition } from 'react';
 import { api } from '~/utils/api';
 import { Types } from '~/types/app-types';
 import Button from '~/components/base/button';
+import RequiredLabel from '~/components/base/required-label';
+import InfoCircle from '~/components/base/info-circle';
 
 const types = [
   { id: 1, type: 'Alpha' },
@@ -237,7 +239,10 @@ const Import: NextPage = () => {
                     </div>
                     <div className="flex flex-row mt-3 flex-grow gap-4">
                       <div className="flex flex-col gap-1 flex-grow">
-                        <RequiredLabel text="Release type" />
+                        <div className="flex flex-row gap-2">
+                          <RequiredLabel text="Release type" />
+                          <InfoCircle tooltip="test tooltip"></InfoCircle>
+                        </div>
                         {selectedType && selectedType.type != 'Custom' && (
                           <Listbox
                             value={selectedType}
