@@ -1,5 +1,10 @@
 import { Listbox, Transition } from '@headlessui/react';
-import { ArrowLeftIcon, ArrowUpTrayIcon, ChevronUpDownIcon, FolderIcon } from '@heroicons/react/24/outline';
+import {
+  ArrowLeftIcon,
+  ArrowUpTrayIcon,
+  ChevronUpDownIcon,
+  FolderIcon
+} from '@heroicons/react/24/outline';
 import { useRouter } from 'next/router';
 import { Card, Divider, Text, TextInput, Title } from '@tremor/react';
 import { type NextPage } from 'next';
@@ -27,9 +32,7 @@ const Import: NextPage = () => {
   );
   const [selectedOS, setSelectedOS] = useState<string>(selectedOSes[0] || '');
 
-  const [selectedType, setSelectedType] = useState<string>(
-    types[0]?.type || ''
-  );
+  const [selectedType, setSelectedType] = useState(types[0]);
 
   const [selectedPlatforms, setSelectedPlatforms] = useState<string[]>(
     Types[selectedOS]?.platform || ['Java / Kotlin']
@@ -52,7 +55,7 @@ const Import: NextPage = () => {
   });
 
   const resetReleaseTypes = (types: Array<{ id: number; type: string }>) => {
-    setSelectedType(types[0]?.type || '');
+    setSelectedType(types[0]);
   };
 
   const handleOSChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -130,7 +133,7 @@ const Import: NextPage = () => {
         name: name,
         description: description,
         image: image,
-        releaseType: selectedType || 'Alpha',
+        releaseType: selectedType?.type || 'Alpha',
         os: selectedOS || 'Android',
         platform: selectedPlatform || 'Java / Kotlin'
       });
@@ -243,14 +246,14 @@ const Import: NextPage = () => {
                           <RequiredLabel text="Release type" />
                           <InfoCircle tooltip="test tooltip"></InfoCircle>
                         </div>
-                        {selectedType != 'Custom' && (
+                        {selectedType?.type != 'Custom' && (
                           <Listbox
                             value={selectedType}
                             onChange={setSelectedType}
                           >
                             <Listbox.Button className="w-full cursor-pointer my-auto flex flex-row border cursor-default font-bold rounded-md text-cat-text py-2 px-3 hover:bg-cat-crust focus:bg-cat-crust sm:text-sm">
                               <span className="block truncate my-auto flex flex-grow">
-                                {selectedType}
+                                {selectedType?.type}
                               </span>
                               <span className="flex ml-left">
                                 <ChevronUpDownIcon className="w-5 h-5 stroke-cat-overlay1" />
@@ -299,7 +302,7 @@ const Import: NextPage = () => {
                             </Transition>
                           </Listbox>
                         )}
-                        {selectedType == 'Custom' && (
+                        {selectedType?.type == 'Custom' && (
                           <div
                             className="flex flex-col gap-1"
                             id="release_type_custom"
