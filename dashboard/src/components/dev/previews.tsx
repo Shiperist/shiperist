@@ -1,7 +1,7 @@
 import React from 'react';
 import { ComponentPreview, Previews } from '@react-buddy/ide-toolbox-next';
 import { PaletteTree } from './palette';
-import Navbar from '~/components/navbar/navbar.component';
+import { Navbar } from '~/components/navbar/navbar';
 
 const ComponentPreviews = () => {
   return (

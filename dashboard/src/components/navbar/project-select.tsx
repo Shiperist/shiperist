@@ -10,7 +10,7 @@ function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
 }
 
-export default function ProjectSelect({ user }: { user: any }) {
+export default function ProjectSelect() {
   const { data: sessionData } = useSession();
   const { data: data } = api.apps.list.useQuery(
     { pageSize: 25 }, // no input
