@@ -6,7 +6,7 @@ import '~/styles/globals.css';
 import React, { Suspense } from 'react';
 import { DevSupport } from '@react-buddy/ide-toolbox-next';
 import { ComponentPreviews, useInitial } from '~/components/dev';
-import Navbar from '~/components/navbar/navbar.component';
+import { Navbar } from '~/components/navbar/navbar';
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
