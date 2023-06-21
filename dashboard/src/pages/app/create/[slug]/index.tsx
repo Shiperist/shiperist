@@ -1,10 +1,5 @@
 import { Listbox, Transition } from '@headlessui/react';
-import {
-  ArrowLeftIcon,
-  ArrowUpTrayIcon,
-  ChevronUpDownIcon,
-  FolderIcon
-} from '@heroicons/react/24/outline';
+import { ArrowLeftIcon, ArrowUpTrayIcon, ChevronUpDownIcon, FolderIcon } from '@heroicons/react/24/outline';
 import { useRouter } from 'next/router';
 import { Card, Divider, Text, TextInput, Title } from '@tremor/react';
 import { type NextPage } from 'next';

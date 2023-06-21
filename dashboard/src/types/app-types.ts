@@ -1,3 +1,5 @@
+import React from 'react';
+
 interface OSData {
   platform: string[];
   icon: string;
@@ -20,3 +22,9 @@ export const Types: OSType = {
     color: '#0078D7'
   }
 };
+
+export interface GitProvider {
+  key: string;
+  name: string;
+  icon: React.ReactNode;
+}

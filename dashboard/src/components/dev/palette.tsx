@@ -1,10 +1,5 @@
 import React, { Fragment } from 'react';
-import {
-  Category,
-  Component,
-  Palette,
-  Variant
-} from '@react-buddy/ide-toolbox-next';
+import { Category, Component, Palette, Variant } from '@react-buddy/ide-toolbox-next';
 
 export const PaletteTree = () => (
   <Palette>

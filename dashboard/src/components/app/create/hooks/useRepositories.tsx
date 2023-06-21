@@ -1,12 +1,18 @@
 import { api } from '~/utils/api';
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { GitProvider } from '~/types/app-types';
+import { Github } from 'lucide-react';
 
 export function useRepositories() {
-  const [selectedProvider, setSelectedProvider] = useState<string>('GitHub');
+  const [selectedProvider, setSelectedProvider] = useState<GitProvider>({
+    key: 'github',
+    name: 'GitHub',
+    icon: <Github className="w-6 h-6 text-cat-text" />
+  });
   const [searchRepository, setSearchRepository] = useState('');
 
   const { data: repos } = api.integrations.listRepositories.useQuery({
-    provider: selectedProvider.toLowerCase()
+    provider: selectedProvider.name.toLowerCase()
   });
 
   const filteredRepos = repos?.filter((repo) => {
