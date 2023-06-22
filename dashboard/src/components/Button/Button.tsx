@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import type { ButtonSize, ButtonVariant } from '~/components/button/ButtonBase';
+import type { ButtonSize, ButtonVariant } from '~/components/Button/ButtonBase';
 import { Loader2 } from 'lucide-react';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {

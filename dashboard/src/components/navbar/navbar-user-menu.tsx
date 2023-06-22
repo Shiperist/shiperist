@@ -2,7 +2,7 @@ import Image from 'next/image';
 import React from 'react';
 import { useUserProfile } from '~/components/navbar/hooks/useUserProfile';
 import { Flex, Text, Title } from '@tremor/react';
-import Button from '~/components/button/Button';
+import Button from '~/components/Button/Button';
 
 export function NavbarUserMenu() {
   const { user, handleSignOut, handleSignIn, navigateToProfile } =

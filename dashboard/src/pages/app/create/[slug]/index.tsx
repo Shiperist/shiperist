@@ -1,4 +1,4 @@
-import { Listbox, Transition } from '@headlessui/react';
+import { Listbox, Switch, Transition } from '@headlessui/react';
 import {
   ArrowLeftIcon,
   ArrowUpTrayIcon,
@@ -14,8 +14,10 @@ import { api } from '~/utils/api';
 import { Types } from '~/types/app-types';
 import RequiredLabel from '~/components/base/required-label';
 import InfoCircle from '~/components/base/info-circle';
-import Button from '~/components/button/Button';
+import Button from '~/components/Button/Button';
 import Link from 'next/link';
+import AppCreateInput from '~/components/app/create/app-create-input';
+import { ChevronRight } from 'lucide-react';
 
 const types = [
   { id: 1, type: 'Alpha' },
@@ -164,275 +166,84 @@ const Import: NextPage = () => {
             zZHorizonZz
           </Link>
         </text>
-        <form
-          className="modal-box w-full"
-          id="app_create_form"
-          method="dialog"
-          onSubmit={handleSubmit}
-        >
-          <div className="flex flex-col gap-2 py-8">
-            <div className="flex flex-row mt-3 flex-grow gap-4">
-              <div className="flex flex-col gap-10 flex-grow">
-                <Flex
-                  justifyContent="start"
-                  alignItems="start"
-                  flexDirection="row"
-                  className="gap-8"
-                >
-                  <div className="basis-2/5">
-                    <Text className="font-bold text-ctp-text">App name</Text>
-                    <Text className="text-ctp-subtext0">
-                      This is the name of your app.
-                    </Text>
-                  </div>
-                  <TextInput
-                    required
-                    className="flex w-full h-12 text-ctp-text"
-                    name="name"
+        <Card className="shadow-0 ring-0 border-1 border-ctp-overlay1">
+          <form
+            className="modal-box w-full"
+            id="app_create_form"
+            method="dialog"
+            onSubmit={handleSubmit}
+          >
+            <div className="flex flex-col gap-2">
+              <div className="flex flex-row mt-3 flex-grow gap-4">
+                <div className="flex flex-col gap-10 flex-grow">
+                  <AppCreateInput
+                    name="App Name"
+                    optional={false}
                     placeholder="my-app"
-                    tabIndex={0}
-                    type="text"
-                  />
-                </Flex>
-                <Flex
-                  justifyContent="start"
-                  alignItems="start"
-                  flexDirection="row"
-                  className="gap-8"
-                >
-                  <div className="basis-2/5">
-                    <Text className="font-bold text-ctp-text">
-                      App icon{' '}
-                      <span className="text-ctp-subtext0 font-normal">
-                        (Optional)
-                      </span>
-                    </Text>
-                    <Text className="text-ctp-subtext0">
-                      A url to an image that will be used as the icon for your
-                      app. This is only used for display purposes.
-                    </Text>
-                  </div>
-                  <TextInput
-                    required
-                    className="flex w-full h-12 text-ctp-text"
-                    name="name"
+                  >
+                    This is the name of your app.
+                  </AppCreateInput>
+                  <AppCreateInput
+                    name="App Icon"
+                    optional={true}
                     placeholder="https://example.com/icon.png"
-                    tabIndex={0}
-                    type="text"
-                  />
-                </Flex>
-                <Flex
-                  justifyContent="start"
-                  alignItems="start"
-                  flexDirection="row"
-                  className="gap-8"
-                >
-                  <div className="basis-2/5">
-                    <Text className="font-bold text-ctp-text">
-                      App description{' '}
-                      <span className="text-ctp-subtext0 font-normal">
-                        (Optional)
-                      </span>
-                    </Text>
-                    <Text className="text-ctp-subtext0">
-                      A description of your app. What does it do? What is it
-                      for? This is only used for display purposes.
-                    </Text>
-                  </div>
-                  <TextInput
-                    required
-                    className="flex w-full h-12 text-ctp-text"
-                    name="name"
+                  >
+                    A url to an image that will be used as the icon for your
+                    app. This is only used for display purposes.
+                  </AppCreateInput>
+                  <AppCreateInput
+                    name="App Description"
+                    optional={true}
                     placeholder="This is my app. It does stuff."
-                    tabIndex={0}
-                    type="text"
-                  />
-                </Flex>
-                <Flex
-                  justifyContent="start"
-                  alignItems="start"
-                  flexDirection="row"
-                  className="gap-8"
-                >
-                  <div className="basis-2/5">
-                    <Text className="font-bold text-ctp-text">
-                      Root directory{' '}
-                      <span className="text-ctp-subtext0 font-normal">
-                        (Optional)
-                      </span>
-                    </Text>
-                    <Text className="text-ctp-subtext0">
-                      The root directory of your app. This is where the build
-                      command will be run.
-                    </Text>
-                  </div>
-                  <TextInput
-                    required
-                    className="flex w-full h-12 text-ctp-text"
-                    name="name"
+                  >
+                    A description of your app. What does it do? What is it for?
+                    This is only used for display purposes.
+                  </AppCreateInput>
+                  <AppCreateInput
+                    name="Platform"
+                    optional={true}
                     placeholder="e.g. src"
-                    tabIndex={0}
-                    type="text"
-                  />
-                </Flex>
-                <Flex
-                  justifyContent="start"
-                  alignItems="start"
-                  flexDirection="row"
-                  className="gap-8"
-                >
-                  <div className="basis-2/5">
-                    <Text className="font-bold text-ctp-text">
-                      App description{' '}
-                      <span className="text-ctp-subtext0 font-normal">
-                        (Optional)
-                      </span>
+                  >
+                    The root directory of your app. This is where the build
+                    command will be run.
+                  </AppCreateInput>
+                  <AppCreateInput
+                    name="Root Directory"
+                    optional={true}
+                    placeholder="react-native"
+                  >
+                    A platform is a system on which is you app built. For
+                    example, if your OS of choice is Windows, you can choose
+                    between UWP, Win32 and WSL. You can see the list of
+                    supported platforms
+                    {'here'}
+                  </AppCreateInput>
+                  <Card className="flex flex-row gap-4 shadow-0 ring-0 border-1 border-ctp-overlay1">
+                    <ChevronRight className="w-5 h-5 text-ctp-text" />
+                    <Text className="text-ctp-text font-bold">
+                      Android Build Settings
                     </Text>
-                    <Text className="text-ctp-subtext0">
-                      A description of your app. What does it do? What is it
-                      for? This is only used for display purposes.
+                  </Card>
+                  <Card className="flex flex-row gap-4 shadow-0 ring-0 border-1 border-ctp-overlay1">
+                    <ChevronRight className="w-5 h-5 text-ctp-text" />
+                    <Text className="text-ctp-text font-bold">
+                      iOS Build Settings
                     </Text>
-                  </div>
-                  {/*selectedType?.type != 'Custom' && (
-                    <Listbox
-                      value={selectedType}
-                      onChange={setSelectedType}
-                    >
-                      <Listbox.Button
-                        className='w-full cursor-pointer my-auto flex flex-row border cursor-default font-bold rounded-md text-ctp-text py-2 px-3 hover:bg-ctp-crust focus:bg-ctp-crust sm:text-sm'>
-                              <span className='block truncate my-auto flex flex-grow'>
-                                {selectedType?.type}
-                              </span>
-                        <span className='flex ml-left'>
-                                <ChevronUpDownIcon className='w-5 h-5 stroke-ctp-overlay1' />
-                              </span>
-                      </Listbox.Button>
-                      <Transition
-                        as={Fragment}
-                        enter='ease-out duration-300'
-                        enterFrom='opacity-0 scale-95'
-                        enterTo='opacity-100 scale-100'
-                        leave='ease-in duration-200'
-                        leaveFrom='opacity-100 scale-100'
-                        leaveTo='opacity-0 scale-95'
-                      >
-                        <Listbox.Options
-                          className='absolute mt-16 max-h-60 w-[640px] overflow-y-auto rounded-md bg-ctp-crust py-1 text-ctp-text shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm'>
-                          {types.map((type, typeID) => (
-                            <Listbox.Option
-                              key={typeID}
-                              className={({ active }) =>
-                                `relative cursor-default select-none py-2 px-4 ${
-                                  active
-                                    ? 'bg-ctp-mantle text-ctp-text cursor-pointer'
-                                    : 'text-ctp-text'
-                                }`
-                              }
-                              value={type}
-                            >
-                              {({ selected }) => (
-                                <>
-                                        <span
-                                          className={`block truncate ${
-                                            selected
-                                              ? 'font-medium'
-                                              : 'font-normal'
-                                          }`}
-                                        >
-                                          {type.type === 'Custom'
-                                            ? 'Custom...'
-                                            : type.type}
-                                        </span>
-                                </>
-                              )}
-                            </Listbox.Option>
-                          ))}
-                        </Listbox.Options>
-                      </Transition>
-                    </Listbox>
-                  )}
-                  {selectedType?.type == 'Custom' && (
-                    <div
-                      className='flex flex-col gap-1'
-                      id='release_type_custom'
-                    >
-                      <TextInput
-                        required
-                        className='flex w-full'
-                        id='release_type_input'
-                        placeholder='Type your release type'
-                        type='text'
-                      />
-                      <button
-                        className='text-sm underline cursor-pointer text-left text-ctp-text'
-                        onClick={() => resetReleaseTypes(types)}
-                      >
-                        Return to pre-set release types
-                      </button>
-                    </div>
-                  )*/}
-                </Flex>
-                <Flex
-                  justifyContent="start"
-                  alignItems="start"
-                  flexDirection="row"
-                  className="gap-8"
-                >
-                  <div className="basis-2/5">
-                    <Text className="font-bold text-ctp-text">Platform</Text>
-                    <Text className="text-ctp-subtext0">
-                      A platform is a system on which is you app built. For
-                      example, if your OS of choice is Windows, you can choose
-                      between UWP, Win32 and WSL. You can see the list of
-                      supported platforms
-                      {'here'}
+                  </Card>
+                  <Card className="flex flex-row gap-4 shadow-0 ring-0 border-1 border-ctp-overlay1">
+                    <ChevronRight className="w-5 h-5 text-ctp-text" />
+                    <Text className="text-ctp-text font-bold">
+                      Windows Build Settings
                     </Text>
-                  </div>
-                  <TextInput
-                    required
-                    className="flex w-full h-12 text-ctp-text"
-                    name="name"
-                    placeholder="This is my app. It does stuff."
-                    tabIndex={0}
-                    type="text"
-                  />
-                </Flex>
-                <Flex
-                  justifyContent="start"
-                  alignItems="start"
-                  flexDirection="row"
-                  className="gap-8"
-                >
-                  <div className="basis-2/5">
-                    <Text className="font-bold text-ctp-text">
-                      Build Command{' '}
-                      <span className="text-ctp-subtext0 font-normal">
-                        (Optional)
-                      </span>
-                    </Text>
-                    <Text className="text-ctp-subtext0">
-                      This command will be executed when the app is built and is
-                      executed in the root of the repository. If you don't
-                      specify a build command, the app will be built using the
-                      default build command for the platform.
-                    </Text>
-                  </div>
-                  <TextInput
-                    required
-                    className="flex w-full h-12 text-ctp-text"
-                    name="name"
-                    placeholder="dotnet publish -c Release -r win-x64"
-                    tabIndex={0}
-                    type="text"
-                  />
-                </Flex>
+                  </Card>
+                </div>
               </div>
+              <Button type="submit" className="mt-8 w-full" variant="success">
+                Create
+              </Button>
             </div>
-          </div>
-          <Button type="submit" className="ml-auto w-full" variant="success">
-            Create
-          </Button>
-        </form>
+          </form>
+        </Card>
       </div>
     </div>
   );

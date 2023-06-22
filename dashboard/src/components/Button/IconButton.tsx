@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import type { Color } from '~/utils/colors';
-import type { ButtonVariant } from '~/components/button/ButtonBase';
+import type { ButtonVariant } from '~/components/Button/ButtonBase';
 
 interface IconButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {

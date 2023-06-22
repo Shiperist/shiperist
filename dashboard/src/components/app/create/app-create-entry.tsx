@@ -4,7 +4,7 @@ import { DateTime } from 'luxon';
 import React from 'react';
 import { useRouter } from 'next/router';
 import { Base64 } from 'js-base64';
-import Button from '~/components/button/Button';
+import Button from '~/components/Button/Button';
 
 interface IAppCreateEntryProps {
   name: string;

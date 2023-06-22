@@ -50,7 +50,7 @@ const Profile: NextPage = () => {
     setIsInputChanged(hasInputChanged);
   }, [inputValues]);
 
-  //TODO: change button color when section is hovered
+  //TODO: change Button color when section is hovered
 
   /*   useEffect(() => {
     const observerCallback: IntersectionObserverCallback = (entries) => {

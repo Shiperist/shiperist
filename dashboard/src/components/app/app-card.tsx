@@ -3,7 +3,7 @@ import { Card, Flex, Title } from '@tremor/react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import { MoreVertical } from 'lucide-react';
-import IconButton from '~/components/button/IconButton';
+import IconButton from '~/components/Button/IconButton';
 
 interface IAppCardProps {
   id: string;
