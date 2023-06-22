@@ -1,26 +1,32 @@
 import { type NextPage } from 'next';
 import React from 'react';
-import { AppList } from '~/components/app/app-list';
-import { Flex, Text } from '@tremor/react';
-import Button, { Variants } from '~/components/Button/Button';
-import { Check, Search, Space } from 'lucide-react';
+import { Flex } from '@tremor/react';
+import Button from '~/components/Button/Button';
+import { Variants } from '~/components/Base/BaseButtonVariants';
+import { Check } from 'lucide-react';
 import { Sizes } from '~/components/Base/BaseTypes';
 import TextInput from '~/components/TextInput/TextInput';
+import Title from '~/components/Text/Title';
+import Bold from '~/components/Text/Bold';
+import Subtitle from '~/components/Text/Subtitle';
+import Italic from '~/components/Text/Italic';
+import Text from '~/components/Text/Text';
+import Description from '~/components/Text/Description';
+import InfoTooltip from '~/components/Other/InfoTooltip';
 
 const Dev: NextPage = () => {
   return (
     <div className="max-w-7xl mx-auto p-8">
-      <Text className="text-5xl font-bold text-ctp-text">Dev Page</Text>
-      <text className="text-3xl text-ctp-subtext1 mt-8">Buttons</text>
+      <Title>Dev Components Showcase</Title>
+      {/* Buttons */}
       <Flex
         justifyContent="center"
         alignItems="stretch"
         flexDirection="col"
-        className="gap-4"
+        className="gap-4 mt-8 border border-ctp-text p-6 rounded-lg"
       >
-        <Text className="text-2xl font-bold text-ctp-text mt-8">
-          Button Variants
-        </Text>
+        <Subtitle className="">Buttons</Subtitle>
+        <Bold className="">Button Variants</Bold>
         <Flex
           justifyContent="start"
           alignItems="center"
@@ -29,15 +35,13 @@ const Dev: NextPage = () => {
         >
           {Variants.map((variant) => {
             return (
-              <Button variant={variant} size="medium">
+              <Button key={`key-${variant}`} variant={variant} size="medium">
                 {variant}
               </Button>
             );
           })}
         </Flex>
-        <Text className="text-2xl font-bold text-ctp-text mt-8">
-          Size Variants
-        </Text>
+        <Bold className="">Size Variants</Bold>
         <Flex
           justifyContent="start"
           alignItems="center"
@@ -46,15 +50,13 @@ const Dev: NextPage = () => {
         >
           {Sizes.map((size) => {
             return (
-              <Button variant="warning" size={size}>
+              <Button key={`key-${size}`} variant="warning" size={size}>
                 {size}
               </Button>
             );
           })}
         </Flex>
-        <Text className="text-2xl font-bold text-ctp-text mt-8">
-          Icon Buttons Variants
-        </Text>
+        <Bold className="">Icon Button Variants</Bold>
         <Flex
           justifyContent="start"
           alignItems="center"
@@ -92,16 +94,15 @@ const Dev: NextPage = () => {
           ></Button>
         </Flex>
       </Flex>
-      <text className="text-3xl text-ctp-subtext1 mt-8">Text Input</text>
+      {/* Text Inputs */}
       <Flex
         justifyContent="center"
         alignItems="stretch"
         flexDirection="col"
-        className="gap-4"
+        className="gap-4 mt-8 border border-ctp-text p-6 rounded-lg"
       >
-        <Text className="text-2xl font-bold text-ctp-text mt-8">
-          Button Variants
-        </Text>
+        <Subtitle className="">Text Input</Subtitle>
+        <Bold className="">Text Input Variants</Bold>
         <Flex
           justifyContent="start"
           alignItems="center"
@@ -156,6 +157,57 @@ const Dev: NextPage = () => {
             className="w-full"
             placeholder="Type something..."
           />
+        </Flex>
+      </Flex>
+      {/* Texts */}
+      <Flex
+        justifyContent="center"
+        alignItems="stretch"
+        flexDirection="col"
+        className="gap-4 mt-8 border border-ctp-text p-6 rounded-lg"
+      >
+        <Subtitle className="">Texts</Subtitle>
+        <Bold className="">Texts Variants</Bold>
+        <Flex
+          justifyContent="start"
+          alignItems="start"
+          flexDirection="col"
+          className="gap-4"
+        >
+          <Title>Title</Title>
+          <Subtitle>Subtitle</Subtitle>
+          <Text>Text</Text>
+          <Bold>Bold</Bold>
+          <Italic>Italic</Italic>
+          <Description>Description</Description>
+        </Flex>
+      </Flex>
+      {/* Other */}
+      <Flex
+        justifyContent="center"
+        alignItems="stretch"
+        flexDirection="col"
+        className="gap-4 mt-8 border border-ctp-text p-6 rounded-lg"
+      >
+        <Subtitle className="">Other</Subtitle>
+        <Flex
+          justifyContent="start"
+          alignItems="start"
+          flexDirection="col"
+          className="gap-4"
+        >
+          <Flex
+            justifyContent="start"
+            alignItems="start"
+            flexDirection="row"
+            className="gap-1"
+          >
+            <Text>Random text</Text>
+            <InfoTooltip
+              className="top-[-50px]"
+              tooltip="Hello this is a information tooltip"
+            />
+          </Flex>
         </Flex>
       </Flex>
     </div>

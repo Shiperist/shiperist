@@ -7,7 +7,7 @@ import { useRepositories } from '~/components/app/create/hooks/useRepositories';
 import { AppCreateList } from '~/components/app/create/app-create-list';
 import { AppCreateProviderSelect } from '~/components/app/create/app-create-provider-select';
 import { Github, Gitlab } from 'lucide-react';
-import { GitProvider } from '~/types/app-types';
+import type { GitProvider } from '~/types/app-types';
 import { AppCreateProviderCard } from '~/components/app/create/app-create-provider-card';
 
 export const providers: GitProvider[] = [
