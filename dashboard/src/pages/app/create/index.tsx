@@ -14,17 +14,17 @@ export const providers: GitProvider[] = [
   {
     key: 'github',
     name: 'GitHub',
-    icon: <Github className="w-5 h-5 text-cat-text" />
+    icon: <Github className="w-5 h-5 text-ctp-text" />
   },
   {
     key: 'gitlab',
     name: 'GitLab',
-    icon: <Gitlab className="w-5 h-5 text-cat-text" />
+    icon: <Gitlab className="w-5 h-5 text-ctp-text" />
   },
   {
     key: 'bitbucket',
     name: 'Bitbucket',
-    icon: <Github className="w-5 h-5 text-cat-text" />
+    icon: <Github className="w-5 h-5 text-ctp-text" />
   }
 ];
 
@@ -46,14 +46,14 @@ const Create: NextPage = () => {
           flexDirection="col"
           className="h-full w-full my-12"
         >
-          <text className="text-cat-text text-3xl">Create a new app</text>
-          <Text className="text-cat-subtext0">
+          <text className="text-ctp-text text-3xl">Create a new app</text>
+          <Text className="text-ctp-subtext0">
             Import a git repository from providers like Github, Gitlab, or
             Bitbucket.
           </Text>
         </Flex>
-        <Card className="border-cat-overlay1 border-1 rounded-lg w-full h-full min-w-96 ring-0">
-          <Title className="text-cat-text text-4xl">
+        <Card className="border-ctp-overlay1 border-1 rounded-lg w-full h-full min-w-96 ring-0">
+          <Title className="text-ctp-text text-4xl">
             Import Git Repository
           </Title>
           <div className="tbwrap mt-4 flex">

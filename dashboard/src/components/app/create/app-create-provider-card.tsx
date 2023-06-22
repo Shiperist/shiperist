@@ -15,17 +15,17 @@ interface IAppCreateProviderCardProps {
 
 export function AppCreateProviderCard(props: IAppCreateProviderCardProps) {
   return (
-    <Card className="p-3 border-1 border-cat-overlay1 ring-0">
+    <Card className="p-3 border-1 border-ctp-overlay1 ring-0">
       <Flex justifyContent="start" alignItems="stretch" flexDirection="col">
         <Flex>
           {props.icon}
-          <Title className="text-cat-text text-2xl ml-2 mr-auto">
+          <Title className="text-ctp-text text-2xl ml-2 mr-auto">
             {props.provider}
           </Title>
           {props.connected ? (
-            <Check className="w-5 h-5 text-cat-green" />
+            <Check className="w-5 h-5 text-ctp-green" />
           ) : (
-            <X className="w-5 h-5 text-cat-red" />
+            <X className="w-5 h-5 text-ctp-red" />
           )}
         </Flex>
         <Flex
@@ -42,19 +42,19 @@ export function AppCreateProviderCard(props: IAppCreateProviderCardProps) {
           >
             <Link
               href={props.profileUrl}
-              className="text-cat-text hover:underline"
+              className="text-ctp-text hover:underline"
             >
               {props.profile}
             </Link>
-            <ExternalLink className="w-4 h-4 text-cat-text" />
+            <ExternalLink className="w-4 h-4 text-ctp-text" />
           </Flex>
-          <Text className="text-cat-overlay1">
+          <Text className="text-ctp-overlay1">
             <span className="font-bold">{props.repositories}</span>
             <span> repositories</span>
           </Text>
           <Link
             href={props.editScopeUrl}
-            className="text-cat-blue hover:underline"
+            className="text-ctp-blue hover:underline"
           >
             Edit scope
           </Link>

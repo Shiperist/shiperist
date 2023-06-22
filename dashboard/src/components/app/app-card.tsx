@@ -1,8 +1,9 @@
 import React from 'react';
-import { Button, Card, Flex, Title } from '@tremor/react';
+import { Card, Flex, Title } from '@tremor/react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import { MoreVertical } from 'lucide-react';
+import IconButton from '~/components/button/IconButton';
 
 interface IAppCardProps {
   id: string;
@@ -19,7 +20,7 @@ export function AppCard(props: IAppCardProps) {
 
   return (
     <Card
-      className="transition ease-in-out duration-300 p-3 h-48 cursor-pointer shadow-0 ring-0 bg-cat-mantle hover:bg-cat-crust"
+      className="transition ease-in-out duration-300 p-3 h-48 cursor-pointer shadow-0 ring-0 bg-ctp-mantle hover:bg-ctp-crust"
       onClick={navigateToApp}
     >
       <Flex
@@ -36,12 +37,14 @@ export function AppCard(props: IAppCardProps) {
             height={32}
             width={32}
           />
-          <Title className="font-bold flex-1 text-cat-text">{props.name}</Title>
-          <Button className="w-8 h-8 bg-transparent border-0 hover:bg-cat-mantle">
-            <MoreVertical className="w-6 h-6 text-cat-text" />
-          </Button>
+          <Title className="font-bold flex-1 text-ctp-text">{props.name}</Title>
+          <IconButton
+            className="w-8 h-8 text-ctp-text hover:bg-ctp-mantle hover:text-ctp-text"
+            icon={MoreVertical}
+            variant="ghost"
+          />
         </Flex>
-        <text className="text-sm text-cat-subtext0 flex-1">
+        <text className="text-sm text-ctp-subtext0 flex-1">
           {props.description}
         </text>
         <Flex justifyContent="start" alignItems="stretch" className="gap-2">

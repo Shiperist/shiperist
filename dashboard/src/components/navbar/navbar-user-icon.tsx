@@ -32,12 +32,12 @@ export function NavbarUserIcon() {
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-mantle py-1 border-1 border-cat-overlay1">
+        <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-mantle py-1 border-1 border-ctp-overlay1">
           {user ? (
             <div>
               <Menu.Item>
                 <button
-                  className="flex w-full px-4 py-2 text-sm text-cat-text hover:bg-cat-mantle"
+                  className="flex w-full px-4 py-2 text-sm text-ctp-text hover:bg-ctp-mantle"
                   onClick={navigateToProfile}
                 >
                   <User className="h-5 w-5 text-gray-400" />
@@ -46,7 +46,7 @@ export function NavbarUserIcon() {
               </Menu.Item>
               <Menu.Item>
                 <button
-                  className="flex w-full px-4 py-2 text-sm text-cat-text hover:bg-cat-mantle"
+                  className="flex w-full px-4 py-2 text-sm text-ctp-text hover:bg-ctp-mantle"
                   onClick={() => handleSignOut}
                 >
                   <LogOut className="h-5 w-5 text-gray-400" />
@@ -57,7 +57,7 @@ export function NavbarUserIcon() {
           ) : (
             <Menu.Item>
               <button
-                className="flex w-full px-4 py-2 text-sm text-cat-text hover:bg-cat-mantle"
+                className="flex w-full px-4 py-2 text-sm text-ctp-text hover:bg-ctp-mantle"
                 onClick={() => handleSignIn('github')}
               >
                 <LogIn className="h-5 w-5 text-gray-400" />

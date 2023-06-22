@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
 import type { NextPage } from 'next';
-import { ArrowUpTrayIcon, LinkIcon, LockClosedIcon, UserIcon } from '@heroicons/react/24/outline';
+import {
+  ArrowUpTrayIcon,
+  LinkIcon,
+  LockClosedIcon,
+  UserIcon
+} from '@heroicons/react/24/outline';
 import ProfileSection from '~/components/profile/profile-section';
 import ProfileSectionContent from '~/components/profile/profile-section-content';
 import SecuritySectionContent from '~/components/profile/security-section-content';
@@ -191,13 +196,13 @@ const Profile: NextPage = () => {
       <button
         className={`${
           activeTab == section.name.toLowerCase()
-            ? 'bg-cat-mantle hover:bg-cat-crust'
-            : 'hover:bg-cat-mantle'
+            ? 'bg-ctp-mantle hover:bg-ctp-crust'
+            : 'hover:bg-ctp-mantle'
         } text-left w-full pl-4 pr-3 h-10 rounded-lg flex my-auto transition`}
         key={section.name}
         onClick={() => scrollToElement(section.name)}
       >
-        <a className="flex flex-row gap-4 w-full my-auto text-cat-text font-bold capitalize">
+        <a className="flex flex-row gap-4 w-full my-auto text-ctp-text font-bold capitalize">
           <span className="icon my-auto w-6 h-6">{trustedIcon}</span>
           {section.name}
         </a>
@@ -218,13 +223,13 @@ const Profile: NextPage = () => {
       <div className="tbwrap py-8 flex flex-row">
         <div className="w-[256px] flex flex-col px-4 gap-2">
           <div className="sticky top-24">
-            <div className="w-[256px] h-[256px] bg-cat-overlay1 rounded-full flex cursor-pointer">
+            <div className="w-[256px] h-[256px] bg-ctp-overlay1 rounded-full flex cursor-pointer">
               <input className="hidden" id="file_input" type="file" />
               <label
                 className="w-full h-full flex items-center justify-center"
                 htmlFor="file_input"
               >
-                <ArrowUpTrayIcon className="h-10 w-10 stroke-cat-overlay2" />
+                <ArrowUpTrayIcon className="h-10 w-10 stroke-ctp-overlay2" />
               </label>
             </div>
           </div>

@@ -13,9 +13,9 @@ const InfoCircle: React.FC<InfoCircleProps> = ({
 }) => {
   const [showTooltip, setShowTooltip] = useState(false);
 
-  const infoClass = 'w-4 h-4 stroke-cat-overlay1';
+  const infoClass = 'w-4 h-4 stroke-ctp-overlay1';
   const tooltipClass =
-    'absolute z-10 w-32 p-2 text-center transform top-[-32px] left-1/2 -translate-x-1/2 bg-cat-crust text-cat-text text-xs rounded-md shadow break-words';
+    'absolute z-10 w-32 p-2 text-center transform top-[-32px] left-1/2 -translate-x-1/2 bg-ctp-crust text-ctp-text text-xs rounded-md shadow break-words';
 
   return (
     <span className={`${className ?? ''}`} {...props}>

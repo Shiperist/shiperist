@@ -15,14 +15,14 @@ export function AppCreateProviderSelect(props: IAppCreateProviderSelectProps) {
     <div className="w-72">
       <Listbox value={props.selectedProvider} onChange={props.setProvider}>
         <div className="relative">
-          <Listbox.Button className="relative w-full cursor-default rounded-lg bg-transparent border-cat-overlay1 border py-2 pl-3 pr-10 text-left">
+          <Listbox.Button className="relative w-full cursor-default rounded-lg bg-transparent border-ctp-overlay1 border py-2 pl-3 pr-10 text-left">
             <Flex
               justifyContent="start"
               alignItems="center"
               flexDirection="row"
             >
               {props.selectedProvider.icon}
-              <span className="ml-4 text-cat-text">
+              <span className="ml-4 text-ctp-text">
                 {props.selectedProvider.name}
               </span>
             </Flex>
@@ -43,15 +43,15 @@ export function AppCreateProviderSelect(props: IAppCreateProviderSelectProps) {
           leaveFrom="opacity-100 scale-100"
           leaveTo="opacity-0 scale-95"
         >
-          <Listbox.Options className="absolute mt-1 max-h-60 w-[204px] overflow-y-auto rounded-md bg-cat-base py-1 border-1 border-cat-overlay1 text-cat-text">
+          <Listbox.Options className="absolute mt-1 max-h-60 w-[204px] overflow-y-auto rounded-md bg-ctp-base py-1 border-1 border-ctp-overlay1 text-ctp-text">
             {props.providers.map((provider, providerId) => (
               <Listbox.Option
                 key={providerId}
                 className={({ active }) =>
                   `relative cursor-default select-none py-2 px-4 ${
                     active
-                      ? 'bg-cat-mantle text-cat-text cursor-pointer'
-                      : 'text-cat-text'
+                      ? 'bg-ctp-mantle text-ctp-text cursor-pointer'
+                      : 'text-ctp-text'
                   }`
                 }
                 value={provider}

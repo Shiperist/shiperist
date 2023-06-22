@@ -53,10 +53,10 @@ const TextInput: React.ForwardRefRenderFunction<
     <>
       <div className={`flex flex-col ${className || ''}`}>
         <div
-          className={`relative flex items-center min-w-[10rem] h-full outline-none rounded-lg shadow-sm border border-cat-overlay0 ${
-            !isFocused && !error ? 'hover:border-cat-overlay2' : ''
-          } ${isFocused && !error ? 'border-1 border-cat-' + color : ''} ${
-            error ? 'border-cat-red' : ''
+          className={`relative flex items-center min-w-[10rem] h-full outline-none rounded-lg shadow-sm border border-ctp-overlay0 ${
+            !isFocused && !error ? 'hover:border-ctp-overlay2' : ''
+          } ${isFocused && !error ? 'border-1 border-ctp-' + color : ''} ${
+            error ? 'border-ctp-red' : ''
           }`}
           onClick={() => handleFocusChange(true)}
           onFocus={() => handleFocusChange(true)}
@@ -64,24 +64,24 @@ const TextInput: React.ForwardRefRenderFunction<
         >
           {Icon && (
             <div className="ml-3 shrink-0">
-              <Icon className="h-4 w-4 text-cat-subtext1" />
+              <Icon className="h-4 w-4 text-ctp-subtext1" />
             </div>
           )}
           <input
             ref={inputRef}
-            className={`w-full focus:outline-none focus:ring-0 border-none bg-transparent text-cat-subtext1 ${
+            className={`w-full focus:outline-none focus:ring-0 border-none bg-transparent text-ctp-subtext1 ${
               Icon ? 'pl-2' : 'px-4'
             } py-1`}
             {...other}
           />
           {error && (
             <div className="mr-3">
-              <ExclamationCircleIcon className="h-4 w-4 text-cat-red" />
+              <ExclamationCircleIcon className="h-4 w-4 text-ctp-red" />
             </div>
           )}
         </div>
         {errorMessage && (
-          <p className="text-sm text-cat-red mt-1">{errorMessage}</p>
+          <p className="text-sm text-ctp-red mt-1">{errorMessage}</p>
         )}
       </div>
     </>

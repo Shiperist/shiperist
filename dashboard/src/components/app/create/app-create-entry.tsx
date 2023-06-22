@@ -3,8 +3,8 @@ import { LockClosedIcon } from '@heroicons/react/24/outline';
 import { DateTime } from 'luxon';
 import React from 'react';
 import { useRouter } from 'next/router';
-import Button from '~/components/base/button';
 import { Base64 } from 'js-base64';
+import Button from '~/components/button/Button';
 
 interface IAppCreateEntryProps {
   name: string;
@@ -25,7 +25,7 @@ export function AppCreateEntry(props: IAppCreateEntryProps) {
       justifyContent="center"
       alignItems="stretch"
       flexDirection="row"
-      className="p-4 gap-2 border-b-1 border-cat-overlay1 hover:bg-cat-mantle"
+      className="p-4 gap-2 border-b-1 border-ctp-overlay1 hover:bg-ctp-mantle"
     >
       <Flex
         justifyContent="start"
@@ -34,22 +34,22 @@ export function AppCreateEntry(props: IAppCreateEntryProps) {
         className="gap-2"
       >
         {props.private ? (
-          <LockClosedIcon className="w-4 h-4 stroke-cat-red" />
+          <LockClosedIcon className="w-4 h-4 stroke-ctp-red" />
         ) : (
           ''
         )}
-        <Text className="text-cat-text overflow-hidden line-clamp-1">
+        <Text className="text-ctp-text overflow-hidden line-clamp-1">
           {props.name}
         </Text>
       </Flex>
       <Flex justifyContent="end" alignItems="center" className="basis-2/3">
-        <Text className="text-cat-text text-right">
+        <Text className="text-ctp-text text-right">
           {DateTime.fromJSDate(props.updatedAt).setLocale('en').toRelative()}
         </Text>
         <Button
-          className="w-20 h-8 ml-4"
-          color="green"
-          variant="outline"
+          className="ml-4"
+          variant="success"
+          size="medium"
           onClick={navigateToCreateApp}
         >
           Import

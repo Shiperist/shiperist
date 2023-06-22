@@ -7,7 +7,7 @@ export function useRepositories() {
   const [selectedProvider, setSelectedProvider] = useState<GitProvider>({
     key: 'github',
     name: 'GitHub',
-    icon: <Github className="w-6 h-6 text-cat-text" />
+    icon: <Github className="w-6 h-6 text-ctp-text" />
   });
   const [searchRepository, setSearchRepository] = useState('');
 

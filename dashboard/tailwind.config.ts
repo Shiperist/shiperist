@@ -18,13 +18,6 @@ module.exports = {
         'tremor-full': '9999px'
       },
       fontSize: {
-        sm: '0.8rem',
-        base: '1rem',
-        xl: '1.25rem',
-        '2xl': '1.563rem',
-        '3xl': '1.953rem',
-        '4xl': '2.441rem',
-        '5xl': '3.052rem',
         'tremor-label': ['0.75rem'],
         'tremor-default': ['0.875rem', { lineHeight: '1.25rem' }],
         'tremor-title': ['1.125rem', { lineHeight: '1.75rem' }],
@@ -73,12 +66,39 @@ module.exports = {
     {
       pattern:
         /^(fill-(?:slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-(?:50|100|200|300|400|500|600|700|800|900|950))$/
+    },
+    {
+      pattern:
+        /^(bg-ctp-(?:rosewater|flamingo|pink|mauve|red|maroon|peach|yellow|green|teal|blue|sky|sapphire|lavender|crust|mantle|base))$/,
+      variants: ['hover', 'ui-selected']
+    },
+    {
+      pattern:
+        /^(text-ctp-(?:rosewater|flamingo|pink|mauve|red|maroon|peach|yellow|green|teal|blue|sky|sapphire|lavender|crust|mantle|base))$/,
+      variants: ['hover', 'ui-selected']
+    },
+    {
+      pattern:
+        /^(border-ctp-(?:rosewater|flamingo|pink|mauve|red|maroon|peach|yellow|green|teal|blue|sky|sapphire|lavender|crust|mantle|base))$/,
+      variants: ['hover', 'ui-selected']
+    },
+    {
+      pattern:
+        /^(ring-ctp-(?:rosewater|flamingo|pink|mauve|red|maroon|peach|yellow|green|teal|blue|sky|sapphire|lavender|crust|mantle|base))$/
+    },
+    {
+      pattern:
+        /^(stroke-ctp-(?:rosewater|flamingo|pink|mauve|red|maroon|peach|yellow|green|teal|blue|sky|sapphire|lavender|crust|mantle|base))$/
+    },
+    {
+      pattern:
+        /^(fill-ctp-(?:rosewater|flamingo|pink|mauve|red|maroon|peach|yellow|green|teal|blue|sky|sapphire|lavender|crust|mantle|base))$/
     }
   ],
   plugins: [
     require('@headlessui/tailwindcss'),
     require('@catppuccin/tailwindcss')({
-      prefix: 'cat',
+      prefix: 'ctp',
       // which flavour of colours to use by default, in the `:root`
       defaultFlavour: 'latte'
     })

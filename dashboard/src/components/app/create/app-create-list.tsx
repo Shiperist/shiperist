@@ -19,7 +19,7 @@ interface IAppCreateListProps {
 
 export function AppCreateList(props: IAppCreateListProps) {
   return (
-    <div className="mt-4 border-cat-overlay1 border-1 rounded-lg overflow-y-scroll h-96">
+    <div className="mt-4 border-ctp-overlay1 border-1 rounded-lg overflow-y-scroll h-96">
       {props?.repos?.map((repo, repoId) => {
         return (
           <AppCreateEntry

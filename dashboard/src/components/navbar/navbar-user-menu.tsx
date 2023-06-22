@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import React from 'react';
 import { useUserProfile } from '~/components/navbar/hooks/useUserProfile';
-import Button from '~/components/base/button';
 import { Flex, Text, Title } from '@tremor/react';
+import Button from '~/components/button/Button';
 
 export function NavbarUserMenu() {
   const { user, handleSignOut, handleSignIn, navigateToProfile } =
@@ -10,7 +10,7 @@ export function NavbarUserMenu() {
 
   return (
     <>
-      <div className="border-t border-cat-overlay1 pt-4 pb-3">
+      <div className="border-t border-ctp-overlay1 pt-4 pb-3">
         {user ? (
           <>
             <Flex
@@ -27,8 +27,8 @@ export function NavbarUserMenu() {
                 alt={user?.name ? `${user.name} avatar` : ''}
               />
               <div className="ml-3">
-                <Title className="text-cat-text">{user.name}</Title>
-                <Text className="text-cat-subtext0">{user.email}</Text>
+                <Title className="text-ctp-text">{user.name}</Title>
+                <Text className="text-ctp-subtext0">{user.email}</Text>
               </div>
             </Flex>
             <div className="p-4">

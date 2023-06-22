@@ -6,15 +6,16 @@ import {
   FolderIcon
 } from '@heroicons/react/24/outline';
 import { useRouter } from 'next/router';
-import { Card, Divider, Text, TextInput, Title } from '@tremor/react';
+import { Card, Divider, Flex, Text, TextInput, Title } from '@tremor/react';
 import { type NextPage } from 'next';
 import { useSession } from 'next-auth/react';
 import React, { Fragment, useState, useTransition } from 'react';
 import { api } from '~/utils/api';
 import { Types } from '~/types/app-types';
-import Button from '~/components/base/button';
 import RequiredLabel from '~/components/base/required-label';
 import InfoCircle from '~/components/base/info-circle';
+import Button from '~/components/button/Button';
+import Link from 'next/link';
 
 const types = [
   { id: 1, type: 'Alpha' },
@@ -88,7 +89,7 @@ const Import: NextPage = () => {
           onChange={() => setSelectedPlatform(platform)}
         />
         <label
-          className="text-cat-text"
+          className="text-ctp-text"
           htmlFor={`radio-${platform.toLowerCase()}`}
         >
           {platform}
@@ -111,7 +112,7 @@ const Import: NextPage = () => {
           onChange={handleOSChange}
           checked={selectedOS.toLowerCase() === os.toLowerCase()}
         />
-        <label className="text-cat-text" htmlFor={`radio-${os.toLowerCase()}`}>
+        <label className="text-ctp-text" htmlFor={`radio-${os.toLowerCase()}`}>
           {os.charAt(0).toUpperCase() + os.slice(1)}
         </label>
       </div>
@@ -147,142 +148,190 @@ const Import: NextPage = () => {
   };
 
   return (
-    <div className="midwrap max-w-full w-[800px] mx-auto px-4">
+    <div className="midwrap max-w-7xl mx-auto px-8">
       <div className="tbwrap py-8 flex flex-col gap-4">
         <a
           onClick={() => navigateToImport}
-          className="text-cat-text flex flex-row gap-2 hover:underline cursor-pointer"
+          className="text-ctp-text flex flex-row gap-2 hover:underline cursor-pointer"
         >
           <ArrowLeftIcon className="w-5 h-5" />
           <Text>Back to import</Text>
         </a>
-        <div className="flex flex-row gap-2">
-          <Card className="border border-dashed border-cat-overlay1 bg-cat-mantle px-6">
-            <div className="px-6 py-2 my-auto">
-              <Title className="text-lg font-medium font-bold leading-6 text-cat-text">
-                Github repository
-              </Title>
-              <div className="flex flex-row">
-                <div className="bg-cat-crust w-fit rounded-lg px-4 py-4 my-auto">
-                  <Text className="text-cat-text">Github Repo</Text>
-                </div>
-                <div className="ml-auto px-4 flex flex-col bg-cat-crust rounded-lg py-2">
-                  <div className="flex flex-row gap-1">
-                    <FolderIcon className="w-4 h-4 stroke-cat-overlay1" />
-                    <Text className="flex flex-row gap-1 text-cat-text">
-                      User/Github Repo
-                    </Text>
-                  </div>
-                  <div className="flex flex-row gap-1">
-                    <FolderIcon className="w-4 h-4 stroke-cat-overlay1" />
-                    <Text className="flex flex-row gap-1 text-cat-text">
-                      Branch
-                    </Text>
-                  </div>
-                  <div className="flex flex-row gap-1">
-                    <FolderIcon className="w-4 h-4 stroke-cat-overlay1" />
-                    <Text className="flex flex-row gap-1 text-cat-text">
-                      ./
-                    </Text>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </Card>
-        </div>
-        <Card className="border border-dashed border-cat-overlay1 bg-cat-mantle">
-          <div className="overflow-y-auto w-full">
-            <div className="flex min-h-full w-full p-2">
-              <div className="w-full transform overflow-hidden rounded-lg bg-cat-mantle p-6 text-left align-middle transition-all">
-                <Title className="text-lg font-medium font-bold leading-6 text-cat-text">
-                  Configure project
-                </Title>
-                <Divider className="bg-cat-text" />
-                <form
-                  className="modal-box w-full"
-                  id="app_create_form"
-                  method="dialog"
-                  onSubmit={handleSubmit}
+        <text className="text-3xl text-ctp-text">
+          Importing from
+          <Link href={''} className="font-bold text-ctp-text">
+            {' '}
+            zZHorizonZz
+          </Link>
+        </text>
+        <form
+          className="modal-box w-full"
+          id="app_create_form"
+          method="dialog"
+          onSubmit={handleSubmit}
+        >
+          <div className="flex flex-col gap-2 py-8">
+            <div className="flex flex-row mt-3 flex-grow gap-4">
+              <div className="flex flex-col gap-10 flex-grow">
+                <Flex
+                  justifyContent="start"
+                  alignItems="start"
+                  flexDirection="row"
+                  className="gap-8"
                 >
-                  <div className="flex flex-col gap-2">
-                    <div className="flex flex-row mt-3 flex-grow gap-4">
-                      <div className="flex flex-col gap-1 flex-grow">
-                        <RequiredLabel text="Project name" />
-                        <TextInput
-                          required
-                          className="flex w-full text-cat-text"
-                          name="name"
-                          placeholder="Enter a project name"
-                          tabIndex={0}
-                          type="text"
-                        />
-                      </div>
-                      <div className="flex flex-col gap-1">
-                        <Text className="text-cat-text">Icon:</Text>
-                        <div className="w-12 h-12 bg-cat-overlay1 rounded-full flex cursor-pointer">
-                          <input className="hidden" id="image" type="file" />
-                          <label
-                            className="w-full h-full flex items-center justify-center"
-                            htmlFor="file_input"
-                          >
-                            <ArrowUpTrayIcon className="h-6 w-6 stroke-cat-text" />
-                          </label>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="flex flex-col gap-1 flex-grow">
-                      <Text className="text-cat-text">Description:</Text>
-                      <TextInput
-                        className="flex w-full text-cat-text"
-                        name="description"
-                        placeholder="Enter a project description"
-                        tabIndex={0}
-                        type="text"
-                      />
-                    </div>
-                    <div className="flex flex-row mt-3 flex-grow gap-4">
-                      <div className="flex flex-col gap-1 flex-grow">
-                        <div className="flex flex-row gap-2">
-                          <RequiredLabel text="Release type" />
-                          <InfoCircle tooltip="test tooltip"></InfoCircle>
-                        </div>
-                        {selectedType?.type != 'Custom' && (
-                          <Listbox
-                            value={selectedType}
-                            onChange={setSelectedType}
-                          >
-                            <Listbox.Button className="w-full cursor-pointer my-auto flex flex-row border cursor-default font-bold rounded-md text-cat-text py-2 px-3 hover:bg-cat-crust focus:bg-cat-crust sm:text-sm">
-                              <span className="block truncate my-auto flex flex-grow">
+                  <div className="basis-2/5">
+                    <Text className="font-bold text-ctp-text">App name</Text>
+                    <Text className="text-ctp-subtext0">
+                      This is the name of your app.
+                    </Text>
+                  </div>
+                  <TextInput
+                    required
+                    className="flex w-full h-12 text-ctp-text"
+                    name="name"
+                    placeholder="my-app"
+                    tabIndex={0}
+                    type="text"
+                  />
+                </Flex>
+                <Flex
+                  justifyContent="start"
+                  alignItems="start"
+                  flexDirection="row"
+                  className="gap-8"
+                >
+                  <div className="basis-2/5">
+                    <Text className="font-bold text-ctp-text">
+                      App icon{' '}
+                      <span className="text-ctp-subtext0 font-normal">
+                        (Optional)
+                      </span>
+                    </Text>
+                    <Text className="text-ctp-subtext0">
+                      A url to an image that will be used as the icon for your
+                      app. This is only used for display purposes.
+                    </Text>
+                  </div>
+                  <TextInput
+                    required
+                    className="flex w-full h-12 text-ctp-text"
+                    name="name"
+                    placeholder="https://example.com/icon.png"
+                    tabIndex={0}
+                    type="text"
+                  />
+                </Flex>
+                <Flex
+                  justifyContent="start"
+                  alignItems="start"
+                  flexDirection="row"
+                  className="gap-8"
+                >
+                  <div className="basis-2/5">
+                    <Text className="font-bold text-ctp-text">
+                      App description{' '}
+                      <span className="text-ctp-subtext0 font-normal">
+                        (Optional)
+                      </span>
+                    </Text>
+                    <Text className="text-ctp-subtext0">
+                      A description of your app. What does it do? What is it
+                      for? This is only used for display purposes.
+                    </Text>
+                  </div>
+                  <TextInput
+                    required
+                    className="flex w-full h-12 text-ctp-text"
+                    name="name"
+                    placeholder="This is my app. It does stuff."
+                    tabIndex={0}
+                    type="text"
+                  />
+                </Flex>
+                <Flex
+                  justifyContent="start"
+                  alignItems="start"
+                  flexDirection="row"
+                  className="gap-8"
+                >
+                  <div className="basis-2/5">
+                    <Text className="font-bold text-ctp-text">
+                      Root directory{' '}
+                      <span className="text-ctp-subtext0 font-normal">
+                        (Optional)
+                      </span>
+                    </Text>
+                    <Text className="text-ctp-subtext0">
+                      The root directory of your app. This is where the build
+                      command will be run.
+                    </Text>
+                  </div>
+                  <TextInput
+                    required
+                    className="flex w-full h-12 text-ctp-text"
+                    name="name"
+                    placeholder="e.g. src"
+                    tabIndex={0}
+                    type="text"
+                  />
+                </Flex>
+                <Flex
+                  justifyContent="start"
+                  alignItems="start"
+                  flexDirection="row"
+                  className="gap-8"
+                >
+                  <div className="basis-2/5">
+                    <Text className="font-bold text-ctp-text">
+                      App description{' '}
+                      <span className="text-ctp-subtext0 font-normal">
+                        (Optional)
+                      </span>
+                    </Text>
+                    <Text className="text-ctp-subtext0">
+                      A description of your app. What does it do? What is it
+                      for? This is only used for display purposes.
+                    </Text>
+                  </div>
+                  {/*selectedType?.type != 'Custom' && (
+                    <Listbox
+                      value={selectedType}
+                      onChange={setSelectedType}
+                    >
+                      <Listbox.Button
+                        className='w-full cursor-pointer my-auto flex flex-row border cursor-default font-bold rounded-md text-ctp-text py-2 px-3 hover:bg-ctp-crust focus:bg-ctp-crust sm:text-sm'>
+                              <span className='block truncate my-auto flex flex-grow'>
                                 {selectedType?.type}
                               </span>
-                              <span className="flex ml-left">
-                                <ChevronUpDownIcon className="w-5 h-5 stroke-cat-overlay1" />
+                        <span className='flex ml-left'>
+                                <ChevronUpDownIcon className='w-5 h-5 stroke-ctp-overlay1' />
                               </span>
-                            </Listbox.Button>
-                            <Transition
-                              as={Fragment}
-                              enter="ease-out duration-300"
-                              enterFrom="opacity-0 scale-95"
-                              enterTo="opacity-100 scale-100"
-                              leave="ease-in duration-200"
-                              leaveFrom="opacity-100 scale-100"
-                              leaveTo="opacity-0 scale-95"
+                      </Listbox.Button>
+                      <Transition
+                        as={Fragment}
+                        enter='ease-out duration-300'
+                        enterFrom='opacity-0 scale-95'
+                        enterTo='opacity-100 scale-100'
+                        leave='ease-in duration-200'
+                        leaveFrom='opacity-100 scale-100'
+                        leaveTo='opacity-0 scale-95'
+                      >
+                        <Listbox.Options
+                          className='absolute mt-16 max-h-60 w-[640px] overflow-y-auto rounded-md bg-ctp-crust py-1 text-ctp-text shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm'>
+                          {types.map((type, typeID) => (
+                            <Listbox.Option
+                              key={typeID}
+                              className={({ active }) =>
+                                `relative cursor-default select-none py-2 px-4 ${
+                                  active
+                                    ? 'bg-ctp-mantle text-ctp-text cursor-pointer'
+                                    : 'text-ctp-text'
+                                }`
+                              }
+                              value={type}
                             >
-                              <Listbox.Options className="absolute mt-16 max-h-60 w-[640px] overflow-y-auto rounded-md bg-cat-crust py-1 text-cat-text shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                                {types.map((type, typeID) => (
-                                  <Listbox.Option
-                                    key={typeID}
-                                    className={({ active }) =>
-                                      `relative cursor-default select-none py-2 px-4 ${
-                                        active
-                                          ? 'bg-cat-mantle text-cat-text cursor-pointer'
-                                          : 'text-cat-text'
-                                      }`
-                                    }
-                                    value={type}
-                                  >
-                                    {({ selected }) => (
-                                      <>
+                              {({ selected }) => (
+                                <>
                                         <span
                                           className={`block truncate ${
                                             selected
@@ -294,60 +343,96 @@ const Import: NextPage = () => {
                                             ? 'Custom...'
                                             : type.type}
                                         </span>
-                                      </>
-                                    )}
-                                  </Listbox.Option>
-                                ))}
-                              </Listbox.Options>
-                            </Transition>
-                          </Listbox>
-                        )}
-                        {selectedType?.type == 'Custom' && (
-                          <div
-                            className="flex flex-col gap-1"
-                            id="release_type_custom"
-                          >
-                            <TextInput
-                              required
-                              className="flex w-full"
-                              id="release_type_input"
-                              placeholder="Type your release type"
-                              type="text"
-                            />
-                            <button
-                              className="text-sm underline cursor-pointer text-left text-cat-text"
-                              onClick={() => resetReleaseTypes(types)}
-                            >
-                              Return to pre-set release types
-                            </button>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                    <div className="flex flex-row gap-32 mt-3">
-                      <RequiredLabel text="OS" />
-                      <div className="flex flex-col gap-1">{renderOS()}</div>
-                    </div>
-                    <div className="flex flex-row gap-24 mt-3">
-                      <RequiredLabel text="Platform" />
-                      <div className="flex flex-col gap-1">
-                        {renderPlatforms()}
-                      </div>
-                    </div>
-                  </div>
-                  <div className="mt-8 ml-auto">
-                    <Button
-                      type="submit"
-                      className="ml-auto w-full justify-center flex px-2 py-1"
+                                </>
+                              )}
+                            </Listbox.Option>
+                          ))}
+                        </Listbox.Options>
+                      </Transition>
+                    </Listbox>
+                  )}
+                  {selectedType?.type == 'Custom' && (
+                    <div
+                      className='flex flex-col gap-1'
+                      id='release_type_custom'
                     >
-                      Create
-                    </Button>
+                      <TextInput
+                        required
+                        className='flex w-full'
+                        id='release_type_input'
+                        placeholder='Type your release type'
+                        type='text'
+                      />
+                      <button
+                        className='text-sm underline cursor-pointer text-left text-ctp-text'
+                        onClick={() => resetReleaseTypes(types)}
+                      >
+                        Return to pre-set release types
+                      </button>
+                    </div>
+                  )*/}
+                </Flex>
+                <Flex
+                  justifyContent="start"
+                  alignItems="start"
+                  flexDirection="row"
+                  className="gap-8"
+                >
+                  <div className="basis-2/5">
+                    <Text className="font-bold text-ctp-text">Platform</Text>
+                    <Text className="text-ctp-subtext0">
+                      A platform is a system on which is you app built. For
+                      example, if your OS of choice is Windows, you can choose
+                      between UWP, Win32 and WSL. You can see the list of
+                      supported platforms
+                      {'here'}
+                    </Text>
                   </div>
-                </form>
+                  <TextInput
+                    required
+                    className="flex w-full h-12 text-ctp-text"
+                    name="name"
+                    placeholder="This is my app. It does stuff."
+                    tabIndex={0}
+                    type="text"
+                  />
+                </Flex>
+                <Flex
+                  justifyContent="start"
+                  alignItems="start"
+                  flexDirection="row"
+                  className="gap-8"
+                >
+                  <div className="basis-2/5">
+                    <Text className="font-bold text-ctp-text">
+                      Build Command{' '}
+                      <span className="text-ctp-subtext0 font-normal">
+                        (Optional)
+                      </span>
+                    </Text>
+                    <Text className="text-ctp-subtext0">
+                      This command will be executed when the app is built and is
+                      executed in the root of the repository. If you don't
+                      specify a build command, the app will be built using the
+                      default build command for the platform.
+                    </Text>
+                  </div>
+                  <TextInput
+                    required
+                    className="flex w-full h-12 text-ctp-text"
+                    name="name"
+                    placeholder="dotnet publish -c Release -r win-x64"
+                    tabIndex={0}
+                    type="text"
+                  />
+                </Flex>
               </div>
             </div>
           </div>
-        </Card>
+          <Button type="submit" className="ml-auto w-full" variant="success">
+            Create
+          </Button>
+        </form>
       </div>
     </div>
   );

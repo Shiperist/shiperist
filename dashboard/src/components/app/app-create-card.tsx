@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, Flex, Title } from '@tremor/react';
 import { useRouter } from 'next/router';
-import { Plus } from 'lucide-react';
+import { PackagePlus, Plus } from 'lucide-react';
 
 const CreateAppCard = () => {
   const router = useRouter();
@@ -13,7 +13,7 @@ const CreateAppCard = () => {
   return (
     <Card
       key={'create-app'}
-      className="transition ease-in-out duration-300 p-3 h-48 cursor-pointer shadow-0 ring-0 border-1 border-dashed border-cat-overlay1 bg-cat-mantle hover:bg-cat-crust"
+      className="transition ease-in-out duration-300 p-3 h-48 cursor-pointer shadow-0 ring-0 border-1 border-dashed border-ctp-overlay1 bg-ctp-mantle hover:bg-ctp-crust"
       onClick={navigateToCreate}
     >
       <Flex
@@ -22,8 +22,8 @@ const CreateAppCard = () => {
         flexDirection="col"
         className="h-full gap-2"
       >
-        <Plus className="w-8 h-8 text-cat-text" />
-        <Title className="font-bold text-cat-text">Create App</Title>
+        <PackagePlus className="w-8 h-8 text-ctp-text" />
+        <Title className="font-bold text-ctp-text">Create App</Title>
       </Flex>
     </Card>
   );
