@@ -1,10 +1,11 @@
-import { Flex, Text, TextInput } from '@tremor/react';
+import { Flex, Text } from '@tremor/react';
 import { LockClosedIcon } from '@heroicons/react/24/outline';
 import { DateTime } from 'luxon';
 import React from 'react';
 import { useRouter } from 'next/router';
 import { Base64 } from 'js-base64';
 import Button from '~/components/Button/Button';
+import TextInput from '~/components/TextInput/TextInput';
 
 interface IAppCreateInputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -38,13 +39,12 @@ const AppCreateInput: React.FC<IAppCreateInputProps> = ({
         </Text>
         <Text className="text-ctp-subtext0">{children}</Text>
       </div>
-      <input
+      <TextInput
         required
         className="flex w-full h-12 text-ctp-text"
         name="name"
         placeholder={placeholder}
         tabIndex={0}
-        type="text"
         {...other}
       />
     </Flex>
