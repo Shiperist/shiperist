@@ -1,5 +1,10 @@
 import { Listbox, Transition } from '@headlessui/react';
-import { ArrowLeftIcon, ArrowUpTrayIcon, ChevronUpDownIcon, FolderIcon } from '@heroicons/react/24/outline';
+import {
+  ArrowLeftIcon,
+  ArrowUpTrayIcon,
+  ChevronUpDownIcon,
+  FolderIcon
+} from '@heroicons/react/24/outline';
 import { useRouter } from 'next/router';
 import { Card, Divider, Text, TextInput, Title } from '@tremor/react';
 import { type NextPage } from 'next';
@@ -22,20 +27,26 @@ const Import: NextPage = () => {
   const { data: sessionData } = useSession();
   const [isPending, startTransition] = useTransition();
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOS, setSelectedOS] = useState<string>('android');
+  const [selectedOSes, setSelectedOSes] = useState<string[]>(
+    Object.keys(Types) || ['Android']
+  );
+  const [selectedOS, setSelectedOS] = useState<string>(selectedOSes[0] || '');
+
+  const [selectedType, setSelectedType] = useState(types[0]);
+
   const [selectedPlatforms, setSelectedPlatforms] = useState<string[]>(
     Types[selectedOS]?.platform || ['Java / Kotlin']
   );
-  const [selectedType, setSelectedType] = useState(types[0]);
-  const [selectedPlatform, setSelectedPlatform] = useState(
-    selectedPlatforms[0]
+
+  const [selectedPlatform, setSelectedPlatform] = useState<string>(
+    selectedPlatforms[0] || ''
   );
 
   const { data: repositories } = api.integrations.listRepositories.useQuery({
     provider: 'github'
   });
 
-  console.log(repositories);
+  //console.log(repositories);
 
   const addApp = api.apps.addApp.useMutation({
     onSuccess: () => {
@@ -48,10 +59,12 @@ const Import: NextPage = () => {
   };
 
   const handleOSChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedOS = event.target.value.toLowerCase();
+    const OSes = Object.keys(Types) || [];
+    const selectedOS = event.target.value;
     const platforms = Types[selectedOS]?.platform || [];
-    const defaultPlatform = platforms[0];
+    const defaultPlatform = platforms[0] || 'Java / Kotlin';
 
+    setSelectedOSes(OSes);
     setSelectedOS(selectedOS);
     setSelectedPlatforms(platforms);
     setSelectedPlatform(defaultPlatform);
@@ -85,9 +98,7 @@ const Import: NextPage = () => {
   };
 
   const renderOS = () => {
-    const OSes: string[] = ['Android', 'Windows'];
-
-    return OSes.map((os) => (
+    return selectedOSes.map((os) => (
       <div key={`radio-${os.toLowerCase()}`} className="flex flex-row gap-2">
         <input
           required
@@ -101,14 +112,11 @@ const Import: NextPage = () => {
           checked={selectedOS.toLowerCase() === os.toLowerCase()}
         />
         <label className="text-cat-text" htmlFor={`radio-${os.toLowerCase()}`}>
-          {os}
+          {os.charAt(0).toUpperCase() + os.slice(1)}
         </label>
       </div>
     ));
   };
-  //Declaration for rendering
-  const renderOSes = renderOS();
-  const renderPlatform = renderPlatforms();
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -238,14 +246,14 @@ const Import: NextPage = () => {
                           <RequiredLabel text="Release type" />
                           <InfoCircle tooltip="test tooltip"></InfoCircle>
                         </div>
-                        {selectedType && selectedType.type != 'Custom' && (
+                        {selectedType?.type != 'Custom' && (
                           <Listbox
                             value={selectedType}
                             onChange={setSelectedType}
                           >
                             <Listbox.Button className="w-full cursor-pointer my-auto flex flex-row border cursor-default font-bold rounded-md text-cat-text py-2 px-3 hover:bg-cat-crust focus:bg-cat-crust sm:text-sm">
                               <span className="block truncate my-auto flex flex-grow">
-                                {selectedType.type}
+                                {selectedType?.type}
                               </span>
                               <span className="flex ml-left">
                                 <ChevronUpDownIcon className="w-5 h-5 stroke-cat-overlay1" />
@@ -294,7 +302,7 @@ const Import: NextPage = () => {
                             </Transition>
                           </Listbox>
                         )}
-                        {selectedType && selectedType.type == 'Custom' && (
+                        {selectedType?.type == 'Custom' && (
                           <div
                             className="flex flex-col gap-1"
                             id="release_type_custom"
@@ -318,12 +326,12 @@ const Import: NextPage = () => {
                     </div>
                     <div className="flex flex-row gap-32 mt-3">
                       <RequiredLabel text="OS" />
-                      <div className="flex flex-col gap-1">{renderOSes}</div>
+                      <div className="flex flex-col gap-1">{renderOS()}</div>
                     </div>
                     <div className="flex flex-row gap-24 mt-3">
                       <RequiredLabel text="Platform" />
                       <div className="flex flex-col gap-1">
-                        {renderPlatform}
+                        {renderPlatforms()}
                       </div>
                     </div>
                   </div>
