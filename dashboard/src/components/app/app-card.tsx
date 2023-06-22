@@ -3,7 +3,7 @@ import { Card, Flex, Title } from '@tremor/react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import { MoreVertical } from 'lucide-react';
-import IconButton from '~/components/Button/IconButton';
+import Button from '~/components/Button/Button';
 
 interface IAppCardProps {
   id: string;
@@ -38,10 +38,10 @@ export function AppCard(props: IAppCardProps) {
             width={32}
           />
           <Title className="font-bold flex-1 text-ctp-text">{props.name}</Title>
-          <IconButton
-            className="w-8 h-8 text-ctp-text hover:bg-ctp-mantle hover:text-ctp-text"
+          <Button
+            className="w-8 h-8 border-transparent text-ctp-text hover:bg-ctp-mantle hover:text-ctp-text"
             icon={MoreVertical}
-            variant="ghost"
+            variant="success"
           />
         </Flex>
         <text className="text-sm text-ctp-subtext0 flex-1">

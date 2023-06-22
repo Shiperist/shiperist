@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { Text, TextInput } from '@tremor/react';
-import Button from '~/components/base/Button';
+import Button from '~/components/Base/Button';
 
 const ProfileSectionContent = () => {
   const session = useSession();

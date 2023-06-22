@@ -34,17 +34,15 @@ export function NavbarUserMenu() {
             <div className="p-4">
               <Button
                 onClick={navigateToProfile}
-                variant="solid"
-                color="red"
+                variant="info"
                 className="w-full"
               >
                 Profile
               </Button>
               <Button
                 onClick={handleSignOut}
-                variant="solid"
-                color="red"
-                className="w-full"
+                variant="danger"
+                className="w-full mt-3"
               >
                 Sign out
               </Button>
@@ -54,8 +52,7 @@ export function NavbarUserMenu() {
           <div className="mt-3 space-y-1">
             <Button
               onClick={() => handleSignIn('github')}
-              variant="solid"
-              color="green"
+              variant="success"
               className="w-full"
             >
               Sign in

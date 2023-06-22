@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, Flex, Text, Title } from '@tremor/react';
 import { type NextPage } from 'next';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
-import TextInput from '~/components/base/text-input';
+import TextInput from '~/components/Base/text-input';
 import { useRepositories } from '~/components/app/create/hooks/useRepositories';
 import { AppCreateList } from '~/components/app/create/app-create-list';
 import { AppCreateProviderSelect } from '~/components/app/create/app-create-provider-select';

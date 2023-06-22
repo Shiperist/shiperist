@@ -1,2 +1,7 @@
 export type ButtonVariant = 'success' | 'warning' | 'danger' | 'info';
-export type ButtonSize = 'small' | 'medium' | 'large' | 'xlarge';
+export const Variants: ButtonVariant[] = [
+  'success',
+  'warning',
+  'danger',
+  'info'
+];
