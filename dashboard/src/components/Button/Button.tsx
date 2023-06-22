@@ -27,13 +27,12 @@ const Button: React.FC<ButtonProps> = ({
 
   const baseClass =
     'transition ease-in-out duration-150 flex items-center justify-center rounded-lg bg-transparent border-1 active:translate-y-0.5';
-  const variantClass =
-    {
-      success: 'border-ctp-green text-ctp-green hover:bg-ctp-green',
-      danger: 'border-ctp-red text-ctp-red hover:bg-ctp-red',
-      warning: 'border-ctp-yellow text-ctp-yellow hover:bg-ctp-yellow',
-      info: 'border-ctp-blue text-ctp-blue hover:bg-ctp-blue'
-    }[variant] || '';
+  const variantColor = {
+    success: 'green',
+    danger: 'red',
+    warning: 'yellow',
+    info: 'blue'
+  }[variant];
   const sizeClass =
     {
       small: 'text-sm px-2 py-1',
@@ -49,9 +48,11 @@ const Button: React.FC<ButtonProps> = ({
       xlarge: 'p-4'
     }[size] || '';
 
-  const finalVariantClass = `${variantClass} hover:text-ctp-base`;
+  const variantClass = variantColor
+    ? `border-ctp-${variantColor} text-ctp-${variantColor} hover:bg-ctp-${variantColor} hover:text-ctp-base`
+    : '';
 
-  const buttonClasses = `${baseClass} ${finalVariantClass} ${
+  const buttonClasses = `${baseClass} ${variantClass} ${
     !children && (Icon || loading) ? iconSizeClass : sizeClass
   } ${className}`;
 
