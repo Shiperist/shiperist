@@ -2,8 +2,7 @@ import { type NextPage } from 'next';
 import React from 'react';
 import { AppList } from '~/components/app/app-list';
 import { Flex, Text } from '@tremor/react';
-import { Variants } from '~/components/Button/ButtonBase';
-import Button from '~/components/Button/Button';
+import Button, { Variants } from '~/components/Button/Button';
 import { Check, Search, Space } from 'lucide-react';
 import { Sizes } from '~/components/Base/BaseTypes';
 import TextInput from '~/components/TextInput/TextInput';
@@ -106,48 +105,57 @@ const Dev: NextPage = () => {
         <Flex
           justifyContent="start"
           alignItems="center"
-          flexDirection="row"
+          flexDirection="col"
           className="gap-4"
         >
           <TextInput
-            leadingElement="https://"
-            trailingElement={Search}
             loading={false}
             disabled={false}
+            error={false}
             caption="This is a caption"
             className="w-full"
             placeholder="Type something..."
           />
-        </Flex>
-        <Text className="text-2xl font-bold text-ctp-text mt-8">
-          Size Variants
-        </Text>
-        <Flex
-          justifyContent="start"
-          alignItems="center"
-          flexDirection="row"
-          className="gap-4"
-        >
-          {Sizes.map((size) => {
-            return (
-              <Button variant="warning" size={size}>
-                {size}
-              </Button>
-            );
-          })}
-        </Flex>
-        <Text className="text-2xl font-bold text-ctp-text mt-8">
-          Icon Buttons Variants
-        </Text>
-        <Flex
-          justifyContent="start"
-          alignItems="center"
-          flexDirection="row"
-          className="gap-4"
-        >
-          <Button variant="success" size="medium" icon={Check}>
-            Success
-          </Button>
+          <TextInput
+            leadingElement="https://"
+            trailingElement={Check}
+            loading={false}
+            disabled={false}
+            error={false}
+            caption="This is a caption"
+            className="w-full"
+            placeholder="Type something..."
+          />
+          <TextInput
+            leadingElement="https://"
+            trailingElement={Check}
+            loading={true}
+            disabled={false}
+            error={false}
+            caption="This is a caption"
+            className="w-full"
+            placeholder="Type something..."
+          />
+          <TextInput
+            leadingElement="https://"
+            trailingElement={Check}
+            loading={false}
+            disabled={true}
+            error={false}
+            caption="This is a caption"
+            className="w-full"
+            placeholder="Type something..."
+          />
+          <TextInput
+            leadingElement="https://"
+            trailingElement={Check}
+            loading={false}
+            disabled={false}
+            error={true}
+            caption="This is a caption"
+            className="w-full"
+            placeholder="Type something..."
+          />
         </Flex>
       </Flex>
     </div>
