@@ -13,6 +13,7 @@ import Italic from '~/components/Text/Italic';
 import Text from '~/components/Text/Text';
 import Description from '~/components/Text/Description';
 import InfoTooltip from '~/components/Other/InfoTooltip';
+import Link from '~/components/Text/Link';
 
 const Dev: NextPage = () => {
   const cardClass = 'gap-4 border border-ctp-text p-6 rounded-lg';
@@ -186,6 +187,7 @@ const Dev: NextPage = () => {
             <Text>This is a text</Text>
             <Bold>This is a bold text</Bold>
             <Italic>This is a italic text</Italic>
+            <Link>This is a link</Link>
             <Description>This is a description</Description>
           </Flex>
         </Flex>
