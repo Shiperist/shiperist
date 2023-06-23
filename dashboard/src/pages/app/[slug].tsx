@@ -1,5 +1,5 @@
 import React from 'react';
-import { NextPage } from 'next';
+import { type NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { api } from '~/utils/api';
 import { Text } from '@tremor/react';

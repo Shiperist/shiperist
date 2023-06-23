@@ -1,19 +1,11 @@
-import { Listbox, Switch, Transition } from '@headlessui/react';
-import {
-  ArrowLeftIcon,
-  ArrowUpTrayIcon,
-  ChevronUpDownIcon,
-  FolderIcon
-} from '@heroicons/react/24/outline';
+import { ArrowLeftIcon } from '@heroicons/react/24/outline';
 import { useRouter } from 'next/router';
-import { Card, Divider, Flex, Text, TextInput, Title } from '@tremor/react';
+import { Card, Text } from '@tremor/react';
 import { type NextPage } from 'next';
 import { useSession } from 'next-auth/react';
-import React, { Fragment, useState, useTransition } from 'react';
+import React, { useState, useTransition } from 'react';
 import { api } from '~/utils/api';
 import { Types } from '~/types/app-types';
-import RequiredLabel from '~/components/Base/required-label';
-import InfoCircle from '~/components/Base/info-circle';
 import Button from '~/components/Button/Button';
 import Link from 'next/link';
 import AppCreateInput from '~/components/app/create/app-create-input';

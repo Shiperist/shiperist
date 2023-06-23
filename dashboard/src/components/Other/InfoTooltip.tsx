@@ -1,24 +1,24 @@
 import React, { useState } from 'react';
-import { InformationCircleIcon } from '@heroicons/react/24/outline';
+import { InformationCircleIcon } from '@heroicons/react/24/solid';
 import { Transition } from '@headlessui/react';
 
-interface InfoCircleProps extends React.HTMLAttributes<HTMLSpanElement> {
+interface InfoTooltipProps extends React.HTMLAttributes<HTMLSpanElement> {
   tooltip?: string;
 }
 
-const InfoCircle: React.FC<InfoCircleProps> = ({
+const InfoTooltip: React.FC<InfoTooltipProps> = ({
   tooltip,
   className,
   ...props
 }) => {
   const [showTooltip, setShowTooltip] = useState(false);
 
-  const infoClass = 'w-4 h-4 stroke-ctp-overlay1';
+  const infoClass = 'w-4 h-4 fill-ctp-text';
   const tooltipClass =
-    'absolute z-10 w-32 p-2 text-center transform top-[-32px] left-1/2 -translate-x-1/2 bg-ctp-crust text-ctp-text text-xs rounded-md shadow break-words';
+    'absolute z-10 w-32 p-2 text-center transform left-1/2 -translate-x-1/2 bg-ctp-crust text-ctp-text text-xs rounded-lg shadow break-words';
 
   return (
-    <span className={`${className ?? ''}`} {...props}>
+    <span>
       <div className="relative inline-flex">
         <InformationCircleIcon
           className={`${infoClass}`}
@@ -34,11 +34,13 @@ const InfoCircle: React.FC<InfoCircleProps> = ({
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className={tooltipClass}>{tooltip}</div>
+          <div className={`${className ?? ''} ${tooltipClass}`} {...props}>
+            {tooltip}
+          </div>
         </Transition>
       </div>
     </span>
   );
 };
 
-export default InfoCircle;
+export default InfoTooltip;

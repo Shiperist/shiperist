@@ -1,14 +1,7 @@
 import React, { useState } from 'react';
 import { Loader2 } from 'lucide-react';
 import type { Size } from '~/components/Base/BaseTypes';
-
-export type ButtonVariant = 'success' | 'warning' | 'danger' | 'info';
-export const Variants: ButtonVariant[] = [
-  'success',
-  'warning',
-  'danger',
-  'info'
-];
+import type { ButtonVariant } from '../Base/BaseButtonVariants';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   icon?: React.ElementType;
@@ -34,16 +27,12 @@ const Button: React.FC<ButtonProps> = ({
 
   const baseClass =
     'transition ease-in-out duration-150 flex items-center justify-center rounded-lg bg-transparent border-1 active:translate-y-0.5';
-  const variantClass =
-    {
-      success:
-        'border-ctp-green text-ctp-green hover:bg-ctp-green hover:text-ctp-base',
-      danger:
-        'border-ctp-red text-ctp-red hover:bg-ctp-red hover:text-ctp-base',
-      warning:
-        'border-ctp-yellow text-ctp-yellow hover:bg-ctp-yellow hover:text-ctp-base',
-      info: 'border-ctp-blue text-ctp-blue hover:bg-ctp-blue hover:text-ctp-base'
-    }[variant] || '';
+  const variantColor = {
+    success: 'green',
+    danger: 'red',
+    warning: 'yellow',
+    info: 'blue'
+  }[variant];
   const sizeClass =
     {
       small: 'text-sm px-2 py-1',
@@ -58,6 +47,10 @@ const Button: React.FC<ButtonProps> = ({
       large: 'p-3',
       xlarge: 'p-4'
     }[size] || '';
+
+  const variantClass = variantColor
+    ? `border-ctp-${variantColor} text-ctp-${variantColor} hover:bg-ctp-${variantColor} hover:text-ctp-base`
+    : '';
 
   const buttonClasses = `${baseClass} ${variantClass} ${
     !children && (Icon || loading) ? iconSizeClass : sizeClass
