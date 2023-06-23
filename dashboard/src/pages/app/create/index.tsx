@@ -1,14 +1,13 @@
 import React from 'react';
 import { Card, Flex, Text, Title } from '@tremor/react';
 import { type NextPage } from 'next';
-import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
-import TextInput from '~/components/Base/text-input';
 import { useRepositories } from '~/components/app/create/hooks/useRepositories';
 import { AppCreateList } from '~/components/app/create/app-create-list';
 import { AppCreateProviderSelect } from '~/components/app/create/app-create-provider-select';
-import { Github, Gitlab } from 'lucide-react';
-import type { GitProvider } from '~/types/app-types';
+import { Github, Gitlab, Search } from 'lucide-react';
+import { GitProvider } from '~/types/app-types';
 import { AppCreateProviderCard } from '~/components/app/create/app-create-provider-card';
+import TextInput from '~/components/TextInput/TextInput';
 
 const providerClass = 'w-5 h-5 text-ctp-text';
 export const providers: GitProvider[] = [
@@ -67,9 +66,8 @@ const Create: NextPage = () => {
                 />
                 <TextInput
                   placeholder="Search repositories..."
-                  icon={MagnifyingGlassIcon}
-                  color="pink"
-                  className="w-full h-full"
+                  leadingElement={Search}
+                  className="w-full"
                   onChange={(e) => setSearchRepository(e.target.value)}
                 />
               </div>
