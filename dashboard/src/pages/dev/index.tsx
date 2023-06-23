@@ -14,6 +14,7 @@ import Text from '~/components/Text/Text';
 import Description from '~/components/Text/Description';
 import InfoTooltip from '~/components/Other/InfoTooltip';
 import Link from '~/components/Text/Link';
+import Toggle from '~/components/Other/Toggle';
 
 const Dev: NextPage = () => {
   const cardClass = 'gap-4 border border-ctp-text p-6 rounded-lg';
@@ -217,6 +218,26 @@ const Dev: NextPage = () => {
                 tooltip="Hello this is a information tooltip"
               />
             </Flex>
+          </Flex>
+        </Flex>
+        {/* Toggles */}
+        <Flex
+          justifyContent="center"
+          alignItems="stretch"
+          flexDirection="col"
+          className={cardClass}
+        >
+          <Subtitle className="">Toggles</Subtitle>
+          <Flex
+            justifyContent="start"
+            alignItems="start"
+            flexDirection="row"
+            className="gap-4"
+          >
+            <Toggle></Toggle>
+            <Toggle disabled={true}></Toggle>
+            <Toggle variant="square"></Toggle>
+            <Toggle variant="square" disabled={true}></Toggle>
           </Flex>
         </Flex>
       </Flex>
