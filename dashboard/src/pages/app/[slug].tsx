@@ -18,7 +18,7 @@ const Project: NextPage = () => {
   }
 
   return (
-    <div className="midwrap max-w-full w-[1200px] mx-auto px-4">
+    <div className="midwrap max-w-7xl mx-auto px-4">
       <Text>{data.name}</Text>
     </div>
   );
