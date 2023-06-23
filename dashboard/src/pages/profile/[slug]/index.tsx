@@ -219,7 +219,7 @@ const Profile: NextPage = () => {
   });
 
   return (
-    <div className="midwrap max-w-full w-[1200px] mx-auto px-4">
+    <div className="midwrap max-w-7xl mx-auto px-4">
       <div className="tbwrap py-8 flex flex-row">
         <div className="w-[256px] flex flex-col px-4 gap-2">
           <div className="sticky top-24">

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Title: React.FC<React.HTMLAttributes<HTMLParagraphElement>> = ({
+const Title: React.FC<React.HTMLAttributes<HTMLHeadingElement>> = ({
   className = '',
   children,
   ...other

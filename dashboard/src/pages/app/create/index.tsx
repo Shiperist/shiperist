@@ -10,21 +10,22 @@ import { Github, Gitlab } from 'lucide-react';
 import type { GitProvider } from '~/types/app-types';
 import { AppCreateProviderCard } from '~/components/app/create/app-create-provider-card';
 
+const providerClass = 'w-5 h-5 text-ctp-text';
 export const providers: GitProvider[] = [
   {
     key: 'github',
     name: 'GitHub',
-    icon: <Github className="w-5 h-5 text-ctp-text" />
+    icon: <Github className={providerClass} />
   },
   {
     key: 'gitlab',
     name: 'GitLab',
-    icon: <Gitlab className="w-5 h-5 text-ctp-text" />
+    icon: <Gitlab className={providerClass} />
   },
   {
     key: 'bitbucket',
     name: 'Bitbucket',
-    icon: <Github className="w-5 h-5 text-ctp-text" />
+    icon: <Github className={providerClass} />
   }
 ];
 
