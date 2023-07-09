@@ -1,9 +1,10 @@
 import React from 'react';
-import { Card, Flex, Title } from '@tremor/react';
+import { Flex, Title } from '@tremor/react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import { MoreVertical } from 'lucide-react';
 import Button from '~/components/Button/Button';
+import { Card, Text } from "@shiperist-catppuccin-ui/react";
 
 interface IAppCardProps {
   id: string;

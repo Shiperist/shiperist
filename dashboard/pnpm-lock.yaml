@@ -23,6 +23,9 @@ dependencies:
   '@react-buddy/ide-toolbox-next':
     specifier: ^2.4.0
     version: 2.4.0(next@13.4.5)(react@18.2.0)
+  '@shiperist-catppuccin-ui/react':
+    specifier: ^0.0.2
+    version: 0.0.2
   '@t3-oss/env-nextjs':
     specifier: ^0.3.1
     version: 0.3.1(typescript@5.1.3)(zod@3.21.4)
@@ -804,6 +807,51 @@ packages:
   /@rushstack/eslint-patch@1.3.1:
     resolution: {integrity: sha512-RkmuBcqiNioeeBKbgzMlOdreUkJfYaSjwgx9XDgGGpjvWgyaxWvDmZVSN9CS6LjEASadhgPv2BcFp+SeouWXXA==}
     dev: true
+
+  /@shiperist-catppuccin-ui/badge@0.0.2:
+    resolution: {integrity: sha512-ijS4JUit6xyNuyJ4jVItAg/vlePj3Mg7LnrQA5Z8/fa0tTXhjRiEvOXpJGkJn/tv+UXnFqeZLv8WFn1GVVzNJA==}
+    dev: false
+
+  /@shiperist-catppuccin-ui/button@0.0.2:
+    resolution: {integrity: sha512-yczroXxFLYGOHxJIq6CXbAY0DTJ1T26y/F3VcvTxgxZbymCN4lVrii15Oq5Tf7W8M/1ZuwBzwSqy92eSuEDENA==}
+    dev: false
+
+  /@shiperist-catppuccin-ui/card@0.0.2:
+    resolution: {integrity: sha512-Tnl/qwmwNzqU7sm4cwpRuIubL4Q4jWabpTRSHDZ1UuSXHybgJt1ZeptzGqR5ScXg3K44Oi21+JP7h1NZUqXFZg==}
+    dev: false
+
+  /@shiperist-catppuccin-ui/divider@0.0.2:
+    resolution: {integrity: sha512-rwcn6t6FKPTpdfGQXYBuuyasmYq9dUU+EqTLe6g7I6L6oHkUoHFRJlbk1NoRSeZ9cevLT07G2pT9ixTvOfaBvg==}
+    dev: false
+
+  /@shiperist-catppuccin-ui/layout@0.0.1:
+    resolution: {integrity: sha512-N5ndgsLpzC5oeVGos5fUKeumGoJooksLQaO1U4z63CnOKoMkh9kd422RMjEojoUb4Aacx++btV/qpyq8rc30Xg==}
+    dev: false
+
+  /@shiperist-catppuccin-ui/react@0.0.2:
+    resolution: {integrity: sha512-1lwrJ+c4BPhPRX2lzGrmrcl88+T5H6MTjDhsxj3X8k9dGAOPWfNCcJiW1hbmHU2xbNh4b1JqQ/mAchi49sag/g==}
+    dependencies:
+      '@shiperist-catppuccin-ui/badge': 0.0.2
+      '@shiperist-catppuccin-ui/button': 0.0.2
+      '@shiperist-catppuccin-ui/card': 0.0.2
+      '@shiperist-catppuccin-ui/divider': 0.0.2
+      '@shiperist-catppuccin-ui/layout': 0.0.1
+      '@shiperist-catppuccin-ui/switch': 0.0.2
+      '@shiperist-catppuccin-ui/text-input': 0.0.2
+      '@shiperist-catppuccin-ui/typography': 0.0.2
+    dev: false
+
+  /@shiperist-catppuccin-ui/switch@0.0.2:
+    resolution: {integrity: sha512-mj5NwXBRDG8I84WoXL0Yik3HjnUi3gsrtotJM5X872rJGc/ewdLgv3nSr3egmxG8+f1wJJtg0MYtOFbtAXnLhA==}
+    dev: false
+
+  /@shiperist-catppuccin-ui/text-input@0.0.2:
+    resolution: {integrity: sha512-En9UfRe1b2H1xCTbLTcAVEwWnc6rAfnyZkXk3KPfpcbjtWHr6WCbYDeYdjiLUDuwx904FSS7yNp9nss00fb3pQ==}
+    dev: false
+
+  /@shiperist-catppuccin-ui/typography@0.0.2:
+    resolution: {integrity: sha512-QutuQr5Pi8LvC5RywDeaZGxHU86a4bTKDoYGUBLCZva6LpptiNguXiEsoZBS+eEZLlxeg1gXuYgQmKdhXuGqOQ==}
+    dev: false
 
   /@storybook/addon-storysource@7.0.20(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-cBKFICYseeWB7cCxs0lCkkrLI64JJx3UEYxiusxGCoiS6yb8mUI8YbxYmOibODPKvozjl0+CMJn5EXMRPs0TlA==}

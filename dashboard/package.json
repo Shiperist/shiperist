@@ -23,6 +23,7 @@
     "@trpc/react-query": "^10.30.0",
     "@trpc/server": "^10.30.0",
     "@catppuccin/palette": "0.1.5",
+    "@shiperist-catppuccin-ui/react": "^0.0.2",
     "js-base64": "^3.7.5",
     "lucide-react": "^0.248.0",
     "luxon": "^3.3.0",
