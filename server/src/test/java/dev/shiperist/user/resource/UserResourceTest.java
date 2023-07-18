@@ -1,29 +1,35 @@
 package dev.shiperist.user.resource;
 
+import dev.shiperist.user.model.request.CreateUserRequest;
 import io.quarkus.test.junit.QuarkusTest;
+import io.restassured.http.ContentType;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.is;
 
 @QuarkusTest
 public class UserResourceTest {
 
+    private Jsonb jsonb = JsonbBuilder.create();
+
     @Test
-    void createUser() {
-        String userCreateRequest = """
-                {
-                    "name": "test",
-                    "email": "test@test.com",
-                    "isEmailVerified": true,
-                    "image": "test"
-                }
-                """;
+    public void testCreateUserEndpoint() {
+        CreateUserRequest request = new CreateUserRequest();
+        request.setName("Test User");
+        request.setEmail("test.user@example.com");
+        request.setIsEmailVerified(LocalDateTime.now());
+        request.setImage("http://example.com/image.jpg");
+
+        String requestBody = jsonb.toJson(request);
 
         given()
-                .when()
-                .body(userCreateRequest)
-                .post("/user/create")
+                .body(requestBody)
+                .header("Content-Type", ContentType.JSON)
+                .when().post("/create")
                 .then()
-                .statusCode(200);
+                .statusCode(200)
+                .body("name", is(request.getName()))
+                .body("email", is(request.getEmail()));
     }
 }
