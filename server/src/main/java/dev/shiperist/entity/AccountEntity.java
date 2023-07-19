@@ -1,14 +1,14 @@
-package dev.shiperist.user.entity;
+package dev.shiperist.entity;
 
 import io.quarkus.hibernate.reactive.panache.PanacheEntity;
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
-@Getter
-@Builder
+@Data
 @Entity
 @Table(name = "account")
+@EqualsAndHashCode(callSuper = true)
 public class AccountEntity extends PanacheEntity {
 
     @Column(name = "user_id")

@@ -1,13 +1,13 @@
-package dev.shiperist.user.model;
+package dev.shiperist.model;
 
-import dev.shiperist.user.entity.AccountEntity;
-import dev.shiperist.user.entity.SessionEntity;
-import lombok.Getter;
+import dev.shiperist.entity.AccountEntity;
+import dev.shiperist.entity.SessionEntity;
+import lombok.Data;
 
 import java.time.LocalDateTime;
 import java.util.Set;
 
-@Getter
+@Data
 public class User {
     private String name;
     private String email;

@@ -1,7 +1,7 @@
-package dev.shiperist.user.mapper;
+package dev.shiperist.mapper;
 
-import dev.shiperist.user.entity.AccountEntity;
-import dev.shiperist.user.model.Account;
+import dev.shiperist.entity.AccountEntity;
+import dev.shiperist.model.Account;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "jakarta")

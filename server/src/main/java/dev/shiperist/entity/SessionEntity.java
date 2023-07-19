@@ -1,16 +1,16 @@
-package dev.shiperist.user.entity;
+package dev.shiperist.entity;
 
 import io.quarkus.hibernate.reactive.panache.PanacheEntity;
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.time.LocalDateTime;
 
-@Getter
-@Builder
+@Data
 @Entity
 @Table(name = "session")
+@EqualsAndHashCode(callSuper = true)
 public class SessionEntity extends PanacheEntity {
 
     @Column(name = "session_token", unique = true)

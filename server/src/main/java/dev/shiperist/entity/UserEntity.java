@@ -1,20 +1,20 @@
-package dev.shiperist.user.entity;
+package dev.shiperist.entity;
 
 import io.quarkus.hibernate.reactive.panache.PanacheEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.time.LocalDateTime;
 import java.util.Set;
 
-@Getter
-@Builder
+@Data
 @Entity
 @Table(name = "user")
+@EqualsAndHashCode(callSuper = true)
 public class UserEntity extends PanacheEntity {
 
     @Column(name = "name")

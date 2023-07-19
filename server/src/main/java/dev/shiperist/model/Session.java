@@ -1,11 +1,11 @@
-package dev.shiperist.user.model;
+package dev.shiperist.model;
 
-import dev.shiperist.user.entity.UserEntity;
-import lombok.Getter;
+import dev.shiperist.entity.UserEntity;
+import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Getter
+@Data
 public class Session {
     private String sessionToken;
     private String userId;

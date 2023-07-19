@@ -1,9 +1,9 @@
-package dev.shiperist.user.model;
+package dev.shiperist.model;
 
-import dev.shiperist.user.entity.UserEntity;
-import lombok.Getter;
+import dev.shiperist.entity.UserEntity;
+import lombok.Data;
 
-@Getter
+@Data
 public class Account {
     private String userId;
     private String type;
