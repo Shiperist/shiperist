@@ -1,4 +1,4 @@
-package dev.shiperist.service;
+package dev.shiperist.resource;
 
 import jakarta.enterprise.context.ApplicationScoped;
 

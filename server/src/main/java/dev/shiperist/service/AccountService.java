@@ -1,4 +1,4 @@
-package dev.shiperist.resource;
+package dev.shiperist.service;
 
 import dev.shiperist.entity.AccountEntity;
 import dev.shiperist.mapper.AccountMapper;
