@@ -7,8 +7,9 @@ import java.time.LocalDateTime;
 
 @Data
 public class Session {
+    private Long id;
+    private Long userId;
     private String sessionToken;
-    private String userId;
     private LocalDateTime expires;
     private UserEntity user;
 }

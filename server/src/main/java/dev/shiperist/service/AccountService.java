@@ -4,6 +4,7 @@ import dev.shiperist.entity.AccountEntity;
 import dev.shiperist.mapper.AccountMapper;
 import dev.shiperist.model.Account;
 import dev.shiperist.repository.AccountRepository;
+import io.quarkus.hibernate.reactive.panache.common.WithSession;
 import io.smallrye.mutiny.Uni;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -11,6 +12,7 @@ import jakarta.transaction.Transactional;
 
 import java.util.Optional;
 
+@WithSession
 @ApplicationScoped
 public class AccountService {
 

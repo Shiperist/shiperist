@@ -1,18 +1,22 @@
 package dev.shiperist.entity;
 
-import io.quarkus.hibernate.reactive.panache.PanacheEntity;
+import io.quarkus.hibernate.reactive.panache.PanacheEntityBase;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Data
-@Entity
-@Table(name = "account")
+@Entity(name = "Account")
+@Table(name = "account", schema = "public")
 @EqualsAndHashCode(callSuper = true)
-public class AccountEntity extends PanacheEntity {
+public class AccountEntity extends PanacheEntityBase {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public Long id;
 
     @Column(name = "user_id")
-    private String userId;
+    private Long userId;
 
     @Column(name = "type")
     private String type;

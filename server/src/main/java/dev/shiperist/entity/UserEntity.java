@@ -1,10 +1,7 @@
 package dev.shiperist.entity;
 
-import io.quarkus.hibernate.reactive.panache.PanacheEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import io.quarkus.hibernate.reactive.panache.PanacheEntityBase;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -12,10 +9,14 @@ import java.time.LocalDateTime;
 import java.util.Set;
 
 @Data
-@Entity
-@Table(name = "user")
+@Entity(name = "User")
+@Table(name = "user", schema = "public")
 @EqualsAndHashCode(callSuper = true)
-public class UserEntity extends PanacheEntity {
+public class UserEntity extends PanacheEntityBase {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public Long id;
 
     @Column(name = "name")
     private String name;
@@ -28,6 +29,9 @@ public class UserEntity extends PanacheEntity {
 
     @Column(name = "image")
     private String image;
+
+    @Column(name = "password")
+    private String password;
 
     @OneToMany(mappedBy = "user")
     private Set<AccountEntity> accounts;

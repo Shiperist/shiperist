@@ -5,7 +5,8 @@ import lombok.Data;
 
 @Data
 public class Account {
-    private String userId;
+    private Long id;
+    private Long userId;
     private String type;
     private String provider;
     private String providerAccountId;
