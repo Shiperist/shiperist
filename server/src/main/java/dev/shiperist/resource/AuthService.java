@@ -76,11 +76,9 @@ public class AuthService {
                                     .entity("Invalid email or password.").build());
                         }
 
-                        System.out.println("password: " + password);
                         User validUser = user.get();
 
                         if (userService.checkPassword(password, validUser.getPassword())) {
-                            System.out.println("validUser: " + validUser);
                             return sessionService.createSession(validUser)
                                     .map(session -> Response.ok(session).build());
                         } else {

@@ -31,6 +31,7 @@
     </dependencies>
   </dependencyManagement>
   <dependencies>
+    <!-- Quarkus: -->
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-resteasy-reactive-jackson</artifactId>
@@ -38,10 +39,6 @@
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-resteasy-reactive-jsonb</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-mutiny</artifactId>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
@@ -72,6 +69,8 @@
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-security</artifactId>
     </dependency>
+
+    <!-- JWT: -->
     <dependency>
       <groupId>org.eclipse.microprofile.jwt</groupId>
       <artifactId>microprofile-jwt-auth-api</artifactId>
@@ -99,6 +98,8 @@
       <version>0.11.2</version>
       <scope>runtime</scope>
     </dependency>
+
+    <!-- Code generation: -->
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
@@ -110,6 +111,8 @@
       <artifactId>mapstruct</artifactId>
       <version>${mapstruct.version}</version>
     </dependency>
+
+    <!-- Testing: -->
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-junit5</artifactId>

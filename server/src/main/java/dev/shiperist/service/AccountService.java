@@ -4,15 +4,13 @@ import dev.shiperist.entity.AccountEntity;
 import dev.shiperist.mapper.AccountMapper;
 import dev.shiperist.model.Account;
 import dev.shiperist.repository.AccountRepository;
-import io.quarkus.hibernate.reactive.panache.common.WithSession;
+import io.quarkus.hibernate.reactive.panache.common.WithTransaction;
 import io.smallrye.mutiny.Uni;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import jakarta.transaction.Transactional;
 
 import java.util.Optional;
 
-@WithSession
 @ApplicationScoped
 public class AccountService {
 
@@ -22,13 +20,12 @@ public class AccountService {
     @Inject
     AccountMapper accountMapper;
 
-    @Transactional
+    @WithTransaction
     public Uni<Account> createAccount(Account account) {
         AccountEntity accountEntity = accountMapper.toEntity(account);
         return accountRepository.persist(accountEntity).map(accountMapper::toDomain);
     }
 
-    @Transactional
     public Uni<Optional<Account>> getAccount(Long id) {
         return accountRepository.findById(id)
                 .map(accountMapper::toDomain)
@@ -36,13 +33,13 @@ public class AccountService {
                 .onItem().ifNull().continueWith(Optional.empty());
     }
 
-    @Transactional
+    @WithTransaction
     public Uni<Account> updateAccount(Account account) {
         AccountEntity accountEntity = accountMapper.toEntity(account);
         return accountRepository.persist(accountEntity).map(accountMapper::toDomain);
     }
 
-    @Transactional
+    @WithTransaction
     public Uni<Boolean> deleteAccount(Long accountId) {
         return accountRepository.deleteById(accountId);
     }

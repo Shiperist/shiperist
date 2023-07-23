@@ -5,15 +5,13 @@ import dev.shiperist.entity.UserEntity;
 import dev.shiperist.mapper.UserMapper;
 import dev.shiperist.model.User;
 import dev.shiperist.repository.UserRepository;
-import io.quarkus.hibernate.reactive.panache.common.WithSession;
+import io.quarkus.hibernate.reactive.panache.common.WithTransaction;
 import io.smallrye.mutiny.Uni;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import jakarta.transaction.Transactional;
 
 import java.util.Optional;
 
-@WithSession
 @ApplicationScoped
 public class UserService {
 
@@ -23,33 +21,32 @@ public class UserService {
     @Inject
     UserMapper userMapper;
 
-    @Transactional
+    @WithTransaction
     public Uni<User> createUser(String name, String email, String image, String password) {
         UserEntity user = new UserEntity();
         user.setName(name);
         user.setEmail(email);
         user.setImage(image);
         user.setPassword(hashPassword(password));
-        return userRepository.persist(user).map(userMapper::toDomain);
+        return userRepository.persist(user)
+                .map(userMapper::toDomain);
     }
 
-    @Transactional
     public Uni<Optional<User>> getUser(Long id) {
         return userRepository.findById(id).map(user -> Optional.ofNullable(userMapper.toDomain(user)));
     }
 
-    @Transactional
     public Uni<Optional<User>> getUserByEmail(String email) {
         return userRepository.findByEmail(email).map(user -> Optional.ofNullable(userMapper.toDomain(user)));
     }
 
-    @Transactional
+    @WithTransaction
     public Uni<User> updateUser(User user) {
         UserEntity userEntity = userMapper.toEntity(user);
         return userRepository.persist(userEntity).map(userMapper::toDomain);
     }
 
-    @Transactional
+    @WithTransaction
     public Uni<Boolean> deleteUser(Long userId) {
         return userRepository.deleteById(userId);
     }
