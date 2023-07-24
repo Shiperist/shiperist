@@ -12,6 +12,7 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Optional;
 
 @Path("/auth")
@@ -90,7 +91,7 @@ public class AuthService {
                 // Assuming the refresh_token is the sessionId.
                     sessionService.getSession(Long.parseLong(refreshToken))
                             .flatMap(session -> {
-                                if (session.isEmpty() || session.get().getExpires().isBefore(LocalDateTime.now())) {
+                                if (session.isEmpty() || session.get().getExpires().before(new Date())) {
                                     return Uni.createFrom().item(Response.status(Response.Status.UNAUTHORIZED)
                                             .entity("Invalid or expired refresh token.").build());
                                 }

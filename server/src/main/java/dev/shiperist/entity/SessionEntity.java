@@ -5,7 +5,9 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.sql.Time;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Data
 @Entity(name = "Session")
@@ -24,7 +26,8 @@ public class SessionEntity extends PanacheEntityBase {
     private Long userId;
 
     @Column(name = "expires")
-    private LocalDateTime expires;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date expires;
 
     @ManyToOne
     @JoinColumn(name = "user_id", insertable = false, updatable = false)

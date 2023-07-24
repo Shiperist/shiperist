@@ -5,7 +5,9 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.sql.Time;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Set;
 
 @Data
@@ -25,7 +27,8 @@ public class UserEntity extends PanacheEntityBase {
     private String email;
 
     @Column(name = "email_verified")
-    private LocalDateTime emailVerified;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date emailVerified;
 
     @Column(name = "image")
     private String image;
@@ -33,10 +36,10 @@ public class UserEntity extends PanacheEntityBase {
     @Column(name = "password")
     private String password;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private Set<AccountEntity> accounts;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private Set<SessionEntity> sessions;
 
     public UserEntity() {

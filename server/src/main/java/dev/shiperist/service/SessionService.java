@@ -14,6 +14,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
 import java.security.Key;
+import java.sql.Time;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -36,7 +37,7 @@ public class SessionService {
 
         session.setUserId(user.getId());
         session.setSessionToken(generateSessionToken(user, expires));
-        session.setExpires(LocalDateTime.from(expires.toInstant()));
+        session.setExpires(expires);
 
         return sessionRepository.persist(session).map(sessionMapper::toDomain);
     }
