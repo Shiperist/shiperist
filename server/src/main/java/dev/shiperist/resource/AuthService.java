@@ -1,6 +1,6 @@
 package dev.shiperist.resource;
 
-import dev.shiperist.model.User;
+import dev.shiperist.model.account.User;
 import dev.shiperist.service.AccountService;
 import dev.shiperist.service.SessionService;
 import dev.shiperist.service.UserService;
@@ -11,7 +11,6 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Optional;
 

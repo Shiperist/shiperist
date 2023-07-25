@@ -1,6 +1,6 @@
 package dev.shiperist.repository;
 
-import dev.shiperist.entity.UserEntity;
+import dev.shiperist.entity.account.UserEntity;
 import io.quarkus.hibernate.reactive.panache.PanacheRepositoryBase;
 import io.quarkus.hibernate.reactive.panache.common.WithSession;
 import io.smallrye.mutiny.Uni;

@@ -1,11 +1,9 @@
-package dev.shiperist.model;
+package dev.shiperist.model.account;
 
-import dev.shiperist.entity.AccountEntity;
-import dev.shiperist.entity.SessionEntity;
+import dev.shiperist.entity.account.AccountEntity;
+import dev.shiperist.entity.account.SessionEntity;
 import lombok.Data;
 
-import java.sql.Time;
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Set;
 

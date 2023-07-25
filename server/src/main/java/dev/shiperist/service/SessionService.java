@@ -1,9 +1,9 @@
 package dev.shiperist.service;
 
-import dev.shiperist.entity.SessionEntity;
-import dev.shiperist.mapper.SessionMapper;
-import dev.shiperist.model.Session;
-import dev.shiperist.model.User;
+import dev.shiperist.entity.account.SessionEntity;
+import dev.shiperist.mapper.account.SessionMapper;
+import dev.shiperist.model.account.Session;
+import dev.shiperist.model.account.User;
 import dev.shiperist.repository.SessionRepository;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -14,9 +14,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
 import java.security.Key;
-import java.sql.Time;
 import java.time.Instant;
-import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.Optional;

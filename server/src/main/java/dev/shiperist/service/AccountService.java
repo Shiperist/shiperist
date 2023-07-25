@@ -1,8 +1,8 @@
 package dev.shiperist.service;
 
-import dev.shiperist.entity.AccountEntity;
-import dev.shiperist.mapper.AccountMapper;
-import dev.shiperist.model.Account;
+import dev.shiperist.entity.account.AccountEntity;
+import dev.shiperist.mapper.account.AccountMapper;
+import dev.shiperist.model.account.Account;
 import dev.shiperist.repository.AccountRepository;
 import io.quarkus.hibernate.reactive.panache.common.WithTransaction;
 import io.smallrye.mutiny.Uni;

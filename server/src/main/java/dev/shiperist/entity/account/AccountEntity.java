@@ -1,4 +1,4 @@
-package dev.shiperist.entity;
+package dev.shiperist.entity.account;
 
 import io.quarkus.hibernate.reactive.panache.PanacheEntityBase;
 import jakarta.persistence.*;

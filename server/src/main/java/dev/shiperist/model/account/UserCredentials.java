@@ -1,4 +1,4 @@
-package dev.shiperist.model;
+package dev.shiperist.model.account;
 
 import lombok.Data;
 

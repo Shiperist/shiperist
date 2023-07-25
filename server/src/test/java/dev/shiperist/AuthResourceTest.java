@@ -1,6 +1,6 @@
 package dev.shiperist;
 
-import dev.shiperist.model.User;
+import dev.shiperist.model.account.User;
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.Test;

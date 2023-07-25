@@ -1,7 +1,8 @@
-package dev.shiperist.mapper;
+package dev.shiperist.mapper.account;
 
-import dev.shiperist.entity.UserEntity;
-import dev.shiperist.model.User;
+import dev.shiperist.entity.account.UserEntity;
+import dev.shiperist.mapper.QuarkusMappingConfig;
+import dev.shiperist.model.account.User;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;

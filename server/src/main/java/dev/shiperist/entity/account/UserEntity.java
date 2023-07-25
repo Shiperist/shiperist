@@ -1,12 +1,10 @@
-package dev.shiperist.entity;
+package dev.shiperist.entity.account;
 
 import io.quarkus.hibernate.reactive.panache.PanacheEntityBase;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import java.sql.Time;
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Set;
 
