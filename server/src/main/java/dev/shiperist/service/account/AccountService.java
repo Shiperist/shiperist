@@ -1,9 +1,9 @@
-package dev.shiperist.service;
+package dev.shiperist.service.account;
 
 import dev.shiperist.entity.account.AccountEntity;
 import dev.shiperist.mapper.account.AccountMapper;
 import dev.shiperist.model.account.Account;
-import dev.shiperist.repository.AccountRepository;
+import dev.shiperist.repository.account.AccountRepository;
 import io.quarkus.hibernate.reactive.panache.common.WithTransaction;
 import io.smallrye.mutiny.Uni;
 import jakarta.enterprise.context.ApplicationScoped;

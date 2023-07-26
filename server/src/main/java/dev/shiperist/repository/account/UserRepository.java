@@ -1,4 +1,4 @@
-package dev.shiperist.repository;
+package dev.shiperist.repository.account;
 
 import dev.shiperist.entity.account.UserEntity;
 import io.quarkus.hibernate.reactive.panache.PanacheRepositoryBase;

@@ -1,10 +1,10 @@
-package dev.shiperist.service;
+package dev.shiperist.service.account;
 
 import dev.shiperist.entity.account.SessionEntity;
 import dev.shiperist.mapper.account.SessionMapper;
 import dev.shiperist.model.account.Session;
 import dev.shiperist.model.account.User;
-import dev.shiperist.repository.SessionRepository;
+import dev.shiperist.repository.account.SessionRepository;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;

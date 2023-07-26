@@ -1,9 +1,9 @@
 package dev.shiperist.resource;
 
 import dev.shiperist.model.account.User;
-import dev.shiperist.service.AccountService;
-import dev.shiperist.service.SessionService;
-import dev.shiperist.service.UserService;
+import dev.shiperist.service.account.AccountService;
+import dev.shiperist.service.account.SessionService;
+import dev.shiperist.service.account.UserService;
 import io.smallrye.mutiny.Uni;
 import jakarta.annotation.security.PermitAll;
 import jakarta.inject.Inject;
@@ -17,7 +17,7 @@ import java.util.Optional;
 @Path("/auth")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class AuthService {
+public class AuthResource {
 
 
     @Inject

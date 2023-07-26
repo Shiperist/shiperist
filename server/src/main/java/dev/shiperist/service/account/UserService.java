@@ -1,10 +1,10 @@
-package dev.shiperist.service;
+package dev.shiperist.service.account;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
 import dev.shiperist.entity.account.UserEntity;
 import dev.shiperist.mapper.account.UserMapper;
 import dev.shiperist.model.account.User;
-import dev.shiperist.repository.UserRepository;
+import dev.shiperist.repository.account.UserRepository;
 import io.quarkus.hibernate.reactive.panache.common.WithTransaction;
 import io.smallrye.mutiny.Uni;
 import jakarta.enterprise.context.ApplicationScoped;

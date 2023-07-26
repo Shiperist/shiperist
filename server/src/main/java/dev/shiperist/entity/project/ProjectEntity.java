@@ -1,13 +1,17 @@
 package dev.shiperist.entity.project;
 
+import dev.shiperist.entity.account.UserEntity;
 import io.quarkus.hibernate.reactive.panache.PanacheEntityBase;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.util.Set;
 
 @Data
-@Entity(name = "Account")
-@Table(name = "account", schema = "public")
+@Entity(name = "Project")
+@Table(name = "project", schema = "public")
 @EqualsAndHashCode(callSuper = true)
 public class ProjectEntity extends PanacheEntityBase {
 
@@ -15,7 +19,7 @@ public class ProjectEntity extends PanacheEntityBase {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
 
-    @Column(name = "name")
+    @Column(name = "name", unique = true)
     private String name;
 
     @Column(name = "display_name")
@@ -26,4 +30,14 @@ public class ProjectEntity extends PanacheEntityBase {
 
     @Column(name = "image")
     private String image;
+
+    @Column(name = "status")
+    private String status;
+
+    @CreationTimestamp
+    @Column(name = "created_at", updatable = false)
+    private String createdAt;
+
+    @ManyToMany(mappedBy = "projects")
+    private Set<UserEntity> users;
 }

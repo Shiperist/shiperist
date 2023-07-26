@@ -1,5 +1,6 @@
 package dev.shiperist.entity.account;
 
+import dev.shiperist.entity.project.ProjectEntity;
 import io.quarkus.hibernate.reactive.panache.PanacheEntityBase;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -39,6 +40,14 @@ public class UserEntity extends PanacheEntityBase {
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private Set<SessionEntity> sessions;
+
+    @ManyToMany
+    @JoinTable(
+            name = "project_user",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "project_id")
+    )
+    private Set<ProjectEntity> projects;
 
     public UserEntity() {
     }

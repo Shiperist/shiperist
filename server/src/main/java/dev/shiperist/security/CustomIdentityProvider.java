@@ -1,8 +1,8 @@
 package dev.shiperist.security;
 
 import dev.shiperist.model.account.User;
-import dev.shiperist.service.SessionService;
-import dev.shiperist.service.UserService;
+import dev.shiperist.service.account.SessionService;
+import dev.shiperist.service.account.UserService;
 import io.quarkus.security.AuthenticationFailedException;
 import io.quarkus.security.credential.TokenCredential;
 import io.quarkus.security.identity.AuthenticationRequestContext;
