@@ -1,9 +1,11 @@
 package dev.shiperist.resource;
 
 import dev.shiperist.model.account.User;
+import dev.shiperist.model.account.UserResponse;
 import dev.shiperist.service.account.AccountService;
-import dev.shiperist.service.account.SessionService;
+import dev.shiperist.service.account.TokenService;
 import dev.shiperist.service.account.UserService;
+import dev.shiperist.util.SecurityUtil;
 import io.smallrye.mutiny.Uni;
 import jakarta.annotation.security.PermitAll;
 import jakarta.inject.Inject;
@@ -27,7 +29,7 @@ public class AuthResource {
     AccountService accountService;
 
     @Inject
-    SessionService sessionService;
+    TokenService tokenService;
 
     @GET
     @PermitAll
@@ -60,6 +62,15 @@ public class AuthResource {
         return Uni.createFrom().item(Response.ok().build());
     }
 
+    /*
+    TODO: Return this structure:
+    {
+  "access_token": "jwt-token-representing-the-user",
+  "token_type": "bearer",
+  "expires_in": 3600,
+  "refresh_token": "a-refresh-token"
+}
+     */
     @POST
     @PermitAll
     @Path("/token")
@@ -68,6 +79,8 @@ public class AuthResource {
                                   @FormParam("email") String email,
                                   @FormParam("password") String password,
                                   @FormParam("refresh_token") String refreshToken) {
+        UserResponse response = new UserResponse();
+
         return switch (grantType) {
             case "password" -> userService.getUserByEmail(email)
                     .flatMap(user -> {
@@ -79,8 +92,14 @@ public class AuthResource {
                         User validUser = user.get();
 
                         if (userService.checkPassword(password, validUser.getPassword())) {
-                            return sessionService.createSession(validUser)
-                                    .map(session -> Response.ok(session).build());
+                            return tokenService.createRefreshToken(validUser)
+                                    .map(token -> {
+                                        response.setAccessToken(SecurityUtil.generateToken(validUser, new Date()));
+                                        response.setTokenType("bearer");
+                                        response.setExpiresIn(3600);
+                                        response.setRefreshToken(token.getToken());
+                                        return Response.ok(response).build();
+                                    });
                         } else {
                             return Uni.createFrom().item(Response.status(Response.Status.UNAUTHORIZED)
                                     .entity("Invalid email or password.").build());
@@ -88,14 +107,22 @@ public class AuthResource {
                     });
             case "refresh_token" ->
                 // Assuming the refresh_token is the sessionId.
-                    sessionService.getSession(Long.parseLong(refreshToken))
-                            .flatMap(session -> {
-                                if (session.isEmpty() || session.get().getExpires().before(new Date())) {
-                                    return Uni.createFrom().item(Response.status(Response.Status.UNAUTHORIZED)
-                                            .entity("Invalid or expired refresh token.").build());
+                    tokenService.swapRefreshToken(refreshToken)
+                            .flatMap(token -> userService.getUser(token.getUserId()))
+                            .map(user -> {
+                                if (user.isEmpty()) {
+                                    return Response.status(Response.Status.UNAUTHORIZED)
+                                            .entity("Invalid refresh token.").build();
                                 }
 
-                                return Uni.createFrom().item(Response.ok(session.get()).build());
+                                User validUser = user.get();
+
+                                response.setAccessToken(SecurityUtil.generateToken(validUser, new Date()));
+                                response.setTokenType("bearer");
+                                response.setExpiresIn(3600);
+                                response.setRefreshToken(refreshToken);
+
+                                return Response.ok(response).build();
                             });
             default -> Uni.createFrom().item(Response.status(Response.Status.BAD_REQUEST)
                     .entity("Invalid grant_type parameter.").build());

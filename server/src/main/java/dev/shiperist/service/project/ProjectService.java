@@ -1,25 +1,27 @@
 package dev.shiperist.service.project;
 
-import dev.shiperist.entity.account.UserEntity;
 import dev.shiperist.entity.project.ProjectEntity;
+import dev.shiperist.entity.project.ProjectMemberEntity;
 import dev.shiperist.mapper.project.ProjectMapper;
 import dev.shiperist.model.project.Project;
 import dev.shiperist.repository.account.UserRepository;
+import dev.shiperist.repository.project.ProjectMemberRepository;
 import dev.shiperist.repository.project.ProjectRepository;
 import io.quarkus.hibernate.reactive.panache.common.WithTransaction;
-import io.smallrye.mutiny.Multi;
 import io.smallrye.mutiny.Uni;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
 import java.util.List;
-import java.util.Set;
 
 @ApplicationScoped
 public class ProjectService {
 
     @Inject
     ProjectRepository projectRepository;
+
+    @Inject
+    ProjectMemberRepository projectMemberRepository;
 
     @Inject
     UserRepository userRepository;
@@ -29,16 +31,17 @@ public class ProjectService {
 
 
     @WithTransaction
-    public Uni<Project> createProject(String name, String owner) {
-        return userRepository.findById(owner)
-                .map(user -> {
-                    ProjectEntity projectEntity = new ProjectEntity();
-                    projectEntity.setName(name);
-                    projectEntity.getUsers().add(user);
-                    return projectEntity;
-                })
-                .flatMap(projectRepository::persist)
-                .map(projectMapper::toDomain);
+    public Uni<Project> createProject(String name, Long owner) {
+        ProjectEntity projectEntity = new ProjectEntity();
+        projectEntity.setName(name);
+
+        return projectRepository.persistAndFlush(projectEntity)
+                .onItem().ifNotNull().transformToUni(project -> {
+                    ProjectMemberEntity projectMemberEntity = new ProjectMemberEntity();
+                    projectMemberEntity.setProjectId(project.getId());
+                    projectMemberEntity.setUserId(owner);
+                    return projectMemberRepository.persist(projectMemberEntity).replaceWith(project);
+                }).map(projectMapper::toDomain);
     }
 
     public Uni<Project> getProject(Long name) {

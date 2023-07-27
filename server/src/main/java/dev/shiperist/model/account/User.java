@@ -1,7 +1,7 @@
 package dev.shiperist.model.account;
 
 import dev.shiperist.entity.account.AccountEntity;
-import dev.shiperist.entity.account.SessionEntity;
+import dev.shiperist.entity.account.RefreshTokenEntity;
 import lombok.Data;
 
 import java.util.Date;
@@ -16,5 +16,5 @@ public class User {
     private String image;
     public String password;
     private Set<AccountEntity> accounts;
-    private Set<SessionEntity> sessions;
+    private Set<RefreshTokenEntity> sessions;
 }

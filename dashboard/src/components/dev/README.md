@@ -47,7 +47,7 @@ props.
 ```
 
 You can add some global initialization logic for the preview mode in `useInitital.ts`,
-e.g. implicitly obtain user session:
+e.g. implicitly obtain user refreshToken:
 
 ```typescript
 export const useInitial: () => InitialHookStatus = () => {

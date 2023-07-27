@@ -39,15 +39,7 @@ public class UserEntity extends PanacheEntityBase {
     private Set<AccountEntity> accounts;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
-    private Set<SessionEntity> sessions;
-
-    @ManyToMany
-    @JoinTable(
-            name = "project_user",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "project_id")
-    )
-    private Set<ProjectEntity> projects;
+    private Set<RefreshTokenEntity> refreshTokens;
 
     public UserEntity() {
     }
