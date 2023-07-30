@@ -13,7 +13,7 @@ public class AccountEntity extends PanacheEntityBase {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long id;
+    private Long id;
 
     @Column(name = "user_id")
     private Long userId;

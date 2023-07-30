@@ -1,23 +1,27 @@
 package dev.shiperist.entity.project;
 
-import dev.shiperist.entity.account.UserEntity;
+import dev.shiperist.data.OsType;
+import dev.shiperist.data.ReleaseType;
 import io.quarkus.hibernate.reactive.panache.PanacheEntityBase;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.CreationTimestamp;
 
-import java.util.Set;
+import java.util.Date;
 
 @Data
-@Entity(name = "Project")
-@Table(name = "project", schema = "public")
+@Entity(name = "Account")
+@Table(name = "account", schema = "public")
 @EqualsAndHashCode(callSuper = true)
-public class ProjectEntity extends PanacheEntityBase {
+public class ProjectAppEntity extends PanacheEntityBase {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "project_id")
+    private Long projectId;
 
     @Column(name = "name", unique = true)
     private String name;
@@ -36,15 +40,19 @@ public class ProjectEntity extends PanacheEntityBase {
 
     @CreationTimestamp
     @Column(name = "created_at", updatable = false)
-    private String createdAt;
+    private Date createdAt;
 
-    @Column(name = "members")
-    @OneToMany(mappedBy = "project", fetch = FetchType.EAGER)
-    private Set<ProjectMemberEntity> members;
+    @CreationTimestamp
+    @Column(name = "updated_at")
+    private Date updatedAt;
 
-    @ManyToMany(mappedBy = "projects")
-    private Set<UserEntity> users;
+    @Column(name = "os")
+    private OsType os;
 
-    @OneToMany(mappedBy = "project", fetch = FetchType.EAGER)
-    private Set<ProjectAppEntity> projectApps;
+    @Column(name = "release_type")
+    private ReleaseType releaseType;
+
+    @ManyToOne
+    @JoinColumn(name = "project_id", insertable = false, updatable = false)
+    private ProjectEntity project;
 }

@@ -62,15 +62,6 @@ public class AuthResource {
         return Uni.createFrom().item(Response.ok().build());
     }
 
-    /*
-    TODO: Return this structure:
-    {
-  "access_token": "jwt-token-representing-the-user",
-  "token_type": "bearer",
-  "expires_in": 3600,
-  "refresh_token": "a-refresh-token"
-}
-     */
     @POST
     @PermitAll
     @Path("/token")
