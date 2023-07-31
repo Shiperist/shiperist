@@ -42,9 +42,6 @@ public class ProjectEntity extends PanacheEntityBase {
     @OneToMany(mappedBy = "project", fetch = FetchType.EAGER)
     private Set<ProjectMemberEntity> members;
 
-    @ManyToMany(mappedBy = "projects")
-    private Set<UserEntity> users;
-
     @OneToMany(mappedBy = "project", fetch = FetchType.EAGER)
     private Set<ProjectAppEntity> projectApps;
 }

@@ -11,8 +11,8 @@ import org.hibernate.annotations.CreationTimestamp;
 import java.util.Date;
 
 @Data
-@Entity(name = "Account")
-@Table(name = "account", schema = "public")
+@Entity(name = "ProjectApp")
+@Table(name = "project_app", schema = "public")
 @EqualsAndHashCode(callSuper = true)
 public class ProjectAppEntity extends PanacheEntityBase {
 
