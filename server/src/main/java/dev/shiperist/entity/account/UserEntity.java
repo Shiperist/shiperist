@@ -1,13 +1,11 @@
 package dev.shiperist.entity.account;
 
-import dev.shiperist.entity.project.ProjectEntity;
 import io.quarkus.hibernate.reactive.panache.PanacheEntityBase;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.util.Date;
-import java.util.Set;
 
 @Data
 @Entity(name = "User")

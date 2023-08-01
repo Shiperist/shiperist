@@ -31,9 +31,12 @@ public class ProjectService {
 
 
     @WithTransaction
-    public Uni<Project> createProject(String name, Long owner) {
+    public Uni<Project> createProject(Long owner, String name, String displayName, String description, String image) {
         ProjectEntity projectEntity = new ProjectEntity();
         projectEntity.setName(name);
+        projectEntity.setDisplayName(displayName);
+        projectEntity.setDescription(description);
+        projectEntity.setImage(image);
 
         return projectRepository.persistAndFlush(projectEntity)
                 .onItem().ifNotNull().transformToUni(project -> {

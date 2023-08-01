@@ -145,49 +145,6 @@ public class AuthResource {
         };
     }
 
-    @GET
-    @Authenticated
-    @Path("/user/{id}")
-    @Operation(summary = "Returns user information")
-    @APIResponse(
-            responseCode = "200",
-            description = "The user information",
-            content = @Content(mediaType = APPLICATION_JSON, schema = @Schema(implementation = User.class, required = true))
-    )
-    @APIResponse(
-            responseCode = "403",
-            description = "Forbidden"
-    )
-    public Uni<Response> getUser(@PathParam("id") Long id) {
-        if (id == null || !id.equals(Long.parseLong(sub))) {
-            return Uni.createFrom().item(Response.status(Response.Status.FORBIDDEN).build());
-        }
-        return userService.getUser(id)
-                .map(user -> Response.ok(user).build());
-    }
-
-    @PUT
-    @Authenticated
-    @Path("/user")
-    @Operation(summary = "Updates user information")
-    @APIResponse(
-            responseCode = "200",
-            description = "The updated user",
-            content = @Content(mediaType = APPLICATION_JSON, schema = @Schema(implementation = User.class, required = true))
-    )
-    @APIResponse(
-            responseCode = "403",
-            description = "Forbidden"
-    )
-    public Uni<Response> updateUser(User user) {
-        if (user.getId() == null || !user.getId().equals(Long.parseLong(sub))) {
-            return Uni.createFrom().item(Response.status(Response.Status.FORBIDDEN).build());
-        }
-
-        return userService.updateUser(user)
-                .map(updatedUser -> Response.ok(updatedUser).build());
-    }
-
     @HEAD
     @Authenticated
     @Path("/logout")

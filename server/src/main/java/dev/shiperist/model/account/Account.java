@@ -1,6 +1,5 @@
 package dev.shiperist.model.account;
 
-import dev.shiperist.entity.account.UserEntity;
 import lombok.Data;
 
 @Data

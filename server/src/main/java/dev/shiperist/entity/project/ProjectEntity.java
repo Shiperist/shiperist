@@ -1,13 +1,10 @@
 package dev.shiperist.entity.project;
 
-import dev.shiperist.entity.account.UserEntity;
 import io.quarkus.hibernate.reactive.panache.PanacheEntityBase;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.CreationTimestamp;
-
-import java.util.Set;
 
 @Data
 @Entity(name = "Project")
@@ -37,11 +34,4 @@ public class ProjectEntity extends PanacheEntityBase {
     @CreationTimestamp
     @Column(name = "created_at", updatable = false)
     private String createdAt;
-
-    @Column(name = "members")
-    @OneToMany(mappedBy = "project", fetch = FetchType.EAGER)
-    private Set<ProjectMemberEntity> members;
-
-    @OneToMany(mappedBy = "project", fetch = FetchType.EAGER)
-    private Set<ProjectAppEntity> projectApps;
 }
