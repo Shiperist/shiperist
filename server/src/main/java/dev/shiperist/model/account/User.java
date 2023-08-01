@@ -15,6 +15,4 @@ public class User {
     private Date emailVerified;
     private String image;
     public String password;
-    private Set<AccountEntity> accounts;
-    private Set<RefreshTokenEntity> sessions;
 }

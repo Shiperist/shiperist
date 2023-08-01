@@ -18,5 +18,4 @@ public class Account {
     private String scope;
     private String idToken;
     private String sessionState;
-    private UserEntity user;
 }

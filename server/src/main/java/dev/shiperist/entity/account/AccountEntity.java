@@ -51,7 +51,7 @@ public class AccountEntity extends PanacheEntityBase {
     @Column(name = "session_state")
     private String sessionState;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", insertable = false, updatable = false)
     private UserEntity user;
 

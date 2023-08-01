@@ -35,7 +35,7 @@ public class RefreshTokenEntity extends PanacheEntityBase {
     @Column(name = "updated_at")
     private Date updatedAt;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", insertable = false, updatable = false)
     private UserEntity user;
 

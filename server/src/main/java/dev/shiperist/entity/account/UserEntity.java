@@ -35,12 +35,6 @@ public class UserEntity extends PanacheEntityBase {
     @Column(name = "password")
     private String password;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
-    private Set<AccountEntity> accounts;
-
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
-    private Set<RefreshTokenEntity> refreshTokens;
-
     public UserEntity() {
     }
 }

@@ -10,6 +10,7 @@ import io.quarkus.hibernate.reactive.panache.common.WithTransaction;
 import io.smallrye.mutiny.Uni;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.ws.rs.NotFoundException;
 
 @ApplicationScoped
 public class TokenService {
@@ -34,6 +35,10 @@ public class TokenService {
     public Uni<RefreshToken> swapRefreshToken(String token) {
         return refreshTokenRepository.findByToken(token)
                 .flatMap(refreshToken -> {
+                    if(refreshToken == null) {
+                        return Uni.createFrom().failure(new NotFoundException("Refresh token not found"));
+                    }
+
                     if (refreshToken.isRevoked()) {
                         return Uni.createFrom().failure(new RuntimeException("Refresh token is revoked"));
                     }
@@ -57,5 +62,10 @@ public class TokenService {
                     refreshToken.setRevoked(true);
                     return refreshTokenRepository.persist(refreshToken).map(refreshTokenMapper::toDomain);
                 }).map(RefreshToken::isRevoked);
+    }
+
+    @WithTransaction
+    public Uni<Boolean> revokeAllRefreshTokensForUser(Long userId) {
+        return refreshTokenRepository.revokeAllForUser(userId);
     }
 }

@@ -10,7 +10,7 @@ import io.smallrye.mutiny.Uni;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
-import java.util.Optional;
+import java.util.Objects;
 
 @ApplicationScoped
 public class UserService {
@@ -28,16 +28,19 @@ public class UserService {
         user.setEmail(email);
         user.setImage(image);
         user.setPassword(hashPassword(password));
-        return userRepository.persist(user)
-                .map(userMapper::toDomain);
+        return userRepository.persist(user).map(userMapper::toDomain);
     }
 
-    public Uni<Optional<User>> getUser(Long id) {
-        return userRepository.findById(id).map(user -> Optional.ofNullable(userMapper.toDomain(user)));
+    public Uni<User> getUser(Long id) {
+        return userRepository.findById(id).map(userMapper::toDomain);
     }
 
-    public Uni<Optional<User>> getUserByEmail(String email) {
-        return userRepository.findByEmail(email).map(user -> Optional.ofNullable(userMapper.toDomain(user)));
+    public Uni<User> getUserByEmail(String email) {
+        return userRepository.findByEmail(email).map(userMapper::toDomain);
+    }
+
+    public Uni<Boolean> doesUserExist(String email) {
+        return userRepository.findByEmail(email).map(Objects::nonNull);
     }
 
     @WithTransaction
