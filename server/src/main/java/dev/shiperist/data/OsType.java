@@ -1,5 +1,8 @@
 package dev.shiperist.data;
 
+import lombok.Getter;
+
+@Getter
 public enum OsType {
     ANDROID("android"),
     IOS("ios"),
@@ -12,7 +15,4 @@ public enum OsType {
         this.value = value;
     }
 
-    public String getValue() {
-        return value;
-    }
 }

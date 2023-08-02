@@ -1,4 +1,4 @@
-package dev.shiperist.resource;
+package dev.shiperist.resource.project;
 
 import dev.shiperist.model.project.Project;
 import dev.shiperist.model.request.ProjectRequest;

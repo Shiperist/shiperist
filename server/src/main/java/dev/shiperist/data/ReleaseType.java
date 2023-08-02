@@ -1,5 +1,8 @@
 package dev.shiperist.data;
 
+import lombok.Getter;
+
+@Getter
 public enum ReleaseType {
 
     ALPHA("alpha"),
@@ -14,7 +17,4 @@ public enum ReleaseType {
         this.value = value;
     }
 
-    public String getValue() {
-        return value;
-    }
 }

@@ -6,10 +6,10 @@ import java.util.Date;
 
 @Data
 public class User {
+    public String password;
     private Long id;
     private String name;
     private String email;
     private Date emailVerified;
     private String image;
-    public String password;
 }

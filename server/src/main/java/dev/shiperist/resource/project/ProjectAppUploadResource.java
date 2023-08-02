@@ -1,4 +1,4 @@
-package dev.shiperist.resource;
+package dev.shiperist.resource.project;
 
 public class ProjectAppUploadResource {
 }

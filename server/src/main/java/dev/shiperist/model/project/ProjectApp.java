@@ -19,4 +19,6 @@ public class ProjectApp {
     private Date updatedAt;
     private OsType os;
     private ReleaseType releaseType;
+
+    //TODO Add appid and appsecret
 }

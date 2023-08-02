@@ -14,7 +14,7 @@ public class HibernateExceptionHandler implements ExceptionMapper<ConstraintViol
             return Response.status(Response.Status.BAD_REQUEST).entity(ErrorMessage.EMAIL_ALREADY_EXISTS).build();
         }
 
-        if(e.getConstraintName().contains("project_name_key")) {
+        if (e.getConstraintName().contains("project_name_key")) {
             return Response.status(Response.Status.BAD_REQUEST).entity(ErrorMessage.PROJECT_ALREADY_EXISTS).build();
         }
 

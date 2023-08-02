@@ -35,7 +35,7 @@ public class TokenService {
     public Uni<RefreshToken> swapRefreshToken(String token) {
         return refreshTokenRepository.findByToken(token)
                 .flatMap(refreshToken -> {
-                    if(refreshToken == null) {
+                    if (refreshToken == null) {
                         return Uni.createFrom().failure(new NotFoundException("Refresh token not found"));
                     }
 

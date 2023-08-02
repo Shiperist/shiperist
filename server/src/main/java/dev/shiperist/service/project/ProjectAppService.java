@@ -26,12 +26,13 @@ public class ProjectAppService {
     @Inject
     ProjectAppMapper projectAppMapper;
 
-    public Uni<ProjectApp> createProjectApp(Long projectId, String name, String description, String image, OsType os, ReleaseType releaseType) {
+    public Uni<ProjectApp> createProjectApp(Long projectId, String name, String displayName, String description, String image, OsType os, ReleaseType releaseType) {
         return projectService.findById(projectId)
                 .onItem().ifNull().failWith(() -> new RuntimeException("Project not found"))
                 .map(project -> {
                     ProjectAppEntity projectApp = new ProjectAppEntity();
                     projectApp.setName(name);
+                    projectApp.setDisplayName(displayName);
                     projectApp.setDescription(description);
                     projectApp.setImage(image);
                     projectApp.setOs(os);
@@ -43,11 +44,12 @@ public class ProjectAppService {
                 .onItem().ifNotNull().transform(projectAppMapper::toDomain);
     }
 
-    public Uni<ProjectApp> updateProjectApp(Long id, String name, String description, String image) {
+    public Uni<ProjectApp> updateProjectApp(Long id, String name, String displayName, String description, String image) {
         return projectAppRepository.findById(id)
                 .onItem().ifNull().failWith(() -> new RuntimeException("Project App not found"))
                 .map(projectApp -> {
                     projectApp.setName(name);
+                    projectApp.setDisplayName(displayName);
                     projectApp.setDescription(description);
                     projectApp.setImage(image);
                     return projectApp;
