@@ -19,10 +19,10 @@ public class ProjectEntity extends PanacheEntityBase {
     @Column(name = "name", unique = true)
     private String name;
 
-    @Column(name = "display_name")
+    @Column(name = "display_name", length = 128)
     private String displayName;
 
-    @Column(name = "description")
+    @Column(name = "description", length = 1024)
     private String description;
 
     @Column(name = "image")

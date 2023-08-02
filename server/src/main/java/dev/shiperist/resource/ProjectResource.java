@@ -57,7 +57,6 @@ public class ProjectResource {
         return projectService.createProject(Long.parseLong(sub), request.getName(), request.getDisplayName(), request.getDescription(), request.getImage())
                 .onItem().ifNotNull().transform(project -> Response.status(Response.Status.CREATED).entity(project).build())
                 .onItem().ifNull().continueWith(Response.status(Response.Status.BAD_REQUEST).build());
-
     }
 
     @GET
@@ -96,7 +95,7 @@ public class ProjectResource {
             description = "The project does not exist"
     )
     public Uni<Response> updateProject(@PathParam("id") Long id, ProjectRequest request) {
-        return projectService.updateProject(id, request.getDisplayName(), request.getDescription(), request.getImage())
+        return projectService.updateProject(id, request.getName(), request.getDisplayName(), request.getDescription(), request.getImage())
                 .onItem().ifNotNull().transform(updated -> Response.ok(updated).build())
                 .onItem().ifNull().continueWith(Response.status(Response.Status.NOT_FOUND).build());
     }

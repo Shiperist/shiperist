@@ -14,6 +14,10 @@ public class NotFoundExceptionHandler implements ExceptionMapper<NotFoundExcepti
             return Response.status(Response.Status.BAD_REQUEST).entity(ErrorMessage.INVALID_REFRESH_TOKEN).build();
         }
 
+        if (e.getMessage().contains("Project not found")) {
+            return Response.status(Response.Status.NOT_FOUND).entity(ErrorMessage.PROJECT_NOT_FOUND).build();
+        }
+
         return Response.status(Response.Status.NOT_FOUND).build();
     }
 }

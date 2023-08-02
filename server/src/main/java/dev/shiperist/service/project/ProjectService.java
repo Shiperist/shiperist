@@ -11,6 +11,7 @@ import io.quarkus.hibernate.reactive.panache.common.WithTransaction;
 import io.smallrye.mutiny.Uni;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.ws.rs.NotFoundException;
 
 import java.util.List;
 
@@ -52,13 +53,18 @@ public class ProjectService {
     }
 
     @WithTransaction
-    public Uni<Project> updateProject(Long id, String displayName, String description, String image) {
+    public Uni<Project> updateProject(Long id, String name, String displayName, String description, String image) {
         return projectRepository.findById(id)
-                .map(project -> {
+                .flatMap(project -> {
+                    if (project == null) {
+                        return Uni.createFrom().failure(new NotFoundException("Project not found with id " + id));
+                    }
+
+                    project.setName(name);
                     project.setDisplayName(displayName);
                     project.setDescription(description);
                     project.setImage(image);
-                    return project;
+                    return projectRepository.persist(project).replaceWith(project);
                 })
                 .map(projectMapper::toDomain);
     }
