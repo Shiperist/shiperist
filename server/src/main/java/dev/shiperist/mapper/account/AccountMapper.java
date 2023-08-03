@@ -3,9 +3,7 @@ package dev.shiperist.mapper.account;
 import dev.shiperist.entity.account.AccountEntity;
 import dev.shiperist.mapper.QuarkusMappingConfig;
 import dev.shiperist.model.account.Account;
-import org.mapstruct.InheritInverseConfiguration;
-import org.mapstruct.Mapper;
-import org.mapstruct.MappingTarget;
+import org.mapstruct.*;
 
 import java.util.List;
 
@@ -14,6 +12,9 @@ public interface AccountMapper {
 
     List<Account> toDomainList(List<AccountEntity> entities);
 
+    @Mappings({
+            @Mapping(target="userId", expression="java(entity.getUser().getId())")
+    })
     Account toDomain(AccountEntity entity);
 
     @InheritInverseConfiguration(name = "toDomain")

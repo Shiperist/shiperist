@@ -5,6 +5,7 @@ import dev.shiperist.mapper.account.RefreshTokenMapper;
 import dev.shiperist.model.account.RefreshToken;
 import dev.shiperist.model.account.User;
 import dev.shiperist.repository.account.RefreshTokenRepository;
+import dev.shiperist.repository.account.UserRepository;
 import dev.shiperist.util.SecurityUtil;
 import io.quarkus.hibernate.reactive.panache.common.WithTransaction;
 import io.smallrye.mutiny.Uni;
@@ -19,16 +20,25 @@ public class TokenService {
     RefreshTokenRepository refreshTokenRepository;
 
     @Inject
+    UserRepository userRepository;
+
+    @Inject
     RefreshTokenMapper refreshTokenMapper;
 
     @WithTransaction
     public Uni<RefreshToken> createRefreshToken(User user) {
-        RefreshTokenEntity refreshToken = new RefreshTokenEntity();
+        return userRepository.findById(user.getId())
+                .flatMap(foundUser -> {
+                    if (foundUser == null) {
+                        return Uni.createFrom().failure(new NotFoundException("User not found"));
+                    }
 
-        refreshToken.setUserId(user.getId());
-        refreshToken.setToken(SecurityUtil.generateRefreshToken());
+                    RefreshTokenEntity refreshToken = new RefreshTokenEntity();
+                    refreshToken.setUser(foundUser);
+                    refreshToken.setToken(SecurityUtil.generateRefreshToken());
 
-        return refreshTokenRepository.persist(refreshToken).map(refreshTokenMapper::toDomain);
+                    return refreshTokenRepository.persist(refreshToken).map(refreshTokenMapper::toDomain);
+                });
     }
 
     @WithTransaction
@@ -47,7 +57,7 @@ public class TokenService {
 
                     RefreshTokenEntity newRefreshToken = new RefreshTokenEntity();
 
-                    newRefreshToken.setUserId(refreshToken.getUserId());
+                    newRefreshToken.setUser(refreshToken.getUser());
                     newRefreshToken.setToken(SecurityUtil.generateRefreshToken());
 
                     return refreshTokenRepository.persist(refreshToken).replaceWith(refreshTokenRepository.persist(newRefreshToken));

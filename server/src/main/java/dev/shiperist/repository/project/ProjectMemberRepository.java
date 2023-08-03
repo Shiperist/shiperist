@@ -11,6 +11,6 @@ import jakarta.enterprise.context.ApplicationScoped;
 public class ProjectMemberRepository implements PanacheRepositoryBase<ProjectMemberEntity, Long> {
 
     public Uni<Boolean> isMember(Long projectId, Long userId) {
-        return count("projectId = ?1 and userId = ?2", projectId, userId).map(count -> count > 0);
+        return count("project.id = ?1 and user.id = ?2", projectId, userId).map(count -> count > 0);
     }
 }

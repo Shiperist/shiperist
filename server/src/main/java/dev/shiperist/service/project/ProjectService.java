@@ -14,6 +14,7 @@ import jakarta.inject.Inject;
 import jakarta.ws.rs.NotFoundException;
 
 import java.util.List;
+import java.util.Objects;
 
 @ApplicationScoped
 public class ProjectService {
@@ -39,17 +40,22 @@ public class ProjectService {
         projectEntity.setDescription(description);
         projectEntity.setImage(image);
 
-        return projectRepository.persistAndFlush(projectEntity)
-                .onItem().ifNotNull().transformToUni(project -> {
-                    ProjectMemberEntity projectMemberEntity = new ProjectMemberEntity();
-                    projectMemberEntity.setProjectId(project.getId());
-                    projectMemberEntity.setUserId(owner);
-                    return projectMemberRepository.persist(projectMemberEntity).replaceWith(project);
-                }).map(projectMapper::toDomain);
+        return userRepository.findById(owner)
+                .flatMap(user -> projectRepository.persistAndFlush(projectEntity)
+                        .onItem().ifNotNull().transformToUni(project -> {
+                            ProjectMemberEntity projectMemberEntity = new ProjectMemberEntity();
+                            projectMemberEntity.setProject(project);
+                            projectMemberEntity.setUser(user);
+                            return projectMemberRepository.persist(projectMemberEntity).replaceWith(project);
+                        }).map(projectMapper::toDomain));
     }
 
     public Uni<Project> getProject(Long name) {
         return projectRepository.findById(name).map(projectMapper::toDomain);
+    }
+
+    public Uni<Boolean> doesProjectExist(String name) {
+        return projectRepository.findByName(name).map(Objects::nonNull);
     }
 
     @WithTransaction

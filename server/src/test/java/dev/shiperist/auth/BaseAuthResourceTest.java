@@ -1,12 +1,13 @@
 package dev.shiperist.auth;
 
+import dev.shiperist.BaseTest;
 import dev.shiperist.model.account.User;
 import org.instancio.Instancio;
 import org.junit.jupiter.api.BeforeEach;
 
 import static org.instancio.Select.field;
 
-public abstract class BaseAuthResourceTest {
+public abstract class BaseAuthResourceTest extends BaseTest {
 
     protected User user;
 

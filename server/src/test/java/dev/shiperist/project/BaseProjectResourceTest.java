@@ -1,5 +1,6 @@
 package dev.shiperist.project;
 
+import dev.shiperist.BaseTest;
 import dev.shiperist.entity.account.UserEntity;
 import dev.shiperist.mapper.account.UserMapper;
 import dev.shiperist.model.account.User;
@@ -15,29 +16,28 @@ import org.junit.jupiter.api.TestInstance;
 import static org.instancio.Select.field;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public abstract class BaseProjectResourceTest {
+public abstract class BaseProjectResourceTest  extends BaseTest {
 
     @Inject
     UserRepository userRepository;
 
-    @Inject
-    UserMapper userMapper;
-
     @BeforeAll
     public void setUp() throws Throwable {
-        User user = Instancio.of(User.class)
-                .generate(field(User::getName), gen -> gen.text().uuid())
-                .set(field(User::getEmail), "project@test.com")
-                .generate(field(User::getImage), gen -> gen.net().url().asString())
-                .generate(field(User::getPassword), gen -> gen.text().uuid())
-                .ignore(field(User::getId))
-                .ignore(field(User::getEmailVerified))
+        UserEntity user = Instancio.of(UserEntity.class)
+                .generate(field(UserEntity::getName), gen -> gen.text().uuid())
+                .set(field(UserEntity::getEmail), "project@test.com")
+                .generate(field(UserEntity::getImage), gen -> gen.net().url().asString())
+                .generate(field(UserEntity::getPassword), gen -> gen.text().uuid())
+                .ignore(field(UserEntity::getId))
+                .ignore(field(UserEntity::getEmailVerified))
+                .ignore(field(UserEntity::getAccounts))
+                .ignore(field(UserEntity::getRefreshTokens))
+                .ignore(field(UserEntity::getProjectMembers))
                 .create();
 
-        UserEntity userEntity = userMapper.toEntity(user);
-        VertxContextSupport.subscribeAndAwait(() -> Panache.withTransaction(() -> userRepository.findByEmail(userEntity.getEmail()).flatMap(existingUser -> {
+        VertxContextSupport.subscribeAndAwait(() -> Panache.withTransaction(() -> userRepository.findByEmail(user.getEmail()).flatMap(existingUser -> {
             if (existingUser == null) {
-                return userRepository.persist(userEntity);
+                return userRepository.persist(user);
             } else {
                 return Uni.createFrom().item(existingUser);
             }

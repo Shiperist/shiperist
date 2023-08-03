@@ -16,20 +16,12 @@ public class ProjectMemberEntity extends PanacheEntityBase {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
 
-    @Column(name = "user_id")
-    private Long userId;
-
-    @Column(name = "project_id")
-    private Long projectId;
-
     @Column(name = "role")
     private String role;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id", insertable = false, updatable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
     private UserEntity user;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "project_id", insertable = false, updatable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
     private ProjectEntity project;
 }

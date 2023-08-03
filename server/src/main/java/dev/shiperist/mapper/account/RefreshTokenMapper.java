@@ -3,9 +3,7 @@ package dev.shiperist.mapper.account;
 import dev.shiperist.entity.account.RefreshTokenEntity;
 import dev.shiperist.mapper.QuarkusMappingConfig;
 import dev.shiperist.model.account.RefreshToken;
-import org.mapstruct.InheritInverseConfiguration;
-import org.mapstruct.Mapper;
-import org.mapstruct.MappingTarget;
+import org.mapstruct.*;
 
 import java.util.List;
 
@@ -14,6 +12,9 @@ public interface RefreshTokenMapper {
 
     List<RefreshToken> toDomainList(List<RefreshTokenEntity> entities);
 
+    @Mappings({
+            @Mapping(target = "userId", expression = "java(entity.getUser().getId())"),
+    })
     RefreshToken toDomain(RefreshTokenEntity entity);
 
     @InheritInverseConfiguration(name = "toDomain")

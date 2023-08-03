@@ -20,16 +20,13 @@ public class ProjectAppEntity extends PanacheEntityBase {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "project_id")
-    private Long projectId;
-
     @Column(name = "name", unique = true)
     private String name;
 
-    @Column(name = "display_name")
+    @Column(name = "display_name", length = 128)
     private String displayName;
 
-    @Column(name = "description")
+    @Column(name = "description", length = 1024)
     private String description;
 
     @Column(name = "image")
@@ -52,7 +49,6 @@ public class ProjectAppEntity extends PanacheEntityBase {
     @Column(name = "release_type")
     private ReleaseType releaseType;
 
-    @ManyToOne
-    @JoinColumn(name = "project_id", insertable = false, updatable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
     private ProjectEntity project;
 }

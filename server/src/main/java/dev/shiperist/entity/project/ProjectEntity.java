@@ -6,6 +6,9 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.CreationTimestamp;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 @Entity(name = "Project")
 @Table(name = "project", schema = "public")
@@ -34,4 +37,10 @@ public class ProjectEntity extends PanacheEntityBase {
     @CreationTimestamp
     @Column(name = "created_at", updatable = false)
     private String createdAt;
+
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ProjectMemberEntity> projectMembers = new ArrayList<>();
+
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ProjectAppEntity> projectApps = new ArrayList<>();
 }

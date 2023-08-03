@@ -15,6 +15,6 @@ public class RefreshTokenRepository implements PanacheRepositoryBase<RefreshToke
     }
 
     public Uni<Boolean> revokeAllForUser(Long userId) {
-        return update("revoked = true where userId = ?1", userId).map(updateResult -> updateResult > 0);
+        return update("revoked = true where user.id = ?1", userId).map(updateResult -> updateResult > 0);
     }
 }

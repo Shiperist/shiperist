@@ -21,9 +21,6 @@ public class RefreshTokenEntity extends PanacheEntityBase {
     @Column(name = "token", unique = true, length = 1024)
     private String token;
 
-    @Column(name = "user_id")
-    private Long userId;
-
     @Column(name = "revoked")
     private boolean revoked;
 
@@ -36,7 +33,6 @@ public class RefreshTokenEntity extends PanacheEntityBase {
     private Date updatedAt;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id", insertable = false, updatable = false)
     private UserEntity user;
 
     public RefreshTokenEntity() {

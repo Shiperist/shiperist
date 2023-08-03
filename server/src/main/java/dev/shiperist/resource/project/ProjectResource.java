@@ -1,5 +1,6 @@
 package dev.shiperist.resource.project;
 
+import dev.shiperist.exception.ErrorMessage;
 import dev.shiperist.model.project.Project;
 import dev.shiperist.model.request.ProjectRequest;
 import dev.shiperist.service.project.ProjectMemberService;
@@ -54,9 +55,14 @@ public class ProjectResource {
             description = "The project already exists"
     )
     public Uni<Response> createProject(ProjectRequest request) {
-        return projectService.createProject(Long.parseLong(sub), request.getName(), request.getDisplayName(), request.getDescription(), request.getImage())
-                .onItem().ifNotNull().transform(project -> Response.status(Response.Status.CREATED).entity(project).build())
-                .onItem().ifNull().continueWith(Response.status(Response.Status.BAD_REQUEST).build());
+        return projectService.doesProjectExist(request.getName()).flatMap(exists -> {
+            if (!exists) {
+                return projectService.createProject(Long.parseLong(sub), request.getName(), request.getDisplayName(), request.getDescription(), request.getImage())
+                        .map(project -> Response.status(Response.Status.CREATED).entity(project).build());
+            } else {
+                return Uni.createFrom().item(Response.status(Response.Status.BAD_REQUEST).entity(ErrorMessage.PROJECT_ALREADY_EXISTS).build());
+            }
+        });
     }
 
     @GET
@@ -95,9 +101,15 @@ public class ProjectResource {
             description = "The project does not exist"
     )
     public Uni<Response> updateProject(@PathParam("id") Long id, ProjectRequest request) {
-        return projectService.updateProject(id, request.getName(), request.getDisplayName(), request.getDescription(), request.getImage())
-                .onItem().ifNotNull().transform(updated -> Response.ok(updated).build())
-                .onItem().ifNull().continueWith(Response.status(Response.Status.NOT_FOUND).build());
+        return projectService.doesProjectExist(request.getName()).flatMap(exists -> {
+            if (!exists) {
+                return projectService.updateProject(id, request.getName(), request.getDisplayName(), request.getDescription(), request.getImage())
+                        .onItem().ifNotNull().transform(updated -> Response.ok(updated).build())
+                        .onItem().ifNull().continueWith(Response.status(Response.Status.NOT_FOUND).build());
+            } else {
+                return Uni.createFrom().item(Response.status(Response.Status.BAD_REQUEST).entity(ErrorMessage.PROJECT_ALREADY_EXISTS).build());
+            }
+        });
     }
 
     @GET

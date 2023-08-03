@@ -30,7 +30,7 @@ public class CreateEndpointTest extends BaseProjectAppResourceTest {
                         "displayName", equalTo(app.getDisplayName()),
                         "description", equalTo(app.getDescription()),
                         "image", equalTo(app.getImage()),
-                        "os", equalTo(app.getOs()),
-                        "releaseType", equalTo(app.getReleaseType()));
+                        "os", equalTo(app.getOs().name()),
+                        "releaseType", equalTo(app.getReleaseType().name()));
     }
 }

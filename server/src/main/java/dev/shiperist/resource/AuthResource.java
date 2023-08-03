@@ -68,8 +68,16 @@ public class AuthResource {
             description = "The user with the given email already exists"
     )
     public Uni<Response> signUp(User user) {
-        return userService.createUser(user.getName(), user.getEmail(), user.getImage(), user.getPassword())
-                .onItem().ifNotNull().transform(u -> Response.status(Response.Status.CREATED).entity(u).build());
+        return userService.doesUserExist(user.getEmail()).flatMap(
+                exists -> {
+                    if (exists) {
+                        return Uni.createFrom().item(Response.status(Response.Status.BAD_REQUEST).entity(ErrorMessage.EMAIL_ALREADY_EXISTS).build());
+                    } else {
+                        return userService.createUser(user.getName(), user.getEmail(), user.getImage(), user.getPassword())
+                                .onItem().ifNotNull().transform(u -> Response.status(Response.Status.CREATED).entity(u).build());
+                    }
+                }
+        );
     }
 
     @POST

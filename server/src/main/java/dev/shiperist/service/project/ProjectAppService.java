@@ -37,7 +37,7 @@ public class ProjectAppService {
                     projectApp.setImage(image);
                     projectApp.setOs(os);
                     projectApp.setReleaseType(releaseType);
-                    projectApp.setProjectId(projectId);
+                    projectApp.setProject(project);
                     return projectApp;
                 })
                 .onItem().ifNotNull().transformToUni(projectAppRepository::persistAndFlush)

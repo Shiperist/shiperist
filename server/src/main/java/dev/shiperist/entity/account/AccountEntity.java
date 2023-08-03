@@ -15,9 +15,6 @@ public class AccountEntity extends PanacheEntityBase {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "user_id")
-    private Long userId;
-
     @Column(name = "type")
     private String type;
 
@@ -52,7 +49,6 @@ public class AccountEntity extends PanacheEntityBase {
     private String sessionState;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id", insertable = false, updatable = false)
     private UserEntity user;
 
     public AccountEntity() {

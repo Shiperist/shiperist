@@ -13,4 +13,8 @@ public class UserRepository implements PanacheRepositoryBase<UserEntity, Long> {
     public Uni<UserEntity> findByEmail(String email) {
         return find("email", email).firstResult();
     }
+
+    public Uni<Boolean> isMember(Long userId, Long projectId) {
+        return count("id = ?1 and projects.id = ?2", userId, projectId).map(count -> count > 0);
+    }
 }

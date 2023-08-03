@@ -3,9 +3,7 @@ package dev.shiperist.mapper.project;
 import dev.shiperist.entity.project.ProjectAppEntity;
 import dev.shiperist.mapper.QuarkusMappingConfig;
 import dev.shiperist.model.project.ProjectApp;
-import org.mapstruct.InheritInverseConfiguration;
-import org.mapstruct.Mapper;
-import org.mapstruct.MappingTarget;
+import org.mapstruct.*;
 
 import java.util.List;
 
@@ -14,6 +12,9 @@ public interface ProjectAppMapper {
 
     List<ProjectApp> toDomainList(List<ProjectAppEntity> entities);
 
+    @Mappings({
+            @Mapping(target="projectId", expression="java(entity.getProject().getId())")
+    })
     ProjectApp toDomain(ProjectAppEntity entity);
 
     @InheritInverseConfiguration(name = "toDomain")

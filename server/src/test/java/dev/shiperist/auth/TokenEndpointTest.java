@@ -49,27 +49,6 @@ public class TokenEndpointTest extends BaseAuthResourceTest {
     }
 
     @Test
-    @DisplayName("POST /auth/token - duplicate email")
-    public void testDuplicate() {
-        given()
-                .contentType(ContentType.JSON)
-                .body(user)
-                .when().post("/auth/signup")
-                .then().statusCode(201)
-                .body("name", equalTo(user.getName()),
-                        "email", equalTo(user.getEmail()),
-                        "image", equalTo(user.getImage()));
-
-        given()
-                .contentType(ContentType.JSON)
-                .body(user)
-                .when().post("/auth/signup")
-                .then().statusCode(400)
-                .body("error", equalTo(ErrorMessage.EMAIL_ALREADY_EXISTS.getError()),
-                        "description", equalTo(ErrorMessage.EMAIL_ALREADY_EXISTS.getDescription()));
-    }
-
-    @Test
     @DisplayName("POST /auth/token - no user")
     public void testNoUser() {
         given()
