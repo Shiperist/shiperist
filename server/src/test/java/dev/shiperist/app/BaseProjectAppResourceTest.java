@@ -7,7 +7,9 @@ import dev.shiperist.entity.account.UserEntity;
 import dev.shiperist.entity.project.ProjectEntity;
 import dev.shiperist.entity.project.ProjectMemberEntity;
 import dev.shiperist.mapper.account.UserMapper;
+import dev.shiperist.mapper.project.ProjectMapper;
 import dev.shiperist.mapper.project.ProjectMemberMapper;
+import dev.shiperist.model.project.Project;
 import dev.shiperist.model.project.ProjectApp;
 import dev.shiperist.model.project.ProjectMember;
 import dev.shiperist.repository.account.UserRepository;
@@ -36,8 +38,11 @@ public abstract class BaseProjectAppResourceTest extends BaseTest {
     @Inject
     ProjectMemberRepository projectMemberRepository;
 
+    @Inject
+    ProjectMapper projectMapper;
+
     protected ProjectApp app;
-    protected long projectId;
+    protected Project project;
 
     @BeforeAll
     public void beforeAll() throws Throwable {
@@ -81,7 +86,7 @@ public abstract class BaseProjectAppResourceTest extends BaseTest {
 
         VertxContextSupport.subscribeAndAwait(() -> Panache.withTransaction(() -> projectMemberRepository.persistAndFlush(projectMember)));
 
-        projectId = project.getId();
+        this.project = projectMapper.toDomain(project);
     }
 
     @BeforeEach

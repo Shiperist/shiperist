@@ -1,8 +1,8 @@
 package dev.shiperist.resource.project;
 
+import dev.shiperist.exception.ErrorMessage;
 import dev.shiperist.model.project.ProjectApp;
 import dev.shiperist.service.project.ProjectAppService;
-import dev.shiperist.service.project.ProjectMemberService;
 import io.quarkus.security.Authenticated;
 import io.smallrye.mutiny.Uni;
 import jakarta.enterprise.context.RequestScoped;
@@ -19,8 +19,6 @@ import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
-import java.util.function.Function;
-
 
 @RequestScoped
 @Authenticated
@@ -28,7 +26,7 @@ import java.util.function.Function;
 @Tag(name = "Project Apps")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class ProjectAppResource extends BaseProjectResource{
+public class ProjectAppResource extends BaseProjectResource {
 
     //TODO Add project member to have permission to create project app
 
@@ -39,6 +37,8 @@ public class ProjectAppResource extends BaseProjectResource{
     @Claim(standard = Claims.sub)
     String sub;
 
+    //TODO Is this is the correct way to do it I mean to work with entities possibly in here or move it to the service layer?
+
     @PUT
     @Operation(summary = "Create a project app")
     @APIResponse(
@@ -47,9 +47,20 @@ public class ProjectAppResource extends BaseProjectResource{
             content = @Content(schema = @Schema(implementation = ProjectApp.class))
     )
     public Uni<Response> createProjectApp(@Parameter(description = "Project ID") @PathParam("projectId") Long projectId, ProjectApp app) {
-        return ifMember(Long.parseLong(sub), projectId, isMember ->
-                projectAppService.createProjectApp(projectId, app.getName(), app.getDisplayName(), app.getDescription(), app.getImage(), app.getOs(), app.getReleaseType())
-                        .onItem().ifNotNull().transform(projectApp -> Response.status(Response.Status.CREATED).entity(projectApp).build()));
+        return ifMember(Long.parseLong(sub), projectId, isMember -> {
+            if (isMember) {
+                return projectAppService.doesProjectAppExist(app.getName()).flatMap(exists -> {
+                    if (!exists) {
+                        return projectAppService.createProjectApp(projectId, app.getName(), app.getDisplayName(), app.getDescription(), app.getImage(), app.getOs(), app.getReleaseType())
+                                .onItem().ifNotNull().transform(projectApp -> Response.status(Response.Status.CREATED).entity(projectApp).build());
+                    } else {
+                        return Uni.createFrom().item(Response.status(Response.Status.BAD_REQUEST).entity(ErrorMessage.PROJECT_APP_ALREADY_EXISTS).build());
+                    }
+                });
+            } else {
+                return Uni.createFrom().item(Response.status(Response.Status.FORBIDDEN).entity(ErrorMessage.PROJECT_NOT_MEMBER).build());
+            }
+        });
     }
 
     @PATCH
@@ -61,9 +72,20 @@ public class ProjectAppResource extends BaseProjectResource{
             content = @Content(schema = @Schema(implementation = ProjectApp.class))
     )
     public Uni<Response> updateProjectApp(@Parameter(description = "Project App ID") @PathParam("id") Long id, ProjectApp app) {
-        return ifMember(Long.parseLong(sub), app.getProjectId(), isMember ->
-                projectAppService.updateProjectApp(id, app.getName(), app.getDisplayName(), app.getDescription(), app.getImage())
-                        .onItem().ifNotNull().transform(projectApp -> Response.status(Response.Status.OK).entity(projectApp).build()));
+        return ifMember(Long.parseLong(sub), app.getProjectId(), isMember -> {
+            if (isMember) {
+                return projectAppService.doesProjectAppExist(app.getName()).flatMap(exists -> {
+                    if (!exists) {
+                        return projectAppService.updateProjectApp(id, app.getName(), app.getDisplayName(), app.getDescription(), app.getImage())
+                                .onItem().ifNotNull().transform(projectApp -> Response.status(Response.Status.OK).entity(projectApp).build());
+                    } else {
+                        return Uni.createFrom().item(Response.status(Response.Status.BAD_REQUEST).entity(ErrorMessage.PROJECT_APP_ALREADY_EXISTS).build());
+                    }
+                });
+            } else {
+                return Uni.createFrom().item(Response.status(Response.Status.FORBIDDEN).entity(ErrorMessage.PROJECT_NOT_MEMBER).build());
+            }
+        });
     }
 
     @GET

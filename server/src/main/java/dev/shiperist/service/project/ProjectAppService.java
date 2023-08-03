@@ -12,6 +12,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
 import java.util.List;
+import java.util.Objects;
 
 @ApplicationScoped
 public class ProjectAppService {
@@ -28,10 +29,10 @@ public class ProjectAppService {
 
     public Uni<ProjectApp> createProjectApp(Long projectId, String name, String displayName, String description, String image, OsType os, ReleaseType releaseType) {
         return projectService.findById(projectId)
-                .onItem().ifNull().failWith(() -> new RuntimeException("Project not found"))
                 .map(project -> {
+                    String appName = project.getName() + "/" + name;
                     ProjectAppEntity projectApp = new ProjectAppEntity();
-                    projectApp.setName(name);
+                    projectApp.setName(appName);
                     projectApp.setDisplayName(displayName);
                     projectApp.setDescription(description);
                     projectApp.setImage(image);
@@ -46,9 +47,9 @@ public class ProjectAppService {
 
     public Uni<ProjectApp> updateProjectApp(Long id, String name, String displayName, String description, String image) {
         return projectAppRepository.findById(id)
-                .onItem().ifNull().failWith(() -> new RuntimeException("Project App not found"))
                 .map(projectApp -> {
-                    projectApp.setName(name);
+                    String appName = projectApp.getProject().getName() + "/" + name;
+                    projectApp.setName(appName);
                     projectApp.setDisplayName(displayName);
                     projectApp.setDescription(description);
                     projectApp.setImage(image);
@@ -64,6 +65,10 @@ public class ProjectAppService {
 
     public Uni<List<ProjectApp>> getProjectApps(Long projectId) {
         return projectAppRepository.list("projectId", projectId).map(projectAppMapper::toDomainList);
+    }
+
+    public Uni<Boolean> doesProjectAppExist(String name) {
+        return projectAppRepository.findByName(name).map(Objects::nonNull);
     }
 
     public Uni<Boolean> deleteProjectApp(Long id) {
