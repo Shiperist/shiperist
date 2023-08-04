@@ -47,20 +47,8 @@ public class ProjectAppResource extends BaseProjectResource {
             content = @Content(schema = @Schema(implementation = ProjectApp.class))
     )
     public Uni<Response> createProjectApp(@Parameter(description = "Project ID") @PathParam("projectId") Long projectId, ProjectApp app) {
-        return ifMember(Long.parseLong(sub), projectId, isMember -> {
-            if (isMember) {
-                return projectAppService.doesProjectAppExist(app.getName()).flatMap(exists -> {
-                    if (!exists) {
-                        return projectAppService.createProjectApp(projectId, app.getName(), app.getDisplayName(), app.getDescription(), app.getImage(), app.getOs(), app.getReleaseType())
-                                .onItem().ifNotNull().transform(projectApp -> Response.status(Response.Status.CREATED).entity(projectApp).build());
-                    } else {
-                        return Uni.createFrom().item(Response.status(Response.Status.BAD_REQUEST).entity(ErrorMessage.PROJECT_APP_ALREADY_EXISTS).build());
-                    }
-                });
-            } else {
-                return Uni.createFrom().item(Response.status(Response.Status.FORBIDDEN).entity(ErrorMessage.PROJECT_NOT_MEMBER).build());
-            }
-        });
+        return projectAppService.createProjectApp(projectId, Long.parseLong(sub), app.getName(), app.getDisplayName(), app.getDescription(), app.getImage(), app.getOs(), app.getReleaseType())
+                .onItem().ifNotNull().transform(projectApp -> Response.status(Response.Status.CREATED).entity(projectApp).build());
     }
 
     @PATCH
@@ -72,20 +60,8 @@ public class ProjectAppResource extends BaseProjectResource {
             content = @Content(schema = @Schema(implementation = ProjectApp.class))
     )
     public Uni<Response> updateProjectApp(@Parameter(description = "Project App ID") @PathParam("id") Long id, ProjectApp app) {
-        return ifMember(Long.parseLong(sub), app.getProjectId(), isMember -> {
-            if (isMember) {
-                return projectAppService.doesProjectAppExist(app.getName()).flatMap(exists -> {
-                    if (!exists) {
-                        return projectAppService.updateProjectApp(id, app.getName(), app.getDisplayName(), app.getDescription(), app.getImage())
-                                .onItem().ifNotNull().transform(projectApp -> Response.status(Response.Status.OK).entity(projectApp).build());
-                    } else {
-                        return Uni.createFrom().item(Response.status(Response.Status.BAD_REQUEST).entity(ErrorMessage.PROJECT_APP_ALREADY_EXISTS).build());
-                    }
-                });
-            } else {
-                return Uni.createFrom().item(Response.status(Response.Status.FORBIDDEN).entity(ErrorMessage.PROJECT_NOT_MEMBER).build());
-            }
-        });
+        return projectAppService.updateProjectApp(id, Long.parseLong(sub), app.getName(), app.getDisplayName(), app.getDescription(), app.getImage())
+                .onItem().ifNotNull().transform(projectApp -> Response.status(Response.Status.OK).entity(projectApp).build());
     }
 
     @GET
@@ -97,9 +73,8 @@ public class ProjectAppResource extends BaseProjectResource {
             content = @Content(schema = @Schema(implementation = ProjectApp.class))
     )
     public Uni<Response> getProjectApp(@Parameter(description = "Project App ID") @PathParam("id") Long id) {
-        return ifMember(Long.parseLong(sub), id, isMember ->
-                projectAppService.getProjectApp(id)
-                        .onItem().ifNotNull().transform(projectApp -> Response.status(Response.Status.OK).entity(projectApp).build()));
+        return projectAppService.getProjectApp(id, Long.parseLong(sub))
+                .onItem().ifNotNull().transform(projectApp -> Response.status(Response.Status.OK).entity(projectApp).build());
     }
 
     @GET
@@ -110,8 +85,7 @@ public class ProjectAppResource extends BaseProjectResource {
             content = @Content(schema = @Schema(implementation = ProjectApp.class))
     )
     public Uni<Response> getProjectApps(@Parameter(description = "Project ID") @PathParam("projectId") Long projectId) {
-        return ifMember(Long.parseLong(sub), projectId, isMember ->
-                projectAppService.getProjectApps(projectId)
-                        .onItem().ifNotNull().transform(projectApps -> Response.status(Response.Status.OK).entity(projectApps).build()));
+        return projectAppService.getProjectApps(projectId, Long.parseLong(sub))
+                .onItem().ifNotNull().transform(projectApps -> Response.status(Response.Status.OK).entity(projectApps).build());
     }
 }
