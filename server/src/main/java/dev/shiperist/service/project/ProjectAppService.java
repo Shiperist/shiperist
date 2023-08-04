@@ -78,6 +78,7 @@ public class ProjectAppService {
         return projectApp;
     }
 
+    //TODO: Set project to eager
     private ProjectAppEntity updateProjectAppEntity(ProjectAppEntity projectApp, String name, String displayName, String description, String image) {
         String appName = constructAppName(projectApp.getProject().getName(), name);
         projectApp.setName(appName);
